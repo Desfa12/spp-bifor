@@ -26,12 +26,12 @@ use App\Http\Controllers\AuthController; // Menambahkan controller
 
 
 
+Route::get('/welcome', function () {
+    return view('welcome');
+});
 
 Route::middleware('auth')->group(
     function () {
-        Route::get('/welcome', function () {
-            return view('welcome');
-        });
         Route::get('/', [DashboardController::class, "dashboard"]);
         Route::get('/setting', [SettingController::class, "setting"]);
         Route::get('/datakelas', [DatakelasController::class, "datakelas"]);
