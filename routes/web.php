@@ -33,12 +33,11 @@ Route::get('/welcome', function () {
 Route::middleware('auth')->group(
     function () {
         Route::get('/', [DashboardController::class, "dashboard"]);
-        Route::get('/setting', [SettingController::class, "setting"]);
+        Route::get('/setting', [SettingController::class, "index"]);
         Route::get('/datakelas', [DatakelasController::class, "datakelas"]);
         Route::get('/transaksi', [TransaksiController::class, "transaksi"]);
         Route::get('/rekap', [RekapController::class, "rekap"]);
         Route::get('/laporan', [LaporanController::class, "laporan"]);
-
 
         Route::get('/datasiswa', [DatasiswaController::class, "index"]);
         Route::get('/datasiswa/create', [DatasiswaController::class, 'create']);

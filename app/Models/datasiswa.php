@@ -9,12 +9,12 @@ class Datasiswa extends Model
 {
     use HasFactory;
 
-    protected $table = 'datasiswa'; // Nama tabel di database
+    protected $table = 'siswa'; // Nama tabel di database
     protected $fillable = ['nis', 'nisn', 'nama_siswa', 'kelas', 'jurusan', 'jenis_kelamin', 'tgl_lahir', 'no_telp'];
 
     // Di model Datasiswa
-    public function transaksi()
-    {
-        return $this->hasMany(Transaksi::class);
-    }
+    // public function transaksi()
+    // {
+    //     return $this->hasMany(Transaksi::class);
+    // }
 }

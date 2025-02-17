@@ -17,14 +17,16 @@
     </div>
     @endif
 
-<div class="container mt-4">
+{{-- <div class="container mt-4"> --}}
     <!-- FORM PENCARIAN -->
     <div class="pb-3">
         <form class="d-flex" action="{{ url('datasiswa') }}" method="get">
             <input class="form-control me-1" type="search" name="katakunci" value="{{ request('katakunci') }}" placeholder="Masukkan kata kunci" aria-label="Search">
-            <button class="btn btn-secondary" type="submit">Cari</button>
+            <div class="px-2">
+            <button class="btn btn-primary" type="submit">Cari</button>
         </form>
     </div>
+    <br>
     
     <!-- TOMBOL TAMBAH DATA -->
     <div class="pb-3">
@@ -49,33 +51,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php $i =$datasiswa->firstItem()?>
-                    @foreach ($datasiswa as $item)
-                        <tr>
-                            <td>{{ $i }}</td>
-                            <td>{{ $item->nis }}/{{ $item->nisn }}</td>
-                            <td>{{ $item->nama_siswa }}</td>
-                            <td>{{ $item->kelas }}</td>
-                            <td>{{ $item->jurusan }}</td>
-                            <td>{{ $item->jenis_kelamin }}</td>
-                            <td>{{ $item->tgl_lahir }}</td>
-                            <td>{{ $item->no_telp }}</td>
-                            <td>
-                                <a href="{{ url('datasiswa/'.$item->id.'/edit') }}" class="btn btn-warning btn-sm">Edit</a>
-                                <form action="{{ url('datasiswa/'.$item->id) }}" method="POST" class="d-inline">
-                                    @csrf 
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin menghapus?')">Hapus</button>
-                                </form>
-                            </td>
-                        </tr>
-                        <?php $i++ ?>
-                    @endforeach
+                    
                 </tbody>
             </table>
-            {{ $datasiswa->withQueryString()->links() }}
+            {{-- {{ $datasiswa->withQueryString()->links() }} --}}
         </div>
     </div>
-</div>
+{{-- </div> --}}
 
 @endsection

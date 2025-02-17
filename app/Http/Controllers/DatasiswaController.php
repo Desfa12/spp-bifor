@@ -11,32 +11,15 @@ class DatasiswaController extends Controller
     // Menampilkan semua data siswa
     public function index(Request $request)
     {
-        $katakunci = $request->katakunci;
-        $jumlahbaris = 5;
+        $jumlahbaris = 10; // Menentukan jumlah data per halaman
 
-        if (strlen($katakunci)) {
-            $datasiswa = Datasiswa::where('nis', 'like', "%$katakunci%")
-                ->orWhere('nisn', 'like', "%$katakunci%")
-                ->orWhere('nama_siswa', 'like', "%$katakunci%")
-                ->orWhere('kelas', 'like', "%$katakunci%")
-                ->orWhere('jurusan', 'like', "%$katakunci%")
-                ->orWhere('jenis_kelamin', 'like', "%$katakunci%")
-                ->orWhere('tgl_lahir', 'like', "%$katakunci%")
-                ->orWhere(
-                    'no_telp',
-                    'like',
-                    "%$katakunci%"
-                )
-                ->paginate($jumlahbaris);
-        } else {
-            $datasiswa = Datasiswa::orderBy('nama_siswa', 'asc')
-                ->orderByRaw("CAST(SUBSTRING(kelas, 2) AS UNSIGNED) ASC")
-                ->paginate($jumlahbaris);
-        }
+        // Mengambil data siswa dengan pagination
+        $datasiswa = Datasiswa::orderBy('nama_siswa', 'asc')
+            ->orderByRaw("CAST(SUBSTRING(kelas, 2) AS UNSIGNED) ASC")
+            ->paginate($jumlahbaris);
 
-        return view('datasiswa.index')->with('datasiswa', $datasiswa);
+        return view('datasiswa.index', compact('datasiswa'));
     }
-
 
 
     // Menampilkan form tambah data siswa
