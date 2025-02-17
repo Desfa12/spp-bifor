@@ -34,11 +34,20 @@ Route::middleware('auth')->group(
     function () {
         Route::get('/', [DashboardController::class, "dashboard"]);
         Route::get('/setting', [SettingController::class, "index"]);
-        Route::get('/datakelas', [DatakelasController::class, "datakelas"]);
+        // Route::get('/datakelas', [DatakelasController::class, "datakelas"]);
         Route::get('/transaksi', [TransaksiController::class, "transaksi"]);
         Route::get('/rekap', [RekapController::class, "rekap"]);
         Route::get('/laporan', [LaporanController::class, "laporan"]);
 
+        Route::prefix('datakelas')->group(function () {
+            Route::get('/', [DatakelasController::class, 'index']);
+            Route::get('/create', [DatakelasController::class, 'create']);
+            Route::post('/', [DatakelasController::class, 'store']);
+            Route::get('/{datakelas_id}/edit', [DatakelasController::class, 'edit']);
+            Route::put('/{datakelas}', [DatakelasController::class, 'update']);
+            Route::delete('/{datakelas_id}', [DatakelasController::class, 'destroy']);
+        });
+        
         Route::get('/datasiswa', [DatasiswaController::class, "index"]);
         Route::get('/datasiswa/create', [DatasiswaController::class, 'create']);
         Route::post('/datasiswa', [DatasiswaController::class, 'store']);

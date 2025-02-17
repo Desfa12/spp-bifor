@@ -10,6 +10,25 @@
 
 
 @section('content')
+@if (Session::has('success'))
+    <div class="pt-3">
+        <div class="alert alert-success">
+                {{ Session::get('success') }}
+        </div>
+    </div>
+    @endif
+    @if ($errors->any())
+  <div class="pt-3">
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $item)
+                    <li>{{ $item }}</li>
+                @endforeach
+            </ul>
+        </div>
+      </div>
+      @endif
+
                 {{-- <div class="container mt-4"> --}}
                     <!-- FORM PENCARIAN -->
                     {{-- <div class="col-md-6">
@@ -33,7 +52,7 @@
 
                     <!-- TOMBOL TAMBAH DATA -->
                     <div class="pb-3">
-                        <a href="{{ url('datasiswa/create') }}" class="btn btn-primary">+ Tambah Data</a>
+                        <a href="{{ url('datakelas/create') }}" class="btn btn-primary">+ Tambah Data</a>
                     </div>
                 
                     <!-- TABEL DATA -->
@@ -50,29 +69,27 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {{-- @foreach ($datasiswa as $item)
+                                    <?php $i = $datakelas->firstItem() ?>
+                                    @foreach ($datakelas as $item)
                                         <tr>
                                             <td>{{ $i }}</td>
-                                            <td>{{ $item->nis }}/{{ $item->nisn }}</td>
-                                            <td>{{ $item->nama_siswa }}</td>
-                                            <td>{{ $item->kelas }}</td>
+                                            <td>{{ $item->tingkat }}</td>
                                             <td>{{ $item->jurusan }}</td>
-                                            <td>{{ $item->jenis_kelamin }}</td>
-                                            <td>{{ $item->tgl_lahir }}</td>
-                                            <td>{{ $item->no_telp }}</td>
+                                            <td>{{ $item->angkatan }}</td>
                                             <td>
-                                                <a href="{{ url('datasiswa/'.$item->id.'/edit') }}" class="btn btn-warning btn-sm">Edit</a>
-                                                <form action="{{ url('datasiswa/'.$item->id) }}" method="POST" class="d-inline">
+                                                <a href="{{ url('datakelas/'.$item->id.'/edit') }}" class="btn btn-warning btn-sm">Edit</a>
+                                                <form action="{{ url('datakelas/'.$item->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus?')">
                                                     @csrf 
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin menghapus?')">Hapus</button>
+                                                    {{-- <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin menghapus?')">Hapus</button> --}}
+                                                    <input type="submit" class="btn btn-danger btn-sm" value="Hapus">
                                                 </form>
                                             </td>
                                         </tr>
-                                    @endforeach --}} 
+                                    @endforeach 
                                 </tbody>
                             </table>
-                            {{-- {{ $datasiswa->withQueryString()->links() }} --}}
+                            {{ $datakelas->withQueryString()->links() }}
                         </div>
                     </div>
                 {{-- </div> --}}

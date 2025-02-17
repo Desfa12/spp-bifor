@@ -10,10 +10,6 @@ class Kelas extends Model
     use HasFactory;
 
     protected $table = 'kelas';
-    protected $fillable = ['tingkat_kelas', 'jurusan'];
+    protected $fillable = ['tingkat','jurusan','angkatan'];
 
-    public function siswa()
-    {
-        return $this->hasMany(Siswa::class, 'id_kelas', 'id');
-    }
 }
