@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    APLIKASI PEMBAYARAN SPP YAYASAN PENDIDIKAN NURUL ILMA - Edit datakelas
+    APLIKASI PEMBAYARAN SPP YAYASAN PENDIDIKAN NURUL ILMA
 @endsection
 
 @section('page-title')

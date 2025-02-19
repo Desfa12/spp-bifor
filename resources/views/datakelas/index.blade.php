@@ -37,8 +37,6 @@
                             </div>
                         </form>
                     </div>
-                    
-                    <br>
 
                     <!-- TOMBOL TAMBAH DATA -->
                     <div class="pb-3">

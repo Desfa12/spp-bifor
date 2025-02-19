@@ -48,12 +48,14 @@ Route::middleware('auth')->group(
             Route::delete('/{datakelas_id}', [DatakelasController::class, 'destroy']);
         });
         
-        Route::get('/datasiswa', [DatasiswaController::class, "index"]);
-        Route::get('/datasiswa/create', [DatasiswaController::class, 'create']);
-        Route::post('/datasiswa', [DatasiswaController::class, 'store']);
-        Route::get('/datasiswa/{datasiswa_id}/edit', [DatasiswaController::class, 'edit']);
-        Route::put('/datasiswa/{datasiswa}', [DatasiswaController::class, 'update']);
-        Route::delete('/datasiswa/{datasiswa_id}', [DatasiswaController::class, 'destroy']);
+        Route::prefix('datasiswa')->group(function () {
+            Route::get('/', [DatasiswaController::class, 'index'])->name('datasiswa.index'); // Tampilkan semua data siswa
+            Route::get('/create', [DatasiswaController::class, 'create'])->name('datasiswa.create'); // Form tambah data
+            Route::post('/', [DatasiswaController::class, 'store'])->name('datasiswa.store'); // Simpan data baru
+            Route::get('/{id}/edit', [DatasiswaController::class, 'edit'])->name('datasiswa.edit'); // Form edit data
+            Route::put('/{id}', [DatasiswaController::class, 'update'])->name('datasiswa.update'); // Update data siswa
+            Route::delete('/{id}', [DatasiswaController::class, 'destroy'])->name('datasiswa.destroy'); // Hapus data siswa
+        });
 
         Route::get('/transaksi', [TransaksiController::class, "index"]);
         Route::get('/transaksi/create', [TransaksiController::class, 'create']);
