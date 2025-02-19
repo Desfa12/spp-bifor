@@ -28,26 +28,16 @@
         </div>
       </div>
       @endif
-
-                {{-- <div class="container mt-4"> --}}
                     <!-- FORM PENCARIAN -->
-                    {{-- <div class="col-md-6">
-                        <div class="mb-3">
-                            <label for="nomor_lembaga">Cari Kelas</label>
-                            <div class="input-group gap-2">
-                                <input type="text" class="form-control" id="nomor_lembaga" placeholder="Masukkan Nama Kelas">
-                                <div class="px-2"></div> <!-- Memberikan sedikit jarak -->
-                                <button type="button" class="btn btn-primary" onclick="cariKelas()">Cari</button>
-                            </div>
-                        </div>
-                    </div> --}}
                     <div class="pb-3">
-                        <form class="d-flex" action="{{ url('datasiswa') }}" method="get">
+                        <form class="d-flex" action="{{ url('datakelas') }}" method="get">
                             <input class="form-control me-1" type="search" name="katakunci" value="{{ request('katakunci') }}" placeholder="Masukkan kata kunci" aria-label="Search">
                             <div class="px-2">
-                            <button class="btn btn-primary" type="submit">Cari</button>
+                                <button class="btn btn-primary" type="submit">Cari</button>
+                            </div>
                         </form>
                     </div>
+                    
                     <br>
 
                     <!-- TOMBOL TAMBAH DATA -->
@@ -72,7 +62,7 @@
                                     <?php $i = $datakelas->firstItem() ?>
                                     @foreach ($datakelas as $item)
                                         <tr>
-                                            <td>{{ $i }}</td>
+                                            <td>{{ $i++ }}</td>
                                             <td>{{ $item->tingkat }}</td>
                                             <td>{{ $item->jurusan }}</td>
                                             <td>{{ $item->angkatan }}</td>
@@ -92,7 +82,6 @@
                             {{ $datakelas->withQueryString()->links() }}
                         </div>
                     </div>
-                {{-- </div> --}}
 @endsection
 
 

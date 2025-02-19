@@ -8,17 +8,21 @@ use Illuminate\Http\Request;
 
 class DatakelasController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        // return view('datakelas.index');
-        // return view('datakelas.index', ['data' => Kelas::get()]);
-        $jumlahbaris = 10; // Menentukan jumlah data per halaman
+        $katakunci = $request->input('katakunci');
 
-        // Mengambil data siswa dengan pagination
-        $datakelas = Kelas::paginate($jumlahbaris);
+        $datakelas = Kelas::when($katakunci, function ($query, $katakunci) {
+                return $query->where('tingkat', 'like', "%$katakunci%")
+                            ->orWhere('jurusan', 'like', "%$katakunci%")
+                            ->orWhere('angkatan', 'like', "%$katakunci%");
+            })
+            ->orderBy('tingkat', 'asc')
+            ->paginate(10);
 
         return view('datakelas.index', compact('datakelas'));
     }
+
 
     // Menampilkan form tambah data siswa
     public function create()
@@ -30,14 +34,9 @@ class DatakelasController extends Controller
     public function store(Request $request)
     {
         // Simpan data sementara di session untuk form yang tidak valid
-        Session::flash('nis', $request->nis);
-        Session::flash('nisn', $request->nisn);
-        Session::flash('nama_siswa', $request->nama_siswa);
-        Session::flash('kelas', $request->kelas);
+        Session::flash('tingkat', $request->tingkat);
         Session::flash('jurusan', $request->jurusan);
-        Session::flash('jenis_kelamin', $request->jenis_kelamin);
-        Session::flash('tgl_lahir', $request->tgl_lahir);
-        Session::flash('no_telp', $request->no_telp);
+        Session::flash('angkatan', $request->angkatan);
 
         // Validasi input
         $request->validate([
@@ -62,47 +61,41 @@ class DatakelasController extends Controller
     }
 
     // Menampilkan form edit data siswa
-    // public function edit($id)
-    // {
-    //     $datasiswa = Datasiswa::findOrFail($id);
-    //     return view('datasiswa.edit', compact('datasiswa'));
-    // }
+    public function edit($id)
+    {
+        $datakelas = Kelas::findOrFail($id);
+        return view('datakelas.edit', compact('datakelas'));
+    }
 
 
     // // Menyimpan perubahan data siswa
-    // public function update(Request $request, Datasiswa $datasiswa)
-    // {
-    //     // Validasi input
-    //     $request->validate([
-    //         'nama_siswa' => 'required|string',
-    //         'kelas' => 'required|string',
-    //         'jurusan' => 'required|string',
-    //         'jenis_kelamin' => 'required|in:L,P',
-    //         'tgl_lahir' => 'required|date',
-    //         'no_telp' => 'required|string',
-    //     ], [
-    //         'nama_siswa.required' => 'Nama siswa wajib diisi',
-    //         'kelas.required' => 'Kelas wajib diisi',
-    //         'jurusan.required' => 'Jurusan wajib diisi',
-    //         'jenis_kelamin.required' => 'Jenis kelamin wajib diisi',
-    //         'jenis_kelamin.in' => 'Jenis kelamin harus L atau P',
-    //         'tgl_lahir.required' => 'Tanggal lahir wajib diisi',
-    //         'tgl_lahir.date' => 'Format tanggal lahir tidak valid',
-    //         'no_telp.required' => 'No telepon wajib diisi',
-    //     ]);
+    public function update(Request $request, Kelas $datakelas)
+    {
+        // Simpan data sementara di session untuk form yang tidak valid
+        Session::flash('tingkat', $request->tingkat);
+        Session::flash('jurusan', $request->jurusan);
+        Session::flash('angkatan', $request->angkatan);
 
-    //     // Update data siswa
-    //     $datasiswa->update([
-    //         'nama_siswa' => $request->nama_siswa,
-    //         'kelas' => $request->kelas,
-    //         'jurusan' => $request->jurusan,
-    //         'jenis_kelamin' => $request->jenis_kelamin,
-    //         'tgl_lahir' => $request->tgl_lahir,
-    //         'no_telp' => $request->no_telp,
-    //     ]);
+        // Validasi input
+        $request->validate([
+            'tingkat' => 'required|string',
+            'jurusan' => 'required|string',
+            'angkatan' => 'required|string',
+        ], [
+            'tingkat.required' => 'Tingkat Wajib diisi',
+            'jurusan.required' => 'Jurusan Wajib diisi',
+            'angkatan.required' => 'Angkatan Wajib diisi',
+        ]);
 
-    //     return redirect()->to('datasiswa')->with('success', 'Berhasil melakukan update!');
-    // }
+        // Update data
+        $datakelas->update([
+            'tingkat' => $request->tingkat,
+            'jurusan' => $request->jurusan,
+            'angkatan' => $request->angkatan,
+        ]);
+
+        return redirect()->to('datakelas')->with('success', 'Data berhasil diperbarui');
+    }
 
 
     // Menghapus data siswa

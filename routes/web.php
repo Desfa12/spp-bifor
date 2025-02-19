@@ -64,7 +64,7 @@ Route::middleware('auth')->group(
 
 
         Route::resource('siswa', SiswaController::class);
-        Route::resource('kelas', KelasController::class);
+        // Route::resource('kelas', KelasController::class);
         Route::resource('history', HistoryController::class);
     }
 );
