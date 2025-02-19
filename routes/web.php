@@ -33,11 +33,16 @@ Route::get('/welcome', function () {
 Route::middleware('auth')->group(
     function () {
         Route::get('/', [DashboardController::class, "dashboard"]);
-        Route::get('/setting', [SettingController::class, "index"]);
+        // Route::get('/setting', [SettingController::class, "index"]);
         // Route::get('/datakelas', [DatakelasController::class, "datakelas"]);
         Route::get('/transaksi', [TransaksiController::class, "transaksi"]);
         Route::get('/rekap', [RekapController::class, "rekap"]);
         Route::get('/laporan', [LaporanController::class, "laporan"]);
+
+        Route::prefix('settings')->group(function () {
+            Route::get('/edit', [SettingController::class, 'edit'])->name('settings.edit');
+            Route::put('/update', [SettingController::class, 'update'])->name('settings.update');
+        });
 
         Route::prefix('datakelas')->group(function () {
             Route::get('/', [DatakelasController::class, 'index']);

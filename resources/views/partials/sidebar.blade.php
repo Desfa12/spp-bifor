@@ -39,7 +39,7 @@
             </a>
              </li>
           <li class="nav-item">
-            <a href="/setting" class="nav-link">
+            <a href="/settings/edit" class="nav-link">
               <i class="fa fa-cog" aria-hidden="true"></i>
               <p>
                 Setting
