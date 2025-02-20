@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Feb 16, 2025 at 03:25 PM
+-- Generation Time: Feb 20, 2025 at 03:06 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -47,9 +47,38 @@ CREATE TABLE `kelas` (
   `id` bigint UNSIGNED NOT NULL,
   `tingkat` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `jurusan` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `angkatan` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `kelas`
+--
+
+INSERT INTO `kelas` (`id`, `tingkat`, `jurusan`, `angkatan`, `created_at`, `updated_at`) VALUES
+(4, 'XI', 'MULTIMEDIA', '3333', '2025-02-19 07:07:27', '2025-02-19 07:07:27'),
+(5, 'XI', 'RPL', '333', '2025-02-19 07:07:50', '2025-02-19 07:10:39'),
+(6, 'X', 'RPL', '2023', NULL, NULL),
+(7, 'XI', 'MULTIMEDIA', '2022', NULL, NULL),
+(8, 'XII', 'PEMASARAN', '2021', NULL, NULL),
+(9, 'X', 'RPL', '2024', NULL, NULL),
+(10, 'XI', 'MULTIMEDIA', '2023', NULL, NULL),
+(11, 'X', 'RPL', '2023', NULL, NULL),
+(12, 'XI', 'RPL', '2022', NULL, NULL),
+(13, 'XII', 'RPL', '2021', NULL, NULL),
+(14, 'X', 'MULTIMEDIA', '2023', NULL, NULL),
+(15, 'XI', 'MULTIMEDIA', '2022', NULL, NULL),
+(16, 'XII', 'MULTIMEDIA', '2021', NULL, NULL),
+(17, 'X', 'PEMASARAN', '2024', NULL, NULL),
+(18, 'XI', 'PEMASARAN', '2023', NULL, NULL),
+(19, 'XII', 'PEMASARAN', '2022', NULL, NULL),
+(20, 'X', 'AKUNTANSI', '2024', NULL, NULL),
+(21, 'XI', 'AKUNTANSI', '2023', NULL, NULL),
+(22, 'XII', 'AKUNTANSI', '2022', NULL, NULL),
+(23, 'X', 'TKJ', '2024', NULL, NULL),
+(24, 'XI', 'TKJ', '2023', NULL, NULL),
+(25, 'XII', 'TKJ', '2022', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -132,19 +161,26 @@ CREATE TABLE `personal_access_tokens` (
 
 CREATE TABLE `settings` (
   `id` int NOT NULL,
-  `nama_satuan` varchar(255) NOT NULL,
-  `no_lembaga` varchar(255) NOT NULL,
-  `no_tlp` int NOT NULL,
-  `alamat` text NOT NULL,
-  `kota` varchar(255) NOT NULL,
-  `kepala_sekolah` varchar(255) NOT NULL,
-  `nip_kepsek` int NOT NULL,
-  `bendahara` varchar(255) NOT NULL,
-  `nip_bendahara` int NOT NULL,
-  `logo` varchar(255) NOT NULL,
-  `created_at` timestamp NOT NULL,
-  `updated_at` timestamp NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `nama_satuan` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `no_lembaga` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `no_tlp` int DEFAULT NULL,
+  `alamat` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
+  `kota` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `kepala_sekolah` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `nip_kepsek` int DEFAULT NULL,
+  `bendahara` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `nip_bendahara` int DEFAULT NULL,
+  `logo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `settings`
+--
+
+INSERT INTO `settings` (`id`, `nama_satuan`, `no_lembaga`, `no_tlp`, `alamat`, `kota`, `kepala_sekolah`, `nip_kepsek`, `bendahara`, `nip_bendahara`, `logo`, `created_at`, `updated_at`) VALUES
+(1, 'YAYASAN PENDIDIKAN NURUL ILMA', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-02-19 08:33:29', '2025-02-19 08:45:07');
 
 -- --------------------------------------------------------
 
@@ -172,8 +208,22 @@ CREATE TABLE `siswa` (
 
 INSERT INTO `siswa` (`id`, `nis`, `nisn`, `nama_siswa`, `kelas`, `jurusan`, `jenis_kelamin`, `tgl_lahir`, `no_telp`, `created_at`, `updated_at`) VALUES
 (1, '09837654', '3874098763', 'desfa', 'XII', 'rpl', 'P', '2025-02-09', '093789378', '2025-02-09 07:50:31', '2025-02-09 08:03:51'),
-(2, '09876487', '0394857645', 'lolii', 'XI', 'pkm', 'L', '2025-02-09', '05283975892', '2025-02-09 08:11:06', '2025-02-09 20:08:54'),
-(3, '09485738', '8374839274', 'cynta bella', 'XI', 'otkp', 'P', '2025-02-15', '083475329878', '2025-02-09 20:08:33', '2025-02-09 20:08:33');
+(2, '09876487', '0394857645', 'lolii2222', 'XI', 'MULTIMEDIA', 'L', '2025-02-09', '05283975892', '2025-02-09 08:11:06', '2025-02-19 07:45:12'),
+(4, '1001', '2001', 'Andi Saputra', 'X', 'RPL', 'L', '2007-01-15', '081234567890', NULL, NULL),
+(5, '1002', '2002', 'Budi Santoso', 'XI', 'MULTIMEDIA', 'L', '2006-05-22', '081234567891', NULL, NULL),
+(6, '1003', '2003', 'Citra Dewi', 'XII', 'PEMASARAN', 'P', '2005-09-10', '081234567892', NULL, NULL),
+(7, '1004', '2004', 'Dian Prasetyo', 'X', 'RPL', 'L', '2007-03-05', '081234567893', NULL, NULL),
+(8, '1005', '2005', 'Eka Wijaya', 'XI', 'MULTIMEDIA', 'P', '2006-07-18', '081234567894', NULL, NULL),
+(9, '1006', '2006', 'Fajar Ramadhan', 'XII', 'PEMASARAN', 'L', '2005-02-14', '081234567895', NULL, NULL),
+(10, '1007', '2007', 'Gina Anggraini', 'X', 'RPL', 'P', '2007-11-22', '081234567896', NULL, NULL),
+(11, '1008', '2008', 'Hendra Saputra', 'XI', 'MULTIMEDIA', 'L', '2006-04-30', '081234567897', NULL, NULL),
+(12, '1009', '2009', 'Indra Kurniawan', 'XII', 'PEMASARAN', 'L', '2005-06-12', '081234567898', NULL, NULL),
+(13, '1010', '2010', 'Joko Riyadi', 'X', 'RPL', 'L', '2007-10-08', '081234567899', NULL, NULL),
+(14, '1011', '2011', 'Kiki Amelia', 'XI', 'MULTIMEDIA', 'P', '2006-08-25', '081234567900', NULL, NULL),
+(15, '1012', '2012', 'Lina Maulida', 'XII', 'PEMASARAN', 'P', '2005-12-05', '081234567901', NULL, NULL),
+(16, '1013', '2013', 'Mira Septiani', 'X', 'RPL', 'P', '2007-09-19', '081234567902', NULL, NULL),
+(17, '1014', '2014', 'Novi Yulianti', 'XI', 'MULTIMEDIA', 'P', '2006-02-28', '081234567903', NULL, NULL),
+(18, '1015', '2015', 'Oki Setiawan', 'XII', 'PEMASARAN', 'L', '2005-07-01', '081234567904', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -215,7 +265,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
 (1, 'desfa', 'de@gmail.com', NULL, '$2y$12$zw0A.YuYF1T9q7UfzVZt5OcSWiesnOfA8v9BfxC2TF..PiuD9Ll/2', NULL, '2025-02-06 04:07:38', '2025-02-06 04:07:38'),
-(2, 'Qotrun', 'qotrun@gmail.com', NULL, '$2y$12$ljH07CViLAIS/niUFh/05e5i1WVH6VJFJ.a7BIoTR5npMr96gyceS', NULL, '2025-02-07 06:38:11', '2025-02-07 06:38:11');
+(2, 'Qotrun', 'qotrun@gmail.com', NULL, '$2y$12$ljH07CViLAIS/niUFh/05e5i1WVH6VJFJ.a7BIoTR5npMr96gyceS', NULL, '2025-02-07 06:38:11', '2025-02-07 06:38:11'),
+(3, 'dafa', 'dafa@gmail.com', NULL, '$2y$12$9NBNkAukCR7trTb8px.6tOapq3KZ2Wzt84pvIJVafLdHQH4ScGJry', NULL, '2025-02-17 06:19:27', '2025-02-17 06:19:27');
 
 --
 -- Indexes for dumped tables
@@ -301,7 +352,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `kelas`
 --
 ALTER TABLE `kelas`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -319,13 +370,13 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `settings`
 --
 ALTER TABLE `settings`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `siswa`
 --
 ALTER TABLE `siswa`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `transaksi`
@@ -337,7 +388,7 @@ ALTER TABLE `transaksi`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
