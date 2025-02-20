@@ -1,8 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-        APLIKASI PEMBAYARAN SPP YAYASAN PENDIDIKAN NURUL ILMA  
-        SMK BINA INFORMATIKA & SMK KESEHATAN BINA HUSADA
+        APLIKASI PEMBAYARAN SPP {{ $setting->nama_satuan }}
  @endsection
 
 @section('page-title')
@@ -81,35 +80,35 @@
                 <div class="row mb-3">
                     <label class="col-md-3 col-form-label">NPSN/NPSM</label>
                     <div class="col-md-9">
-                        <input class="form-control" type="text" placeholder="Masukkan NPSN/NPSM">
+                        <input class="form-control" type="text" value="{{ $setting->no_lembaga }}" disabled>
                     </div>
                 </div>
 
                 <div class="row mb-3">
                     <label class="col-md-3 col-form-label">Kab/Kota</label>
                     <div class="col-md-9">
-                        <input class="form-control" type="text" placeholder="Masukkan Kab/Kota">
+                        <input class="form-control" type="text" value="{{ $setting->kota }}" disabled>
                     </div>
                 </div>
 
                 <div class="row mb-3">
                     <label class="col-md-3 col-form-label">Kepala</label>
                     <div class="col-md-9">
-                        <input class="form-control" type="text" placeholder="Masukkan Nama Kepala Sekolah">
+                        <input class="form-control" type="text" value="{{ $setting->kepala_sekolah }}" disabled>
                     </div>
                 </div>
 
                 <div class="row mb-3">
                     <label class="col-md-3 col-form-label">Bendahara</label>
                     <div class="col-md-9">
-                        <input class="form-control" type="text" placeholder="Masukkan Nama Bendahara">
+                        <input class="form-control" type="text" value="{{ $setting->bendahara }}" disabled>
                     </div>
                 </div>
 
                 <div class="row mb-3">
                     <label class="col-md-3 col-form-label">Telp</label>
                     <div class="col-md-9">
-                        <input class="form-control" type="text" placeholder="Masukkan Nomor Telepon">
+                        <input class="form-control" type="text" value="{{ $setting->no_tlp }}" disabled>
                     </div>
                 </div>
             </div>

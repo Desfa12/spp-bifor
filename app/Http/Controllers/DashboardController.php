@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Siswa;
 use App\Models\Kelas;
+use App\Models\Setting;
 
 class DashboardController extends Controller
 {
@@ -21,7 +22,9 @@ class DashboardController extends Controller
         
         // Menghitung total jumlah kelas
         $totalKelas = Kelas::count();
+
+        $setting = Setting::firstOrCreate([]);
         
-        return view('dashboard', compact('totalSiswa', 'jumlahLaki', 'jumlahPerempuan', 'totalKelas'));
+        return view('dashboard', compact('totalSiswa', 'jumlahLaki', 'jumlahPerempuan', 'totalKelas','setting'));
     }
 }
