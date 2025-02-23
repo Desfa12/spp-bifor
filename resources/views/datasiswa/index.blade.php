@@ -65,7 +65,6 @@
                     <th>NISN</th>
                     <th>Nama Siswa</th>
                     <th>Kelas</th>
-                    <th>Jurusan</th>
                     <th>Jenis Kelamin</th>
                     <th>Tanggal Lahir</th>
                     <th>No. Telepon</th>
@@ -80,8 +79,7 @@
                         <td>{{ $item->nis }}</td>
                         <td>{{ $item->nisn }}</td>
                         <td>{{ $item->nama_siswa }}</td>
-                        <td>{{ $item->kelas }}</td>
-                        <td>{{ $item->jurusan }}</td>
+                        <td>{{ $item->kelas->tingkat ?? '-' }} {{ $item->kelas->jurusan ?? '-' }} - {{ $item->kelas->angkatan ?? '-' }}</td>
                         <td>{{ $item->jenis_kelamin }}</td>
                         <td>{{ $item->tgl_lahir }}</td>
                         <td>{{ $item->no_telp }}</td>

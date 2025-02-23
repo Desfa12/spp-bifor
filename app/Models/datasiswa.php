@@ -10,6 +10,11 @@ class Datasiswa extends Model
     use HasFactory;
 
     protected $table = 'siswa'; // Nama tabel di database
-    protected $fillable = ['nis', 'nisn', 'nama_siswa', 'kelas', 'jurusan', 'jenis_kelamin', 'tgl_lahir', 'no_telp'];
+    protected $fillable = ['nis', 'nisn', 'nama_siswa', 'id_kelas', 'jenis_kelamin', 'tgl_lahir', 'no_telp'];
+
+    public function kelas()
+    {
+        return $this->belongsTo(Kelas::class, 'id_kelas'); // Sesuaikan dengan foreign key di tabel datasiswa
+    }
 
 }

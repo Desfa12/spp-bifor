@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Datasiswa;
+use App\Models\Kelas;
 
 class DatasiswaController extends Controller
 {
@@ -13,7 +14,7 @@ class DatasiswaController extends Controller
         $katakunci = $request->input('katakunci');
         $jenisKelamin = $request->input('jenis_kelamin'); // Ambil filter jenis kelamin dari request
         
-        $query = Datasiswa::query();
+        $query = Datasiswa::with('kelas');
 
         if ($katakunci) {
             $query->where(function ($q) use ($katakunci) {
@@ -27,7 +28,7 @@ class DatasiswaController extends Controller
             $query->where('jenis_kelamin', $jenisKelamin);
         }
 
-        $datasiswa = $query->paginate(10);
+        $datasiswa = $query->orderBy('created_at', 'desc')->paginate(10);
 
         return view('datasiswa.index', compact('datasiswa', 'katakunci', 'jenisKelamin'));
     }
@@ -36,7 +37,9 @@ class DatasiswaController extends Controller
     // Menampilkan form tambah data
     public function create()
     {
-        return view('datasiswa.create');
+        $kelas = Kelas::where('aktif', 1)->get();
+        return view('datasiswa.create', compact('kelas'));
+        // return view('datasiswa.create');
     }
 
     // Menyimpan data siswa ke database
@@ -46,8 +49,7 @@ class DatasiswaController extends Controller
             'nis' => 'required|string|unique:siswa,nis',
             'nisn' => 'required|string|unique:siswa,nisn',
             'nama_siswa' => 'required|string',
-            'kelas' => 'required|string',
-            'jurusan' => 'required|string',
+            'id_kelas' => 'required|string',
             'jenis_kelamin' => 'required|string',
             'tgl_lahir' => 'required|date',
             'no_telp' => 'nullable|string',
@@ -62,7 +64,8 @@ class DatasiswaController extends Controller
     public function edit($id)
     {
         $datasiswa = Datasiswa::findOrFail($id);
-        return view('datasiswa.edit', compact('datasiswa'));
+        $kelas = Kelas::where('aktif', 1)->get();
+        return view('datasiswa.edit', compact('datasiswa','kelas'));
     }
 
     // Update data siswa
@@ -72,8 +75,7 @@ class DatasiswaController extends Controller
             'nis' => 'required|string|unique:siswa,nis,' . $id,
             'nisn' => 'required|string|unique:siswa,nisn,' . $id,
             'nama_siswa' => 'required|string',
-            'kelas' => 'required|string',
-            'jurusan' => 'required|string',
+            'id_kelas' => 'required|string',
             'jenis_kelamin' => 'required|string',
             'tgl_lahir' => 'required|date',
             'no_telp' => 'nullable|string',

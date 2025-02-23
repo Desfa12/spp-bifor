@@ -51,16 +51,14 @@
                     
                     <div class="form-group">
                         <label for="kelas">Kelas</label>
-                        <input type="text" class="form-control" name="kelas" value="{{ $datasiswa->kelas }}" id="kelas">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="jurusan">Jurusan</label>
-                        <select class="form-control" name="jurusan" id="jurusan">
-                            <option value="">-- Pilih Jurusan --</option>
-                            <option value="RPL" {{ $datasiswa->jurusan == 'RPL' ? 'selected' : '' }}>RPL</option>
-                            <option value="MULTIMEDIA" {{ $datasiswa->jurusan == 'MULTIMEDIA' ? 'selected' : '' }}>MULTIMEDIA</option>
-                            <option value="PEMASARAN" {{ $datasiswa->jurusan == 'PEMASARAN' ? 'selected' : '' }}>PEMASARAN</option>
+                        <select class="form-control" name="id_kelas" id="kelas" required>
+                            <option value="">-- Pilih Kelas --</option>
+                            @foreach ($kelas as $k)
+                                <option value="{{ $k->id }}" 
+                                    {{ old('id_kelas', $datasiswa->id_kelas ?? '') == $k->id ? 'selected' : '' }}>
+                                    {{ $k->tingkat }} {{ $k->jurusan }} - {{ $k->angkatan }}
+                                </option>
+                            @endforeach
                         </select>
                     </div>
                 </div>

@@ -51,16 +51,11 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="kelas">Kelas</label>
-                        <input type="text" class="form-control" name="kelas" id="kelas" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="jurusan">Jurusan</label>
-                        <select class="form-control" name="jurusan" id="jurusan" required>
-                            <option value="">-- Pilih Jurusan --</option>
-                            <option value="RPL">RPL</option>
-                            <option value="MULTIMEDIA">MULTIMEDIA</option>
-                            <option value="PEMASARAN">PEMASARAN</option>
+                        <select class="form-control" name="id_kelas" id="kelas" required>
+                            <option value="">-- Pilih Kelas --</option>
+                            @foreach ($kelas as $k)
+                                <option value="{{ $k->id }}">{{ $k->tingkat }} {{ $k->jurusan }} - {{ $k->angkatan }}</option>
+                            @endforeach
                         </select>
                     </div>
                     

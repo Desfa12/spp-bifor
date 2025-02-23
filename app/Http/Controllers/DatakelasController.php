@@ -11,17 +11,27 @@ class DatakelasController extends Controller
     public function index(Request $request)
     {
         $katakunci = $request->input('katakunci');
-
-        $datakelas = Kelas::when($katakunci, function ($query, $katakunci) {
-                return $query->where('tingkat', 'like', "%$katakunci%")
-                            ->orWhere('jurusan', 'like', "%$katakunci%")
-                            ->orWhere('angkatan', 'like', "%$katakunci%");
-            })
-            ->orderBy('tingkat', 'asc')
-            ->paginate(10);
-
-        return view('datakelas.index', compact('datakelas'));
+        $status = $request->input('status'); // Ambil filter status
+    
+        $query = Kelas::query();
+    
+        if ($katakunci) {
+            $query->where(function ($q) use ($katakunci) {
+                $q->where('tingkat', 'like', "%$katakunci%")
+                    ->orWhere('jurusan', 'like', "%$katakunci%")
+                    ->orWhere('angkatan', 'like', "%$katakunci%");
+            });
+        }
+    
+        if ($status !== null) { // Pastikan filter status bekerja
+            $query->where('aktif', $status);
+        }
+    
+        $datakelas = $query->orderBy('created_at', 'desc')->paginate(10);
+    
+        return view('datakelas.index', compact('datakelas', 'katakunci', 'status'));
     }
+    
 
 
     // Menampilkan form tambah data siswa
@@ -37,16 +47,19 @@ class DatakelasController extends Controller
         Session::flash('tingkat', $request->tingkat);
         Session::flash('jurusan', $request->jurusan);
         Session::flash('angkatan', $request->angkatan);
+        Session::flash('aktif', $request->aktif);
 
         // Validasi input
         $request->validate([
             'tingkat' => 'required|string',
             'jurusan' => 'required|string',
             'angkatan' => 'required|string',
+            'aktif' => 'required|string',
         ], [
             'tingkat.required' => 'Tingkat Wajib diisi',
             'jurusan.string' => 'Jurusan Wajib diisi',
             'angkatan.unique' => 'Angkatan Wajib diisi',
+            'aktif.unique' => 'aktif Wajib diisi',
         ]);
 
 
@@ -54,7 +67,8 @@ class DatakelasController extends Controller
         Kelas::create([
             'tingkat' => $request->tingkat,
             'jurusan' => $request->jurusan,
-            'angkatan' => $request->angkatan
+            'angkatan' => $request->angkatan,
+            'aktif' => $request->aktif
         ]);
 
         return redirect()->to('datakelas')->with('success', 'Berhasil menambahkan data');
@@ -75,16 +89,19 @@ class DatakelasController extends Controller
         Session::flash('tingkat', $request->tingkat);
         Session::flash('jurusan', $request->jurusan);
         Session::flash('angkatan', $request->angkatan);
+        Session::flash('aktif', $request->aktif);
 
         // Validasi input
         $request->validate([
             'tingkat' => 'required|string',
             'jurusan' => 'required|string',
             'angkatan' => 'required|string',
+            'aktif' => 'required|string',
         ], [
             'tingkat.required' => 'Tingkat Wajib diisi',
-            'jurusan.required' => 'Jurusan Wajib diisi',
-            'angkatan.required' => 'Angkatan Wajib diisi',
+            'jurusan.string' => 'Jurusan Wajib diisi',
+            'angkatan.unique' => 'Angkatan Wajib diisi',
+            'aktif.unique' => 'aktif Wajib diisi',
         ]);
 
         // Update data
@@ -92,6 +109,7 @@ class DatakelasController extends Controller
             'tingkat' => $request->tingkat,
             'jurusan' => $request->jurusan,
             'angkatan' => $request->angkatan,
+            'aktif' => $request->aktif
         ]);
 
         return redirect()->to('datakelas')->with('success', 'Data berhasil diperbarui');

@@ -57,6 +57,16 @@
                         <label for="angkatan">Angkatan</label>
                         <input type="text" class="form-control" name="angkatan" value="" id="angkatan">
                     </div>
+
+                    <div class="form-group">
+                        <label for="status">Status</label>
+                        <select class="form-control" name="aktif" id="aktif" required>
+                            <option value="">-- Pilih Status --</option>
+                            <option value="1" {{ old('status', $datakelas->aktif ?? '') == '1' ? 'selected' : '' }}>Aktif</option>
+                            <option value="0" {{ old('status', $datakelas->aktif ?? '') == '0' ? 'selected' : '' }}>Inaktif</option>
+                        </select>
+                    </div>
+                    
                 </div>
 
             </div>
