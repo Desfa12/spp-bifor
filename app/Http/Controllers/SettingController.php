@@ -36,24 +36,24 @@ class SettingController extends Controller
             'nip_bendahara' => 'nullable|string|max:50',
             'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
-
+    
         $setting = Setting::firstOrCreate([]);
-
+    
         // Cek apakah ada file logo yang diunggah
         if ($request->hasFile('logo')) {
             // Hapus logo lama jika ada
-            if ($setting->logo) {
-                Storage::delete('public/logos/' . $setting->logo);
+            if ($setting->logo && file_exists(public_path('logo/' . $setting->logo))) {
+                unlink(public_path('logo/' . $setting->logo));
             }
-
-            // Simpan logo baru
+    
+            // Simpan logo baru di public/logo
             $file = $request->file('logo');
             $filename = time() . '_' . $file->getClientOriginalName();
-            $file->storeAs('public/logos', $filename);
-
+            $file->move(public_path('logo'), $filename); // Pindahkan ke public/logo
+    
             $setting->logo = $filename;
         }
-
+    
         // Update data lainnya
         $setting->update([
             'nama_satuan' => $request->nama_satuan,
@@ -66,7 +66,8 @@ class SettingController extends Controller
             'bendahara' => $request->bendahara,
             'nip_bendahara' => $request->nip_bendahara,
         ]);
-
+    
         return redirect()->route('settings.edit')->with('success', 'Pengaturan berhasil diperbarui.');
     }
+    
 }

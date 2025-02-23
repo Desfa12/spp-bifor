@@ -106,7 +106,7 @@
 
                     <div class="mt-3 text-center">
                         @if ($setting->logo)
-                            <img id="preview" src="{{ asset('storage/logos/' . $setting->logo) }}" alt="Logo Sekolah" 
+                            <img id="preview" src="{{ asset('logo/' . $setting->logo) }}" alt="Logo Sekolah" 
                                 style="max-width: 150px; height: auto; border: 1px solid #ddd; padding: 5px;">
                         @else
                             <img id="preview" src="#" alt="Preview Logo" 

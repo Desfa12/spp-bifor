@@ -24,7 +24,7 @@
     <!-- Brand Logo -->
      <div class="d-flex justify-content-center mt-4">
       @if(isset($setting) && $setting->logo)
-          <img src="{{ asset('storage/logos/' . $setting->logo) }}" alt="Logo" class="img-fluid" style="max-width: 90px;">
+          <img src="{{ asset('logo/' . $setting->logo) }}" alt="Logo" class="img-fluid" style="max-width: 90px;">
       @else
           <img src="{{ asset('admin/dist/img/default-logo.png') }}" alt="Default Logo" class="img-fluid" style="max-width: 90px;">
       @endif
