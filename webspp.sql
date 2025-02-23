@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Feb 20, 2025 at 03:06 PM
+-- Generation Time: Feb 23, 2025 at 12:24 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -48,6 +48,7 @@ CREATE TABLE `kelas` (
   `tingkat` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `jurusan` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `angkatan` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `aktif` int NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -56,29 +57,28 @@ CREATE TABLE `kelas` (
 -- Dumping data for table `kelas`
 --
 
-INSERT INTO `kelas` (`id`, `tingkat`, `jurusan`, `angkatan`, `created_at`, `updated_at`) VALUES
-(4, 'XI', 'MULTIMEDIA', '3333', '2025-02-19 07:07:27', '2025-02-19 07:07:27'),
-(5, 'XI', 'RPL', '333', '2025-02-19 07:07:50', '2025-02-19 07:10:39'),
-(6, 'X', 'RPL', '2023', NULL, NULL),
-(7, 'XI', 'MULTIMEDIA', '2022', NULL, NULL),
-(8, 'XII', 'PEMASARAN', '2021', NULL, NULL),
-(9, 'X', 'RPL', '2024', NULL, NULL),
-(10, 'XI', 'MULTIMEDIA', '2023', NULL, NULL),
-(11, 'X', 'RPL', '2023', NULL, NULL),
-(12, 'XI', 'RPL', '2022', NULL, NULL),
-(13, 'XII', 'RPL', '2021', NULL, NULL),
-(14, 'X', 'MULTIMEDIA', '2023', NULL, NULL),
-(15, 'XI', 'MULTIMEDIA', '2022', NULL, NULL),
-(16, 'XII', 'MULTIMEDIA', '2021', NULL, NULL),
-(17, 'X', 'PEMASARAN', '2024', NULL, NULL),
-(18, 'XI', 'PEMASARAN', '2023', NULL, NULL),
-(19, 'XII', 'PEMASARAN', '2022', NULL, NULL),
-(20, 'X', 'AKUNTANSI', '2024', NULL, NULL),
-(21, 'XI', 'AKUNTANSI', '2023', NULL, NULL),
-(22, 'XII', 'AKUNTANSI', '2022', NULL, NULL),
-(23, 'X', 'TKJ', '2024', NULL, NULL),
-(24, 'XI', 'TKJ', '2023', NULL, NULL),
-(25, 'XII', 'TKJ', '2022', NULL, NULL);
+INSERT INTO `kelas` (`id`, `tingkat`, `jurusan`, `angkatan`, `aktif`, `created_at`, `updated_at`) VALUES
+(5, 'XI', 'RPL', '333', 1, '2025-02-19 07:07:50', '2025-02-19 07:10:39'),
+(7, 'XI', 'MULTIMEDIA', '2022', 0, NULL, NULL),
+(8, 'XII', 'PEMASARAN', '2021', 0, NULL, NULL),
+(9, 'X', 'RPL', '2024', 0, NULL, NULL),
+(10, 'XI', 'MULTIMEDIA', '2023', 0, NULL, NULL),
+(11, 'X', 'RPL', '2023', 0, NULL, NULL),
+(12, 'XI', 'RPL', '2022', 0, NULL, NULL),
+(13, 'XII', 'RPL', '2021', 0, NULL, NULL),
+(14, 'X', 'MULTIMEDIA', '2023', 0, NULL, NULL),
+(15, 'XI', 'MULTIMEDIA', '2022', 0, NULL, NULL),
+(16, 'XII', 'MULTIMEDIA', '2021', 0, NULL, NULL),
+(17, 'X', 'PEMASARAN', '2024', 0, NULL, NULL),
+(18, 'XI', 'PEMASARAN', '2023', 0, NULL, NULL),
+(19, 'XII', 'PEMASARAN', '2022', 0, NULL, NULL),
+(20, 'X', 'AKUNTANSI', '2024', 0, NULL, NULL),
+(21, 'XI', 'AKUNTANSI', '2023', 0, NULL, NULL),
+(22, 'XII', 'AKUNTANSI', '2022', 0, NULL, NULL),
+(23, 'X', 'TKJ', '2024', 0, NULL, NULL),
+(24, 'XI', 'TKJ', '2023', 0, NULL, NULL),
+(25, 'XII', 'TKJ', '2022', 0, NULL, NULL),
+(26, 'X', 'RPL', '222', 1, '2025-02-22 20:56:07', '2025-02-22 20:59:16');
 
 -- --------------------------------------------------------
 
@@ -180,7 +180,7 @@ CREATE TABLE `settings` (
 --
 
 INSERT INTO `settings` (`id`, `nama_satuan`, `no_lembaga`, `no_tlp`, `alamat`, `kota`, `kepala_sekolah`, `nip_kepsek`, `bendahara`, `nip_bendahara`, `logo`, `created_at`, `updated_at`) VALUES
-(1, 'YAYASAN PENDIDIKAN NURUL ILMA', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-02-19 08:33:29', '2025-02-19 08:45:07');
+(1, 'YAYASAN PENDIDIKAN NURUL ILMA 123', '123123', 3123333, 'ddd', 'fff', 'aaa', 2232323, 'ssss', 23212323, '1740283253_yysn.png', '2025-02-19 08:33:29', '2025-02-22 21:00:53');
 
 -- --------------------------------------------------------
 
@@ -193,8 +193,7 @@ CREATE TABLE `siswa` (
   `nis` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `nisn` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `nama_siswa` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `kelas` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `jurusan` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id_kelas` int NOT NULL,
   `jenis_kelamin` enum('L','P') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `tgl_lahir` date NOT NULL,
   `no_telp` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -206,24 +205,25 @@ CREATE TABLE `siswa` (
 -- Dumping data for table `siswa`
 --
 
-INSERT INTO `siswa` (`id`, `nis`, `nisn`, `nama_siswa`, `kelas`, `jurusan`, `jenis_kelamin`, `tgl_lahir`, `no_telp`, `created_at`, `updated_at`) VALUES
-(1, '09837654', '3874098763', 'desfa', 'XII', 'rpl', 'P', '2025-02-09', '093789378', '2025-02-09 07:50:31', '2025-02-09 08:03:51'),
-(2, '09876487', '0394857645', 'lolii2222', 'XI', 'MULTIMEDIA', 'L', '2025-02-09', '05283975892', '2025-02-09 08:11:06', '2025-02-19 07:45:12'),
-(4, '1001', '2001', 'Andi Saputra', 'X', 'RPL', 'L', '2007-01-15', '081234567890', NULL, NULL),
-(5, '1002', '2002', 'Budi Santoso', 'XI', 'MULTIMEDIA', 'L', '2006-05-22', '081234567891', NULL, NULL),
-(6, '1003', '2003', 'Citra Dewi', 'XII', 'PEMASARAN', 'P', '2005-09-10', '081234567892', NULL, NULL),
-(7, '1004', '2004', 'Dian Prasetyo', 'X', 'RPL', 'L', '2007-03-05', '081234567893', NULL, NULL),
-(8, '1005', '2005', 'Eka Wijaya', 'XI', 'MULTIMEDIA', 'P', '2006-07-18', '081234567894', NULL, NULL),
-(9, '1006', '2006', 'Fajar Ramadhan', 'XII', 'PEMASARAN', 'L', '2005-02-14', '081234567895', NULL, NULL),
-(10, '1007', '2007', 'Gina Anggraini', 'X', 'RPL', 'P', '2007-11-22', '081234567896', NULL, NULL),
-(11, '1008', '2008', 'Hendra Saputra', 'XI', 'MULTIMEDIA', 'L', '2006-04-30', '081234567897', NULL, NULL),
-(12, '1009', '2009', 'Indra Kurniawan', 'XII', 'PEMASARAN', 'L', '2005-06-12', '081234567898', NULL, NULL),
-(13, '1010', '2010', 'Joko Riyadi', 'X', 'RPL', 'L', '2007-10-08', '081234567899', NULL, NULL),
-(14, '1011', '2011', 'Kiki Amelia', 'XI', 'MULTIMEDIA', 'P', '2006-08-25', '081234567900', NULL, NULL),
-(15, '1012', '2012', 'Lina Maulida', 'XII', 'PEMASARAN', 'P', '2005-12-05', '081234567901', NULL, NULL),
-(16, '1013', '2013', 'Mira Septiani', 'X', 'RPL', 'P', '2007-09-19', '081234567902', NULL, NULL),
-(17, '1014', '2014', 'Novi Yulianti', 'XI', 'MULTIMEDIA', 'P', '2006-02-28', '081234567903', NULL, NULL),
-(18, '1015', '2015', 'Oki Setiawan', 'XII', 'PEMASARAN', 'L', '2005-07-01', '081234567904', NULL, NULL);
+INSERT INTO `siswa` (`id`, `nis`, `nisn`, `nama_siswa`, `id_kelas`, `jenis_kelamin`, `tgl_lahir`, `no_telp`, `created_at`, `updated_at`) VALUES
+(1, '09837654', '3874098763', 'desfa', 0, 'P', '2025-02-09', '093789378', '2025-02-09 07:50:31', '2025-02-09 08:03:51'),
+(2, '09876487', '0394857645', 'lolii2222', 0, 'L', '2025-02-09', '05283975892', '2025-02-09 08:11:06', '2025-02-19 07:45:12'),
+(4, '1001', '2001', 'Andi Saputra', 0, 'L', '2007-01-15', '081234567890', NULL, NULL),
+(5, '1002', '2002', 'Budi Santoso', 0, 'L', '2006-05-22', '081234567891', NULL, NULL),
+(6, '1003', '2003', 'Citra Dewi', 0, 'P', '2005-09-10', '081234567892', NULL, NULL),
+(7, '1004', '2004', 'Dian Prasetyo', 0, 'L', '2007-03-05', '081234567893', NULL, NULL),
+(8, '1005', '2005', 'Eka Wijaya', 0, 'P', '2006-07-18', '081234567894', NULL, NULL),
+(9, '1006', '2006', 'Fajar Ramadhan', 0, 'L', '2005-02-14', '081234567895', NULL, NULL),
+(10, '1007', '2007', 'Gina Anggraini', 0, 'P', '2007-11-22', '081234567896', NULL, NULL),
+(11, '1008', '2008', 'Hendra Saputra', 0, 'L', '2006-04-30', '081234567897', NULL, NULL),
+(12, '1009', '2009', 'Indra Kurniawan', 0, 'L', '2005-06-12', '081234567898', NULL, NULL),
+(13, '1010', '2010', 'Joko Riyadi', 0, 'L', '2007-10-08', '081234567899', NULL, NULL),
+(14, '1011', '2011', 'Kiki Amelia', 0, 'P', '2006-08-25', '081234567900', NULL, NULL),
+(15, '1012', '2012', 'Lina Maulida', 0, 'P', '2005-12-05', '081234567901', NULL, NULL),
+(16, '1013', '2013', 'Mira Septiani', 0, 'P', '2007-09-19', '081234567902', NULL, NULL),
+(17, '1014', '2014', 'Novi Yulianti', 0, 'P', '2006-02-28', '081234567903', NULL, NULL),
+(18, '1015', '2015', 'Oki Setiawan', 0, 'L', '2005-07-01', '081234567904', NULL, NULL),
+(19, '17171717171717717171', '12345645', 'rath', 5, 'P', '2025-02-23', '13213131231', '2025-02-22 20:39:20', '2025-02-22 20:48:25');
 
 -- --------------------------------------------------------
 
@@ -352,7 +352,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `kelas`
 --
 ALTER TABLE `kelas`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -376,7 +376,7 @@ ALTER TABLE `settings`
 -- AUTO_INCREMENT for table `siswa`
 --
 ALTER TABLE `siswa`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `transaksi`
