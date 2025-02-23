@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Feb 23, 2025 at 12:24 PM
+-- Generation Time: Feb 23, 2025 at 03:23 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -161,26 +161,26 @@ CREATE TABLE `personal_access_tokens` (
 
 CREATE TABLE `settings` (
   `id` int NOT NULL,
-  `nama_satuan` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `no_lembaga` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nama_satuan` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `no_lembaga` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `no_tlp` int DEFAULT NULL,
-  `alamat` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `kota` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `kepala_sekolah` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `alamat` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
+  `kota` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `kepala_sekolah` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `nip_kepsek` int DEFAULT NULL,
-  `bendahara` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `bendahara` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `nip_bendahara` int DEFAULT NULL,
-  `logo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `logo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `settings`
 --
 
 INSERT INTO `settings` (`id`, `nama_satuan`, `no_lembaga`, `no_tlp`, `alamat`, `kota`, `kepala_sekolah`, `nip_kepsek`, `bendahara`, `nip_bendahara`, `logo`, `created_at`, `updated_at`) VALUES
-(1, 'YAYASAN PENDIDIKAN NURUL ILMA 123', '123123', 3123333, 'ddd', 'fff', 'aaa', 2232323, 'ssss', 23212323, '1740283253_yysn.png', '2025-02-19 08:33:29', '2025-02-22 21:00:53');
+(1, 'YAYASAN PENDIDIKAN NURUL ILMA 123', '123123', 3123333, 'ddd', 'fff', 'aaa', 2232323, 'ssss', 23212323, '1740318704_yysn.png', '2025-02-19 08:33:29', '2025-02-23 06:51:44');
 
 -- --------------------------------------------------------
 
@@ -206,23 +206,23 @@ CREATE TABLE `siswa` (
 --
 
 INSERT INTO `siswa` (`id`, `nis`, `nisn`, `nama_siswa`, `id_kelas`, `jenis_kelamin`, `tgl_lahir`, `no_telp`, `created_at`, `updated_at`) VALUES
-(1, '09837654', '3874098763', 'desfa', 0, 'P', '2025-02-09', '093789378', '2025-02-09 07:50:31', '2025-02-09 08:03:51'),
-(2, '09876487', '0394857645', 'lolii2222', 0, 'L', '2025-02-09', '05283975892', '2025-02-09 08:11:06', '2025-02-19 07:45:12'),
-(4, '1001', '2001', 'Andi Saputra', 0, 'L', '2007-01-15', '081234567890', NULL, NULL),
-(5, '1002', '2002', 'Budi Santoso', 0, 'L', '2006-05-22', '081234567891', NULL, NULL),
-(6, '1003', '2003', 'Citra Dewi', 0, 'P', '2005-09-10', '081234567892', NULL, NULL),
-(7, '1004', '2004', 'Dian Prasetyo', 0, 'L', '2007-03-05', '081234567893', NULL, NULL),
-(8, '1005', '2005', 'Eka Wijaya', 0, 'P', '2006-07-18', '081234567894', NULL, NULL),
-(9, '1006', '2006', 'Fajar Ramadhan', 0, 'L', '2005-02-14', '081234567895', NULL, NULL),
-(10, '1007', '2007', 'Gina Anggraini', 0, 'P', '2007-11-22', '081234567896', NULL, NULL),
-(11, '1008', '2008', 'Hendra Saputra', 0, 'L', '2006-04-30', '081234567897', NULL, NULL),
-(12, '1009', '2009', 'Indra Kurniawan', 0, 'L', '2005-06-12', '081234567898', NULL, NULL),
-(13, '1010', '2010', 'Joko Riyadi', 0, 'L', '2007-10-08', '081234567899', NULL, NULL),
-(14, '1011', '2011', 'Kiki Amelia', 0, 'P', '2006-08-25', '081234567900', NULL, NULL),
-(15, '1012', '2012', 'Lina Maulida', 0, 'P', '2005-12-05', '081234567901', NULL, NULL),
-(16, '1013', '2013', 'Mira Septiani', 0, 'P', '2007-09-19', '081234567902', NULL, NULL),
-(17, '1014', '2014', 'Novi Yulianti', 0, 'P', '2006-02-28', '081234567903', NULL, NULL),
-(18, '1015', '2015', 'Oki Setiawan', 0, 'L', '2005-07-01', '081234567904', NULL, NULL),
+(1, '09837654', '3874098763', 'desfa', 5, 'P', '2025-02-09', '093789378', '2025-02-09 07:50:31', '2025-02-09 08:03:51'),
+(2, '09876487', '0394857645', 'lolii2222', 5, 'L', '2025-02-09', '05283975892', '2025-02-09 08:11:06', '2025-02-19 07:45:12'),
+(4, '1001', '2001', 'Andi Saputra', 5, 'L', '2007-01-15', '081234567890', NULL, NULL),
+(5, '1002', '2002', 'Budi Santoso', 5, 'L', '2006-05-22', '081234567891', NULL, NULL),
+(6, '1003', '2003', 'Citra Dewi', 5, 'P', '2005-09-10', '081234567892', NULL, NULL),
+(7, '1004', '2004', 'Dian Prasetyo', 5, 'L', '2007-03-05', '081234567893', NULL, NULL),
+(8, '1005', '2005', 'Eka Wijaya', 5, 'P', '2006-07-18', '081234567894', NULL, NULL),
+(9, '1006', '2006', 'Fajar Ramadhan', 5, 'L', '2005-02-14', '081234567895', NULL, NULL),
+(10, '1007', '2007', 'Gina Anggraini', 5, 'P', '2007-11-22', '081234567896', NULL, NULL),
+(11, '1008', '2008', 'Hendra Saputra', 5, 'L', '2006-04-30', '081234567897', NULL, NULL),
+(12, '1009', '2009', 'Indra Kurniawan', 5, 'L', '2005-06-12', '081234567898', NULL, NULL),
+(13, '1010', '2010', 'Joko Riyadi', 5, 'L', '2007-10-08', '081234567899', NULL, NULL),
+(14, '1011', '2011', 'Kiki Amelia', 5, 'P', '2006-08-25', '081234567900', NULL, NULL),
+(15, '1012', '2012', 'Lina Maulida', 5, 'P', '2005-12-05', '081234567901', NULL, NULL),
+(16, '1013', '2013', 'Mira Septiani', 5, 'P', '2007-09-19', '081234567902', NULL, NULL),
+(17, '1014', '2014', 'Novi Yulianti', 5, 'P', '2006-02-28', '081234567903', NULL, NULL),
+(18, '1015', '2015', 'Oki Setiawan', 5, 'L', '2005-07-01', '081234567904', NULL, NULL),
 (19, '17171717171717717171', '12345645', 'rath', 5, 'P', '2025-02-23', '13213131231', '2025-02-22 20:39:20', '2025-02-22 20:48:25');
 
 -- --------------------------------------------------------
@@ -239,8 +239,21 @@ CREATE TABLE `transaksi` (
   `tagihan` int DEFAULT NULL,
   `bayar` int NOT NULL,
   `sisa` int DEFAULT NULL,
-  `keterangan` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+  `keterangan` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `created_at` timestamp NOT NULL,
+  `updated_at` timestamp NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `transaksi`
+--
+
+INSERT INTO `transaksi` (`id`, `id_siswa`, `tipe`, `bulan`, `tagihan`, `bayar`, `sisa`, `keterangan`, `created_at`, `updated_at`) VALUES
+(1, 1, 'pembayaran spp', '', 10000, 7000, 3000, NULL, '2025-02-23 13:49:11', '2025-02-23 13:49:11'),
+(2, 1, 'SPP', '', 123, 21, 102, 'asdasdasd', '2025-02-23 08:00:08', '2025-02-23 08:00:08'),
+(3, 1, 'SPP', '', 123, 21, 102, 'asdasdasd', '2025-02-23 08:00:28', '2025-02-23 08:00:28'),
+(4, 2, 'SPP', '2025-02', 2000, 1000, 1000, 'asdasdasdas', '2025-02-23 08:13:04', '2025-02-23 08:13:04'),
+(5, 4, 'DSP', '2025-02', 231231, 222, 231009, 'asdasdasd', '2025-02-23 08:19:28', '2025-02-23 08:19:28');
 
 -- --------------------------------------------------------
 
@@ -382,7 +395,7 @@ ALTER TABLE `siswa`
 -- AUTO_INCREMENT for table `transaksi`
 --
 ALTER TABLE `transaksi`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `users`
