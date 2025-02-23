@@ -11,19 +11,27 @@ class DatasiswaController extends Controller
     public function index(Request $request)
     {
         $katakunci = $request->input('katakunci');
+        $jenisKelamin = $request->input('jenis_kelamin'); // Ambil filter jenis kelamin dari request
         
         $query = Datasiswa::query();
 
         if ($katakunci) {
-            $query->where('nama_siswa', 'like', "%$katakunci%")
-                  ->orWhere('nis', 'like', "%$katakunci%")
-                  ->orWhere('nisn', 'like', "%$katakunci%");
+            $query->where(function ($q) use ($katakunci) {
+                $q->where('nama_siswa', 'like', "%$katakunci%")
+                ->orWhere('nis', 'like', "%$katakunci%")
+                ->orWhere('nisn', 'like', "%$katakunci%");
+            });
+        }
+
+        if ($jenisKelamin) {
+            $query->where('jenis_kelamin', $jenisKelamin);
         }
 
         $datasiswa = $query->paginate(10);
 
-        return view('datasiswa.index', compact('datasiswa'));
+        return view('datasiswa.index', compact('datasiswa', 'katakunci', 'jenisKelamin'));
     }
+
 
     // Menampilkan form tambah data
     public function create()

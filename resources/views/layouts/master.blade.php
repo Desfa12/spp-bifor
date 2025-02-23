@@ -23,8 +23,12 @@
   <aside class="main-sidebar sidebar-dark-primary elevation-6">
     <!-- Brand Logo -->
      <div class="d-flex justify-content-center mt-4">
-     <img src="{{asset('admin/dist/img/logo_nurul_ilma-removebg-preview.png') }}"alt="Logo" class="img-fluid" style="max-width: 90px;">
-</div>
+      @if(isset($setting) && $setting->logo)
+          <img src="{{ asset('storage/logos/' . $setting->logo) }}" alt="Logo" class="img-fluid" style="max-width: 90px;">
+      @else
+          <img src="{{ asset('admin/dist/img/default-logo.png') }}" alt="Default Logo" class="img-fluid" style="max-width: 90px;">
+      @endif
+  </div>
     </a>
 
     <!-- Sidebar -->

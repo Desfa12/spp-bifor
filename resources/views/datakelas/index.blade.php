@@ -1,7 +1,6 @@
 @extends('layouts.master')
 
 @section('title')
- APLIKASI PEMBAYARAN SPP YAYASAN NURUL PENDIDIKAN NURUL ILMA
 @endsection
 
 @section('page-title')
@@ -29,11 +28,26 @@
       </div>
       @endif
                     <!-- FORM PENCARIAN -->
-                    <div class="pb-3">
+                    {{-- <div class="pb-3">
                         <form class="d-flex" action="{{ url('datakelas') }}" method="get">
-                            <input class="form-control me-1" type="search" name="katakunci" value="{{ request('katakunci') }}" placeholder="Masukkan kata kunci" aria-label="Search">
-                            <div class="px-2">
-                                <button class="btn btn-primary" type="submit">Cari</button>
+                            <div class="col-md-4">
+                            <input class="form-control me-1" type="search" name="katakunci" value="{{ request('katakunci') }}" placeholder="Cari Tingkat, Jurusan, atau Angkatan" aria-label="Search">
+                        </div>
+                            <div class="col-md-4">
+                                <button type="submit" class="btn btn-primary">Filter</button>
+                            </div>
+                        </form>
+                    </div> --}}
+                    <div class="pb-3">
+                        <form method="GET" action="{{ route('datakelas.index') }}">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <input type="text" name="katakunci" class="form-control" placeholder="Cari Tingkat, Jurusan, atau Angkatan" value="{{ request('katakunci') }}">
+                                </div>
+                                <div class="col-md-4">
+                                    <button type="submit" class="btn btn-primary">Filter</button>
+                                    <a href="{{ route('datakelas.index') }}" class="btn btn-danger">Reset</a>
+                                </div>
                             </div>
                         </form>
                     </div>

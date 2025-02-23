@@ -9,7 +9,7 @@ use App\Models\Setting;
 
 class DashboardController extends Controller
 {
-    public function dashboard()
+    public function index()
     {
         // Menghitung total jumlah siswa
         $totalSiswa = Siswa::count();

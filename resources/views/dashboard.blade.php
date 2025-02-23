@@ -36,7 +36,9 @@
                         <div class="icon">
                             <i class="ion ion-stats-bars"></i>
                         </div>
-                        <a href="/datasiswa" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="{{ route('datasiswa.index', ['jenis_kelamin' => 'P']) }}" class="small-box-footer">
+                            More info <i class="fas fa-arrow-circle-right"></i>
+                        </a>
                     </div>
                 </div>
                 <!-- ./col -->
@@ -49,7 +51,9 @@
                         <div class="icon">
                             <i class="ion ion-person-add"></i>
                         </div>
-                        <a href="/datasiswa" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="{{ route('datasiswa.index', ['jenis_kelamin' => 'L']) }}" class="small-box-footer">
+                            More info <i class="fas fa-arrow-circle-right"></i>
+                        </a>
                     </div>
                 </div>
                 <!-- ./col -->

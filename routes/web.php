@@ -12,6 +12,7 @@ use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\AuthController; // Menambahkan controller
+use App\Http\Controllers\WelcomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,9 +31,11 @@ Route::get('/welcome', function () {
     return view('welcome');
 });
 
+Route::get('/asdasd', [WelcomeController::class, "index"]);
+
 Route::middleware('auth')->group(
     function () {
-        Route::get('/', [DashboardController::class, "dashboard"]);
+        Route::get('/', [DashboardController::class, "index"]);
         // Route::get('/setting', [SettingController::class, "index"]);
         // Route::get('/datakelas', [DatakelasController::class, "datakelas"]);
         Route::get('/transaksi', [TransaksiController::class, "transaksi"]);
@@ -45,12 +48,12 @@ Route::middleware('auth')->group(
         });
 
         Route::prefix('datakelas')->group(function () {
-            Route::get('/', [DatakelasController::class, 'index']);
-            Route::get('/create', [DatakelasController::class, 'create']);
-            Route::post('/', [DatakelasController::class, 'store']);
-            Route::get('/{datakelas_id}/edit', [DatakelasController::class, 'edit']);
-            Route::put('/{datakelas}', [DatakelasController::class, 'update']);
-            Route::delete('/{datakelas_id}', [DatakelasController::class, 'destroy']);
+            Route::get('/', [DatakelasController::class, 'index'])->name('datakelas.index');
+            Route::get('/create', [DatakelasController::class, 'create'])->name('datakelas.create');
+            Route::post('/', [DatakelasController::class, 'store'])->name('datakelas.store');
+            Route::get('/{datakelas_id}/edit', [DatakelasController::class, 'edit'])->name('datakelas.edit');
+            Route::put('/{datakelas}', [DatakelasController::class, 'update'])->name('datakelas.update');
+            Route::delete('/{datakelas_id}', [DatakelasController::class, 'destroy'])->name('datakelas.destroy');
         });
         
         Route::prefix('datasiswa')->group(function () {

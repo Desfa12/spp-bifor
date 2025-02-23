@@ -1,7 +1,6 @@
 @extends('layouts.master')
 
 @section('title')
- APLIKASI PEMBAYARAN SPP YAYASAN NURUL PENDIDIKAN NURUL ILMA
 @endsection
 
 @section('page-title')
@@ -30,10 +29,22 @@
 
 <!-- FORM PENCARIAN -->
 <div class="pb-3">
-    <form class="d-flex" action="{{ url('datasiswa') }}" method="get">
-        <input class="form-control me-1" type="search" name="katakunci" value="{{ request('katakunci') }}" placeholder="Masukkan kata kunci" aria-label="Search">
-        <div class="px-2">
-            <button class="btn btn-primary" type="submit">Cari</button>
+    <form method="GET" action="{{ route('datasiswa.index') }}">
+        <div class="row">
+            <div class="col-md-4">
+                <input type="text" name="katakunci" class="form-control" placeholder="Cari nama, NIS, atau NISN" value="{{ request('katakunci') }}">
+            </div>
+            <div class="col-md-4">
+                <select name="jenis_kelamin" class="form-control">
+                    <option value="">-- Semua Jenis Kelamin --</option>
+                    <option value="L" {{ request('jenis_kelamin') == 'Laki-Laki' ? 'selected' : '' }}>Laki-Laki</option>
+                    <option value="P" {{ request('jenis_kelamin') == 'Perempuan' ? 'selected' : '' }}>Perempuan</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <button type="submit" class="btn btn-primary">Filter</button>
+                <a href="{{ route('datasiswa.index') }}" class="btn btn-danger">Reset</a>
+            </div>
         </div>
     </form>
 </div>
