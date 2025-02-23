@@ -31,10 +31,10 @@
                     <div class="pb-3">
                         <form method="GET" action="{{ route('datakelas.index') }}">
                             <div class="row">
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     <input type="text" name="katakunci" class="form-control" placeholder="Cari Tingkat, Jurusan, atau Angkatan" value="{{ request('katakunci') }}">
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     <select name="status" class="form-control">
                                         <option value="">-- Semua Status --</option>
                                         <option value="1" {{ request('status') === '1' ? 'selected' : '' }}>Aktif</option>
