@@ -2,102 +2,55 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Datasiswa;
 use App\Models\Transaksi;
-use App\Models\Siswa; // Pastikan Anda mengimpor model Siswa jika Anda menggunakan relasi
 use Illuminate\Http\Request;
 
 class TransaksiController extends Controller
 {
-    // Menampilkan semua data transaksi berdasarkan pencarian
-    public function index(Request $request)
+    public function index()
     {
-        $katakunci = $request->katakunci;
-        $jumlahbaris = 5;
-
-        if (strlen($katakunci)) {
-            $datasiswa = Datasiswa::where('nama_siswa', 'like', "%$katakunci%")
-           
-                ->paginate($jumlahbaris);
-        } else {
-            $datasiswa = Datasiswa::orderBy('nama_siswa', 'asc')
-            ->orderByRaw("CAST(SUBSTRING(kelas, 2) AS UNSIGNED) ASC")
-            ->paginate($jumlahbaris);
-        }
+        $transactions = Transaksi::with('siswa.kelas')->get();
+        $students = Datasiswa::with('kelas')->get();
+        // return $students;    
+        return view('transaksi.index', compact('transactions','students'));
     }
 
-        return view('transaksi.index')->with('transaksi', $datasiswa);
-    }
+    // public function create()
+    // {
+    //     $students = Datasiswa::all();
+    //     return view('transaksi.create', compact('students'));
+    // }
 
-    // Menampilkan Form untuk Menambah Transaksi
-    public function create()
-    {
-        $siswa = Siswa::all(); // Ambil daftar siswa
-        return view('transaksi.create', compact('siswa'));
-    }
-
-    // Menyimpan Transaksi Baru
     public function store(Request $request)
     {
         $request->validate([
-            'siswa_id' => 'required|exists:siswa,id',
+            // 'id_siswa' => 'required|exists:datasiswa,id', // Pastikan id_siswa ada di tabel datasiswa
+            'id_siswa' => 'required|integer',
+            'tipe' => 'required|string',
             'bulan' => 'required|string',
-            'jumlah_tagihan' => 'required|numeric',
-            'telah_dibayar' => 'required|numeric',
-            'sisa' => 'required|numeric',
+            'tagihan' => 'required|numeric|min:0',
+            'bayar' => 'required|numeric|min:0',
+            'sisa' => 'required|numeric|min:0',
             'keterangan' => 'nullable|string',
         ]);
 
+        // Hitung sisa pembayaran
+        $sisa = $request->tagihan - $request->bayar;
+
+        // Simpan ke database
         Transaksi::create([
-            'siswa_id' => $request->siswa_id,
+            'id_siswa' => $request->id_siswa,
+            'tipe' => $request->tipe,
             'bulan' => $request->bulan,
-            'jumlah_tagihan' => $request->jumlah_tagihan,
-            'telah_dibayar' => $request->telah_dibayar,
-            'sisa' => $request->sisa,
+            'tagihan' => $request->tagihan,
+            'bayar' => $request->bayar,
+            'sisa' => $sisa,
             'keterangan' => $request->keterangan,
         ]);
 
-        return redirect()->route('transaksi.index')->with('success', 'Transaksi berhasil disimpan.');
+        return redirect()->route('transaksi.index')->with('success', 'Transaksi berhasil ditambahkan!');
     }
 
-    // Menampilkan Form untuk Mengedit Transaksi
-    public function edit($id)
-    {
-        $transaksi = Transaksi::findOrFail($id);
-        $siswa = Siswa::all();
-        return view('transaksi.edit', compact('transaksi', 'siswa'));
-    }
-
-    // Memperbarui Data Transaksi
-    public function update(Request $request, $id)
-    {
-        $request->validate([
-            'siswa_id' => 'required|exists:siswa,id',
-            'bulan' => 'required|string',
-            'jumlah_tagihan' => 'required|numeric',
-            'telah_dibayar' => 'required|numeric',
-            'sisa' => 'required|numeric',
-            'keterangan' => 'nullable|string',
-        ]);
-
-        $transaksi = Transaksi::findOrFail($id);
-        $transaksi->update([
-            'siswa_id' => $request->siswa_id,
-            'bulan' => $request->bulan,
-            'jumlah_tagihan' => $request->jumlah_tagihan,
-            'telah_dibayar' => $request->telah_dibayar,
-            'sisa' => $request->sisa,
-            'keterangan' => $request->keterangan,
-        ]);
-
-        return redirect()->route('transaksi.index')->with('success', 'Transaksi berhasil diperbarui.');
-    }
-
-    // Menghapus Transaksi
-    public function destroy($id)
-    {
-        $transaksi = Transaksi::findOrFail($id);
-        $transaksi->delete();
-
-        return redirect()->route('transaksi.index')->with('success', 'Transaksi berhasil dihapus.');
-    }
 }
+

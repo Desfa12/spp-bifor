@@ -1,11 +1,10 @@
 @extends('layouts.master')
 
 @section('title')
-    APLIKASI PEMBAYARAN SPP YAYASAN PENDIDIKAN NURUL ILMA
 @endsection
 
 @section('page-title')
-    <h3 class="card-title"><i class="fas fa-user"></i><b> Daftar Transaksi</b></h3>
+    <h3 class="card-title"><i class="fas fa-money-bill"></i><b> Tambah Transaksi</b></h3>
 @endsection
 
 @section('content')
@@ -16,62 +15,105 @@
         </div>
     </div>
     @endif
+    @if ($errors->any())
+    <div class="pt-3">
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $item)
+                    <li>{{ $item }}</li>
+                @endforeach
+            </ul>
+        </div>
+    </div>  
+    @endif
 
-<div class="container mt-4">
-    <!-- FORM PENCARIAN -->
-    <div class="pb-3">
-        <form class="d-flex" action="{{ url('transaksi') }}" method="get">
-            <input class="form-control me-1" type="search" name="katakunci" value="{{ request('katakunci') }}" placeholder="Masukkan kata kunci" aria-label="Search">
-            <button class="btn btn-secondary" type="submit">Cari</button>
+    <div class="card p-3 shadow-sm">
+        <form action="{{ url('transaksi') }}" method="post">
+            @csrf
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">        
+                        <label for="student_id">Cari Siswa</label>
+                        <select class="form-control" name="id_siswa" id="student_id" required>
+                            <option value="">-- Pilih Siswa --</option>
+                            @foreach ($students as $s)
+                                <option value="{{ $s->id }}" 
+                                    data-nisn="{{ $s->nisn }}" 
+                                    data-kelas="{{ $s->kelas->tingkat }} {{ $s->kelas->jurusan }} - {{ $s->kelas->angkatan }}" 
+                                    data-jenis_kelamin="{{ $s->jenis_kelamin }}" 
+                                    data-tgl_lahir="{{ $s->tgl_lahir }}">
+                                    {{ $s->nama_siswa }} ({{ $s->nis }})
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="nisn">NISN</label>
+                        <input type="text" class="form-control" id="nisn" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label for="kelas">Kelas</label>
+                        <input type="text" class="form-control" id="kelas" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label for="jenis_kelamin">Jenis Kelamin</label>
+                        <input type="text" class="form-control" id="jenis_kelamin" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label for="tgl_lahir">Tanggal Lahir</label>
+                        <input type="text" class="form-control" id="tgl_lahir" disabled>
+                    </div>
+                    
+                  
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="tipe">Tipe Pembayaran</label>
+                        <select class="form-control" name="tipe" id="tipe" required>
+                            <option value="">-- Pilih Pembayaran --</option>
+                            <option value="SPP">SPP</option>
+                            <option value="DSP">DSP</option>
+                            <option value="Lainnya">Lainnya</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="bulan">Bulan</label>
+                        <input type="month" class="form-control" name="bulan" id="bulan" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="tagihan">Jumlah Tagihan</label>
+                        <input type="number" class="form-control" name="tagihan" id="tagihan" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="bayar">Telah Dibayar</label>
+                        <input type="number" class="form-control" name="bayar" id="bayar" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="sisa">Sisa</label>
+                        <input type="number" class="form-control" name="sisa" id="sisa" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="keterangan">Keterangan</label>
+                        <textarea class="form-control" name="keterangan" id="keterangan"></textarea>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <a href="{{ url('transactions') }}" class="btn btn-secondary">Kembali</a>
+                <button type="submit" class="btn btn-primary">Simpan</button>
+            </div>
         </form>
     </div>
-    
-  
-    <!-- TABEL DATA -->
-    <div class="card p-3 shadow-sm">
-        <div class="table-responsive">
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>ID Transaksi</th>
-                        <th>Nama Siswa</th>
-                        <th>NISN</th>
-                        <th>Bulan</th>
-                        <th>Jumlah Tagihan</th>
-                        <th>Telah Dibayar</th>
-                        <th>Sisa</th>
-                        <th>Keterangan</th>
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php $i = $transaksi->firstItem() ?>
-                    @foreach ($transaksi as $item)
-                        <tr>
-                            <td>{{ $i }}</td>
-                            <td>{{ $item->datasiswa->nama_siswa }}</td> <!-- Menampilkan nama siswa -->
-                            <td>{{ $item->datasiswa->nisn }}</td> <!-- Menampilkan NISN -->
-                            <td>{{ $item->bulan }}</td>
-                            <td>{{ $item->jumlah_tagihan }}</td>
-                            <td>{{ $item->telah_dibayar }}</td>
-                            <td>{{ $item->sisa }}</td>
-                            <td>{{ $item->keterangan }}</td>
-                            <td>
-                                <a href="{{ url('transaksi/'.$item->id.'/edit') }}" class="btn btn-warning btn-sm">Edit</a>
-                                <form action="{{ url('transaksi/'.$item->id) }}" method="POST" class="d-inline">
-                                    @csrf 
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin menghapus?')">Hapus</button>
-                                </form>
-                            </td>
-                        </tr>
-                        <?php $i++ ?>
-                    @endforeach
-                </tbody>
-            </table>
-            {{ $transaksi->withQueryString()->links() }}
-        </div>
-    </div>
-</div>
 
+    <script>
+        document.getElementById('student_id').addEventListener('change', function() {
+            var selectedOption = this.options[this.selectedIndex];
+            document.getElementById('nisn').value = selectedOption.getAttribute('data-nisn');
+            document.getElementById('kelas').value = selectedOption.getAttribute('data-kelas');
+            document.getElementById('jenis_kelamin').value = selectedOption.getAttribute('data-jenis_kelamin');
+            document.getElementById('tgl_lahir').value = selectedOption.getAttribute('data-tgl_lahir');
+        });
+    </script>    
 @endsection

@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Datasiswa;
 use Illuminate\Http\Request;
-use App\Models\Siswa;
 use App\Models\Kelas;
 use App\Models\Setting;
 
@@ -12,13 +12,13 @@ class DashboardController extends Controller
     public function index()
     {
         // Menghitung total jumlah siswa
-        $totalSiswa = Siswa::count();
+        $totalSiswa = Datasiswa::count();
         
         // Menghitung jumlah siswa laki-laki
-        $jumlahLaki = Siswa::where('jenis_kelamin', 'L')->count();
+        $jumlahLaki = Datasiswa::where('jenis_kelamin', 'L')->count();
         
         // Menghitung jumlah siswa perempuan
-        $jumlahPerempuan = Siswa::where('jenis_kelamin', 'P')->count();
+        $jumlahPerempuan = Datasiswa::where('jenis_kelamin', 'P')->count();
         
         // Menghitung total jumlah kelas
         $totalKelas = Kelas::count();

@@ -12,4 +12,8 @@ class Kelas extends Model
     protected $table = 'kelas';
     protected $fillable = ['tingkat','jurusan','angkatan','aktif'];
 
+    public function siswa()
+    {
+        return $this->hasMany(Datasiswa::class, 'kelas_id', 'id');
+    }
 }

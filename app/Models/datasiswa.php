@@ -16,5 +16,10 @@ class Datasiswa extends Model
     {
         return $this->belongsTo(Kelas::class, 'id_kelas'); // Sesuaikan dengan foreign key di tabel datasiswa
     }
+    
+    public function transaksi()
+    {
+        return $this->hasMany(Transaksi::class, 'siswa_id', 'id');
+    }
 
 }

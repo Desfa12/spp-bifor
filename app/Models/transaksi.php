@@ -6,25 +6,22 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Transaksi extends Model
-{
-
+{   
 
     protected $table = 'transaksi'; // Pastikan ini sesuai dengan nama tabel di database
 
     protected $fillable = [
-        'siswa_id',
+        'id_siswa',
+        'tipe',
         'bulan',
-        'jumlah_tagihan',
-        'telah_dibayar',
+        'tagihan',
+        'bayar',
         'sisa',
         'keterangan',
     ];
 
-    // Relasi dengan tabel Siswa (misalnya)
-    // Model Transaksi.php
-    // Di model Transaksi
-    public function Datasiswa()
+    public function siswa()
     {
-        return $this->belongsTo(Datasiswa::class, 'id_siswa'); // Pastikan nama kolom foreign key sesuai
+        return $this->hasMany(Datasiswa::class, 'id'); // Pastikan nama kolom foreign key sesuai
     }
 }

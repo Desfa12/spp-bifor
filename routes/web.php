@@ -8,9 +8,6 @@ use App\Http\Controllers\DatasiswaController;
 use App\Http\Controllers\RekapController;
 use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\LaporanController;
-use App\Http\Controllers\SiswaController;
-use App\Http\Controllers\KelasController;
-use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\AuthController; // Menambahkan controller
 use App\Http\Controllers\WelcomeController;
 
@@ -65,17 +62,23 @@ Route::middleware('auth')->group(
             Route::delete('/{id}', [DatasiswaController::class, 'destroy'])->name('datasiswa.destroy'); // Hapus data siswa
         });
 
-        Route::get('/transaksi', [TransaksiController::class, "index"]);
-        Route::get('/transaksi/create', [TransaksiController::class, 'create']);
-        Route::post('/transaksi', [TransaksiController::class, 'store']);
-        Route::get('/transaksi/{transaksi_id}/edit', [TransaksiController::class, 'edit']);
-        Route::put('/transaksi/{transaksi}', [TransaksiController::class, 'update']);
-        Route::delete('/transaksi/{transaksi_id}', [TransaksiController::class, 'destroy']);
+        Route::prefix('transaksi')->group(function () {
+        Route::get('/', [TransaksiController::class, 'index'])->name('transaksi.index');
+        // Route::get('/create', [TransaksiController::class, 'create'])->name('transaksi.create');
+        Route::post('/', [TransaksiController::class, 'store'])->name('transaksi.store');
+        });
+
+        // Route::get('transaksi/', [TransaksiController::class, "index"]);
+        // Route::get('/transaksi/create', [TransaksiController::class, 'create']);
+        // Route::post('/transaksi', [TransaksiController::class, 'store']);
+        // Route::get('/transaksi/{transaksi_id}/edit', [TransaksiController::class, 'edit']);
+        // Route::put('/transaksi/{transaksi}', [TransaksiController::class, 'update']);
+        // Route::delete('/transaksi/{transaksi_id}', [TransaksiController::class, 'destroy']);
 
 
-        Route::resource('siswa', SiswaController::class);
+        // Route::resource('siswa', SiswaController::class);
         // Route::resource('kelas', KelasController::class);
-        Route::resource('history', HistoryController::class);
+        // Route::resource('history', HistoryController::class);
     }
 );
 
