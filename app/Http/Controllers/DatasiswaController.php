@@ -13,14 +13,14 @@ class DatasiswaController extends Controller
     {
         $katakunci = $request->input('katakunci');
         $jenisKelamin = $request->input('jenis_kelamin'); // Ambil filter jenis kelamin dari request
-        
+
         $query = Datasiswa::with('kelas');
 
         if ($katakunci) {
             $query->where(function ($q) use ($katakunci) {
                 $q->where('nama_siswa', 'like', "%$katakunci%")
-                ->orWhere('nis', 'like', "%$katakunci%")
-                ->orWhere('nisn', 'like', "%$katakunci%");
+                    ->orWhere('nis', 'like', "%$katakunci%")
+                    ->orWhere('nisn', 'like', "%$katakunci%");
             });
         }
 
@@ -65,7 +65,7 @@ class DatasiswaController extends Controller
     {
         $datasiswa = Datasiswa::findOrFail($id);
         $kelas = Kelas::where('aktif', 1)->get();
-        return view('datasiswa.edit', compact('datasiswa','kelas'));
+        return view('datasiswa.edit', compact('datasiswa', 'kelas'));
     }
 
     // Update data siswa

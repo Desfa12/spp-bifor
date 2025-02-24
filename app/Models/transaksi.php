@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Transaksi extends Model
-{   
+{
 
     protected $table = 'transaksi'; // Pastikan ini sesuai dengan nama tabel di database
 
@@ -22,6 +22,6 @@ class Transaksi extends Model
 
     public function siswa()
     {
-        return $this->hasMany(Datasiswa::class, 'id'); // Pastikan nama kolom foreign key sesuai
+        return $this->belongsTo(Datasiswa::class, 'id_siswa', 'id');
     }
 }

@@ -64,8 +64,12 @@ Route::middleware('auth')->group(
 
         Route::prefix('transaksi')->group(function () {
             Route::get('/', [TransaksiController::class, 'index'])->name('transaksi.index');
-            // Route::get('/create', [TransaksiController::class, 'create'])->name('transaksi.create');
             Route::post('/', [TransaksiController::class, 'store'])->name('transaksi.store');
+        });
+
+        Route::prefix('rekap')->group(function () {
+            Route::get('/', [RekapController::class, 'index'])->name('rekap.index');
+            // Route::post('/', [RekapController::class, 'store'])->name('transaksi.store');
         });
 
         // Route::get('transaksi/', [TransaksiController::class, "index"]);

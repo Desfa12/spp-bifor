@@ -33,12 +33,6 @@ class TransaksiController extends Controller
         return view('transaksi.index', compact('datasiswa', 'katakunci', 'jenisKelamin'));
     }
 
-    // public function create()
-    // {
-    //     $students = Datasiswa::all();
-    //     return view('transaksi.create', compact('students'));
-    // }
-
     public function store(Request $request)
     {
         $request->validate([
@@ -59,6 +53,7 @@ class TransaksiController extends Controller
             'bayar' => preg_replace('/\D/', '', $request->bayar),
             'sisa' => preg_replace('/\D/', '', $request->sisa),
         ]);
+
         // Simpan ke database
         Transaksi::create([
             'id_siswa' => $request->id_siswa,
