@@ -11,7 +11,8 @@ class RekapController extends Controller
     {
         $query = Transaksi::with('siswa');
 
-        if ($request->has('katakunci')) {
+        // Filter berdasarkan kata kunci (nama siswa, NIS, NISN)
+        if ($request->has('katakunci') && !empty($request->katakunci)) {
             $query->whereHas('siswa', function ($q) use ($request) {
                 $q->where('nama_siswa', 'like', '%' . $request->katakunci . '%')
                     ->orWhere('nis', 'like', '%' . $request->katakunci . '%')
@@ -19,8 +20,13 @@ class RekapController extends Controller
             });
         }
 
+        // Filter berdasarkan tipe pembayaran (SPP, DSP, Lainnya)
+        if ($request->has('tipe') && !empty($request->tipe)) {
+            $query->where('tipe', $request->tipe);
+        }
+
         $transaksi = $query->orderBy('created_at', 'desc')->paginate(10);
-        // return $transaksi;
+
         return view('rekap.index', compact('transaksi'));
     }
 }
