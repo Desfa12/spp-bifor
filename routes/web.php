@@ -28,15 +28,15 @@ Route::get('/welcome', function () {
     return view('welcome');
 });
 
-Route::get('/asdasd', [WelcomeController::class, "index"]);
+// Route::get('/asdasd', [WelcomeController::class, "index"]);
 
 Route::middleware('auth')->group(
     function () {
         Route::get('/', [DashboardController::class, "index"]);
         // Route::get('/setting', [SettingController::class, "index"]);
         // Route::get('/datakelas', [DatakelasController::class, "datakelas"]);
-        Route::get('/transaksi', [TransaksiController::class, "transaksi"]);
-        Route::get('/rekap', [RekapController::class, "rekap"]);
+        // Route::get('/transaksi', [TransaksiController::class, "transaksi"]);
+        // Route::get('/rekap', [RekapController::class, "rekap"]);
         Route::get('/laporan', [LaporanController::class, "laporan"]);
 
         Route::prefix('settings')->group(function () {
