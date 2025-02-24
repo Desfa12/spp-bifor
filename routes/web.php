@@ -52,7 +52,7 @@ Route::middleware('auth')->group(
             Route::put('/{datakelas}', [DatakelasController::class, 'update'])->name('datakelas.update');
             Route::delete('/{datakelas_id}', [DatakelasController::class, 'destroy'])->name('datakelas.destroy');
         });
-        
+
         Route::prefix('datasiswa')->group(function () {
             Route::get('/', [DatasiswaController::class, 'index'])->name('datasiswa.index'); // Tampilkan semua data siswa
             Route::get('/create', [DatasiswaController::class, 'create'])->name('datasiswa.create'); // Form tambah data
@@ -63,9 +63,9 @@ Route::middleware('auth')->group(
         });
 
         Route::prefix('transaksi')->group(function () {
-        Route::get('/', [TransaksiController::class, 'index'])->name('transaksi.index');
-        // Route::get('/create', [TransaksiController::class, 'create'])->name('transaksi.create');
-        Route::post('/', [TransaksiController::class, 'store'])->name('transaksi.store');
+            Route::get('/', [TransaksiController::class, 'index'])->name('transaksi.index');
+            // Route::get('/create', [TransaksiController::class, 'create'])->name('transaksi.create');
+            Route::post('/', [TransaksiController::class, 'store'])->name('transaksi.store');
         });
 
         // Route::get('transaksi/', [TransaksiController::class, "index"]);

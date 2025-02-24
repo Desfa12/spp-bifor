@@ -8,12 +8,29 @@ use Illuminate\Http\Request;
 
 class TransaksiController extends Controller
 {
-    public function index()
+    // Menampilkan semua data siswa
+    public function index(Request $request)
     {
-        $transactions = Transaksi::with('siswa.kelas')->get();
-        $students = Datasiswa::with('kelas')->get();
-        // return $students;    
-        return view('transaksi.index', compact('transactions','students'));
+        $katakunci = $request->input('katakunci');
+        $jenisKelamin = $request->input('jenis_kelamin'); // Ambil filter jenis kelamin dari request
+
+        $query = Datasiswa::with('kelas');
+
+        if ($katakunci) {
+            $query->where(function ($q) use ($katakunci) {
+                $q->where('nama_siswa', 'like', "%$katakunci%")
+                    ->orWhere('nis', 'like', "%$katakunci%")
+                    ->orWhere('nisn', 'like', "%$katakunci%");
+            });
+        }
+
+        if ($jenisKelamin) {
+            $query->where('jenis_kelamin', $jenisKelamin);
+        }
+
+        $datasiswa = $query->orderBy('created_at', 'desc')->paginate(10);
+
+        return view('transaksi.index', compact('datasiswa', 'katakunci', 'jenisKelamin'));
     }
 
     // public function create()
@@ -29,15 +46,19 @@ class TransaksiController extends Controller
             'id_siswa' => 'required|integer',
             'tipe' => 'required|string',
             'bulan' => 'required|string',
-            'tagihan' => 'required|numeric|min:0',
-            'bayar' => 'required|numeric|min:0',
-            'sisa' => 'required|numeric|min:0',
+            'tagihan' => 'required|min:0',
+            'bayar' => 'required|min:0',
+            'sisa' => 'required|min:0',
             'keterangan' => 'nullable|string',
         ]);
 
         // Hitung sisa pembayaran
-        $sisa = $request->tagihan - $request->bayar;
-
+        // $sisa = $request->tagihan - $request->bayar;
+        $request->merge([
+            'tagihan' => preg_replace('/\D/', '', $request->tagihan),
+            'bayar' => preg_replace('/\D/', '', $request->bayar),
+            'sisa' => preg_replace('/\D/', '', $request->sisa),
+        ]);
         // Simpan ke database
         Transaksi::create([
             'id_siswa' => $request->id_siswa,
@@ -45,12 +66,10 @@ class TransaksiController extends Controller
             'bulan' => $request->bulan,
             'tagihan' => $request->tagihan,
             'bayar' => $request->bayar,
-            'sisa' => $sisa,
+            'sisa' => $request->sisa,
             'keterangan' => $request->keterangan,
         ]);
 
         return redirect()->route('transaksi.index')->with('success', 'Transaksi berhasil ditambahkan!');
     }
-
 }
-
