@@ -74,8 +74,14 @@
         </tbody>
     </table>
 
+    @php
+        use Carbon\Carbon;
+        Carbon::setLocale('id');
+        $tanggalCetak = Carbon::now('Asia/Jakarta')->translatedFormat('l, d F Y H:i');
+    @endphp
+
     <div class="footer">
-        <p>Dicetak pada: {{ date('d-m-Y H:i:s') }}</p>
+        <p>Dicetak pada: {{ $tanggalCetak }} WIB</p>
     </div>
 
 </body>
