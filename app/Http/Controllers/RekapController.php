@@ -10,7 +10,7 @@ class RekapController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Transaksi::with('siswa');
+        $query = Transaksi::with('siswa.kelas');
 
         // Filter berdasarkan kata kunci (nama siswa, NIS, NISN)
         if ($request->filled('katakunci')) {
@@ -38,7 +38,7 @@ class RekapController extends Controller
 
     public function exportPdf(Request $request)
     {
-        $query = Transaksi::with('siswa');
+        $query = Transaksi::with('siswa.kelas');
 
         if ($request->filled('katakunci')) {
             $query->whereHas('siswa', function ($q) use ($request) {
@@ -61,4 +61,5 @@ class RekapController extends Controller
         $pdf = PDF::loadView('rekap.rekap_data_pdf', compact('transaksi'));
         return $pdf->download('rekap_data.pdf');
     }
+
 }
