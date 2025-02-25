@@ -47,28 +47,32 @@
         <thead>
             <tr>
                 <th>No</th>
-                <th class="text-left">Nama Siswa</th>
-                <th>NIS</th>
+                <th>Nama Siswa</th>
+                <th>NISN</th>
+                {{-- <th>NIS</th> --}}
+                <th>Kelas</th>
                 <th>Tipe</th>
                 <th>Bulan</th>
-                <th class="text-right">Tagihan</th>
-                <th class="text-right">Bayar</th>
-                <th class="text-right">Sisa</th>
-                <th class="text-left">Keterangan</th>
+                <th>Tagihan</th>
+                <th>Bayar</th>
+                <th>Sisa</th>
+                <th>Keterangan</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($transaksi as $item)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td class="text-left">{{ $item->siswa?->nama_siswa ?? '-' }}</td>
-                    <td>{{ $item->siswa?->nis ?? '-' }}</td>
+                    <td>{{ $item->siswa?->nama_siswa ?? '-' }}</td>
+                    <td>{{ $item->siswa?->nisn ?? '-' }}</td>
+                    {{-- <td>{{ $item->siswa?->nis ?? '-' }}</td> --}}
+                    <td>{{ $item->siswa?->kelas?->tingkat ?? '-' }} {{ $item->siswa?->kelas?->jurusan ?? '-' }} - {{ $item->siswa?->kelas?->angkatan ?? '-' }}</td>
                     <td>{{ $item->tipe }}</td>
                     <td>{{ date('Y-m', strtotime($item->bulan)) }}</td>
-                    <td class="text-right">Rp{{ number_format($item->tagihan, 0, ',', '.') }}</td>
-                    <td class="text-right">Rp{{ number_format($item->bayar, 0, ',', '.') }}</td>
-                    <td class="text-right">Rp{{ number_format($item->sisa, 0, ',', '.') }}</td>
-                    <td class="text-left">{{ $item->keterangan ?? '-' }}</td>
+                    <td>Rp{{ number_format($item->tagihan, 0, ',', '.') }}</td>
+                    <td>Rp{{ number_format($item->bayar, 0, ',', '.') }}</td>
+                    <td>Rp{{ number_format($item->sisa, 0, ',', '.') }}</td>
+                    <td>{{ $item->keterangan ?? '-' }}</td>
                 </tr>
             @endforeach
         </tbody>

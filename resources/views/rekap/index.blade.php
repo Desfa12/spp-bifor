@@ -58,7 +58,9 @@
                 <tr>
                     <th>No</th>
                     <th>Nama Siswa</th>
+                    <th>NISN</th>
                     <th>NIS</th>
+                    <th>Kelas</th>
                     <th>Tipe</th>
                     <th>Bulan</th>
                     <th>Tagihan</th>
@@ -72,7 +74,9 @@
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $item->siswa?->nama_siswa ?? '-' }}</td>
+                        <td>{{ $item->siswa?->nisn ?? '-' }}</td>
                         <td>{{ $item->siswa?->nis ?? '-' }}</td>
+                        <td>{{ $item->siswa?->kelas?->tingkat ?? '-' }} {{ $item->siswa?->kelas?->jurusan ?? '-' }} - {{ $item->siswa?->kelas?->angkatan ?? '-' }}</td>
                         <td>{{ $item->tipe }}</td>
                         <td>{{ date('Y-m', strtotime($item->bulan)) }}</td>
                         <td>Rp{{ number_format($item->tagihan, 0, ',', '.') }}</td>
