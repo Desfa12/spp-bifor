@@ -29,25 +29,25 @@
       @endif
                     <!-- FORM PENCARIAN -->
                     <div class="pb-3">
-                        <form method="GET" action="{{ route('datakelas.index') }}">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <input type="text" name="katakunci" class="form-control" placeholder="Cari Tingkat, Jurusan, atau Angkatan" value="{{ request('katakunci') }}">
-                                </div>
-                                <div class="col-md-4">
-                                    <select name="status" class="form-control">
-                                        <option value="">-- Semua Status --</option>
-                                        <option value="1" {{ request('status') === '1' ? 'selected' : '' }}>Aktif</option>
-                                        <option value="0" {{ request('status') === '0' ? 'selected' : '' }}>Inaktif</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-4">
-                                    <button type="submit" class="btn btn-primary">Filter</button>
-                                    <a href="{{ route('datakelas.index') }}" class="btn btn-danger">Reset</a>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
+    <form method="GET" action="{{ route('datakelas.index') }}">
+        <div class="row">
+            <div class="col-12 col-md-4 mb-2">
+                <input type="text" name="katakunci" class="form-control" placeholder="Cari Tingkat, Jurusan, atau Angkatan" value="{{ request('katakunci') }}">
+            </div>
+            <div class="col-12 col-md-4 mb-2">
+                <select name="status" class="form-control">
+                    <option value="">-- Semua Status --</option>
+                    <option value="1" {{ request('status') === '1' ? 'selected' : '' }}>Aktif</option>
+                    <option value="0" {{ request('status') === '0' ? 'selected' : '' }}>Inaktif</option>
+                </select>
+            </div>
+            <div class="col-12 col-md-4 mb-2">
+                <button type="submit" class="btn btn-primary ">Filter</button>
+                <a href="{{ route('datakelas.index') }}" class="btn btn-danger">Reset</a>
+            </div>
+        </div>
+    </form>
+</div>
 
 
                     <!-- TOMBOL TAMBAH DATA -->

@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Feb 24, 2025 at 10:52 AM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Host: 127.0.0.1
+-- Generation Time: Feb 25, 2025 at 03:39 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -58,19 +58,17 @@ CREATE TABLE `kelas` (
 --
 
 INSERT INTO `kelas` (`id`, `tingkat`, `jurusan`, `angkatan`, `aktif`, `created_at`, `updated_at`) VALUES
-(5, 'XI', 'RPL', '333', 1, '2025-02-19 07:07:50', '2025-02-19 07:10:39'),
-(7, 'XI', 'MULTIMEDIA', '2022', 0, NULL, NULL),
-(8, 'XII', 'PEMASARAN', '2021', 0, NULL, NULL),
-(9, 'X', 'RPL', '2024', 0, NULL, NULL),
-(10, 'XI', 'MULTIMEDIA', '2023', 0, NULL, NULL),
-(11, 'X', 'RPL', '2023', 0, NULL, NULL),
-(12, 'XI', 'RPL', '2022', 0, NULL, NULL),
-(13, 'XII', 'RPL', '2021', 0, NULL, NULL),
-(14, 'X', 'MULTIMEDIA', '2023', 0, NULL, NULL),
-(15, 'XI', 'MULTIMEDIA', '2022', 0, NULL, NULL),
-(16, 'XII', 'MULTIMEDIA', '2021', 0, NULL, NULL),
-(17, 'X', 'PEMASARAN', '2024', 0, NULL, NULL),
-(18, 'XI', 'PEMASARAN', '2023', 0, NULL, NULL),
+(5, 'XI', 'REKAYASA PERANGKAT LUNAK (RPL)', '2024/2025', 1, '2025-02-19 07:07:50', '2025-02-25 14:32:01'),
+(7, 'XI', 'MULTIMEDIA (MM)', '2024/2025', 1, NULL, '2025-02-25 14:32:56'),
+(10, 'X', 'MULTIMEDIA (MM)', '2024/2025', 1, NULL, '2025-02-25 14:33:33'),
+(11, 'X', 'TEKNIK JARINGAN KOMPUTER (TKJ)', '2024/2025', 1, NULL, '2025-02-25 14:33:41'),
+(12, 'XI', 'TEKNIK JARINGAN KOMPUTER (TKJ)', '2024/2025', 1, NULL, '2025-02-25 14:33:50'),
+(13, 'XII', 'REKAYASA PERANGKAT LUNAK (RPL)', '2024/2025', 1, NULL, '2025-02-25 14:32:15'),
+(14, 'X', 'OTOMATISASI TATA KELOLA PERKANTORAN (OTKP)', '2024/2025', 1, NULL, '2025-02-25 14:34:01'),
+(15, 'XII', 'TEKNIK JARINGAN KOMPUTER (TKJ)', '2024/2025', 1, NULL, '2025-02-25 14:34:12'),
+(16, 'XII', 'MULTIMEDIA (MM)', '2024/2025', 1, NULL, '2025-02-25 14:37:21'),
+(17, 'XI', 'OTOMATISASI TATA KELOLA PERKANTORAN (OTKP)', '2024/2025', 1, NULL, '2025-02-25 14:37:50'),
+(18, 'XII', 'OTOMATISASI TATA KELOLA PERKANTORAN', '2024/2025', 0, NULL, '2025-02-25 14:28:32'),
 (19, 'XII', 'PEMASARAN', '2022', 0, NULL, NULL),
 (20, 'X', 'AKUNTANSI', '2024', 0, NULL, NULL),
 (21, 'XI', 'AKUNTANSI', '2023', 0, NULL, NULL),
@@ -78,7 +76,7 @@ INSERT INTO `kelas` (`id`, `tingkat`, `jurusan`, `angkatan`, `aktif`, `created_a
 (23, 'X', 'TKJ', '2024', 0, NULL, NULL),
 (24, 'XI', 'TKJ', '2023', 0, NULL, NULL),
 (25, 'XII', 'TKJ', '2022', 0, NULL, NULL),
-(26, 'X', 'RPL', '222', 1, '2025-02-22 20:56:07', '2025-02-22 20:59:16');
+(26, 'X', 'REKAYASA PERANGKAT LUNAK (RPL)', '2024/2025', 1, '2025-02-22 20:56:07', '2025-02-25 14:31:51');
 
 -- --------------------------------------------------------
 

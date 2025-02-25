@@ -31,17 +31,17 @@
 <div class="pb-3">
     <form method="GET" action="{{ route('datasiswa.index') }}">
         <div class="row">
-            <div class="col-md-4">
+            <div class="ol-12 col-md-4 mb-2">
                 <input type="text" name="katakunci" class="form-control" placeholder="Cari nama, NIS, atau NISN" value="{{ request('katakunci') }}">
             </div>
-            <div class="col-md-4">
+            <div class="ol-12 col-md-4 mb-2">
                 <select name="jenis_kelamin" class="form-control">
                     <option value="">-- Semua Jenis Kelamin --</option>
                     <option value="L" {{ request('jenis_kelamin') == 'Laki-Laki' ? 'selected' : '' }}>Laki-Laki</option>
                     <option value="P" {{ request('jenis_kelamin') == 'Perempuan' ? 'selected' : '' }}>Perempuan</option>
                 </select>
             </div>
-            <div class="col-md-4">
+            <div class="col-12 col-md-4 mb-2">
                 <button type="submit" class="btn btn-primary">Filter</button>
                 <a href="{{ route('datasiswa.index') }}" class="btn btn-danger">Reset</a>
             </div>
