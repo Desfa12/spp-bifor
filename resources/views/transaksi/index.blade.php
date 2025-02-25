@@ -31,10 +31,10 @@
 <div class="pb-3">
     <form method="GET" action="{{ route('transaksi.index') }}">
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-12 col-md-8 mb-2">
                 <input type="text" name="katakunci" class="form-control" placeholder="Cari nama, NIS, atau NISN" >
             </div>
-            <div class="col-md-4">
+            <div class="col-12 col-md-4 mb-2">
                 <button type="submit" class="btn btn-primary">Filter</button>
             </div>
         </div>

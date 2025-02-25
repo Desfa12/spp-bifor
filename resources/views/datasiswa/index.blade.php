@@ -84,7 +84,7 @@
                         <td>{{ $item->tgl_lahir }}</td>
                         <td>{{ $item->no_telp }}</td>
                         <td>
-                            <a href="{{ url('datasiswa/'.$item->id.'/edit') }}" class="btn btn-warning btn-sm">Edit</a>
+                            <a href="{{ url('datasiswa/'.$item->id.'/edit') }}" class="btn btn-warning btn-sm ">Edit</a>
                             <form action="{{ url('datasiswa/'.$item->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus?')">
                                 @csrf 
                                 @method('DELETE')

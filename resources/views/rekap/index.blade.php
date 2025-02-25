@@ -25,11 +25,13 @@
 
 <div class="pb-3">
     <form method="GET" action="{{ route('rekap.index') }}">
-        <div class="row">
-            <div class="col-md-3">
+       <div class="pb-3">
+    <form method="GET" action="{{ route('rekap.index') }}">
+        <div class="row align-items-end">
+            <div class="col-12 col-md-3 mb-2">
                 <input type="text" name="katakunci" class="form-control" placeholder="Cari nama, NIS, atau NISN" value="{{ request('katakunci') }}">
             </div>
-            <div class="col-md-3">
+            <div class="col-12 col-md-3 mb-2">
                 <select class="form-control" name="tipe" id="tipe">
                     <option value="">-- Pilih Pembayaran --</option>
                     <option value="SPP" {{ request('tipe') == 'SPP' ? 'selected' : '' }}>SPP</option>
@@ -37,17 +39,19 @@
                     <option value="Lainnya" {{ request('tipe') == 'Lainnya' ? 'selected' : '' }}>Lainnya</option>
                 </select>
             </div>
-            <div class="col-md-3">
-                <input type="month" class="form-control" name="bulan" id="bulan" value="{{ request('bulan') }}" >
+            <div class="col-12 col-md-3 mb-2">
+                <input type="month" class="form-control" name="bulan" id="bulan" value="{{ request('bulan') }}">
             </div>
-            <div class="col-md-3">
-                <button type="submit" class="btn btn-primary">Filter</button>
-                <a href="{{ route('rekap.index') }}" class="btn btn-danger">Reset</a>
+            <div class="col-12 col-md-3 mb-2">
+                <button type="submit" class="btn btn-primary me-2">Filter</button>
+                <a href="{{ route('rekap.index') }}" class="btn btn-danger me-2">Reset</a>
                 <a href="{{ route('rekap.exportPdf', request()->query()) }}" class="btn btn-success">
                     <i class="fas fa-file-pdf"></i> Export PDF
                 </a>
             </div>
         </div>
+    </form>
+</div>
     </form>
 </div>
 
