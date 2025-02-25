@@ -48,9 +48,12 @@
                         <label for="jurusan">Jurusan</label>
                         <select class="form-control" name="jurusan" id="jurusan">
                             <option value="">-- Pilih Jurusan --</option>
-                            <option value="RPL" {{ $datakelas->jurusan == 'RPL' ? 'selected' : '' }}>RPL</option>
+                            <option value="RPL" {{ $datakelas->jurusan == 'RPL' ? 'selected' : '' }}>REKAYASA PERANGKAT LUNAK (RPL)</option>
                             <option value="MULTIMEDIA" {{ $datakelas->jurusan == 'MULTIMEDIA' ? 'selected' : '' }}>MULTIMEDIA</option>
-                            <option value="PEMASARAN" {{ $datakelas->jurusan == 'PEMASARAN' ? 'selected' : '' }}>PEMASARAN</option>
+                            <option value="TEKNIK JARINGAN KOMPUTER" {{ $datakelas->jurusan == 'TEKNIK JARINGAN KOMPUTER' ? 'selected' : '' }}>TEKNIK JARINGAN KOMPUTER (TKJ)</option>
+                            <option value="OTOMATISASI TATA KELOLA PERKANTORAN " {{ $datakelas->jurusan == 'OTOMATISASI TATA KELOLA PERKANTORAN ' ? 'selected' : '' }}>OTOMATISASI TATA KELOLA PERKANTORAN (OTKP)</option>
+                            <option value="PERBANKAN DAN KEUANGAN MIKRO" {{ $datakelas->jurusan == 'PERBANKAN DAN KEUANGAN MIKRO' ? 'selected' : '' }}>PERBANKAN DAN KEUANGAN MIKRO (PKM)</option>
+                            <option value="KEPERAWATAN" {{ $datakelas->jurusan == 'KEPERAWATAN' ? 'selected' : '' }}>KEPERAWATAN</option>
                         </select>
                     </div>
 

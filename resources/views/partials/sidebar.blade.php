@@ -74,6 +74,14 @@
             <a href="/rekap" class="nav-link">
               <i class="fas fa-clipboard-list"></i>
               <p>
+                Rekap dan Laporan
+              </p>
+            </a>
+          </li>
+          {{-- <li class="nav-item">
+            <a href="/rekap" class="nav-link">
+              <i class="fas fa-clipboard-list"></i>
+              <p>
                 Rekap
               </p>
             </a>
@@ -85,7 +93,7 @@
                 Laporan
               </p>
             </a>
-          </li>
+          </li> --}}
           {{-- <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="fas fa-save"></i>

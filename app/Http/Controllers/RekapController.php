@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Transaksi;
 use Illuminate\Http\Request;
+use PDF;
 
 class RekapController extends Controller
 {
@@ -12,7 +13,7 @@ class RekapController extends Controller
         $query = Transaksi::with('siswa');
 
         // Filter berdasarkan kata kunci (nama siswa, NIS, NISN)
-        if ($request->has('katakunci') && !empty($request->katakunci)) {
+        if ($request->filled('katakunci')) {
             $query->whereHas('siswa', function ($q) use ($request) {
                 $q->where('nama_siswa', 'like', '%' . $request->katakunci . '%')
                     ->orWhere('nis', 'like', '%' . $request->katakunci . '%')
@@ -21,12 +22,43 @@ class RekapController extends Controller
         }
 
         // Filter berdasarkan tipe pembayaran (SPP, DSP, Lainnya)
-        if ($request->has('tipe') && !empty($request->tipe)) {
+        if ($request->filled('tipe')) {
             $query->where('tipe', $request->tipe);
+        }
+
+        // Filter berdasarkan bulan (format: YYYY-MM)
+        if ($request->filled('bulan')) {
+            $query->where('bulan', $request->bulan);
         }
 
         $transaksi = $query->orderBy('created_at', 'desc')->paginate(10);
 
         return view('rekap.index', compact('transaksi'));
+    }
+
+    public function exportPdf(Request $request)
+    {
+        $query = Transaksi::with('siswa');
+
+        if ($request->filled('katakunci')) {
+            $query->whereHas('siswa', function ($q) use ($request) {
+                $q->where('nama_siswa', 'like', '%' . $request->katakunci . '%')
+                    ->orWhere('nis', 'like', '%' . $request->katakunci . '%')
+                    ->orWhere('nisn', 'like', '%' . $request->katakunci . '%');
+            });
+        }
+
+        if ($request->filled('tipe')) {
+            $query->where('tipe', $request->tipe);
+        }
+
+        if ($request->filled('bulan')) {
+            $query->where('bulan', $request->bulan);
+        }
+
+        $transaksi = $query->orderBy('created_at', 'desc')->get();
+
+        $pdf = PDF::loadView('rekap.rekap_data_pdf', compact('transaksi'));
+        return $pdf->download('rekap_data.pdf');
     }
 }

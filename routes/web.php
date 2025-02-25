@@ -69,7 +69,7 @@ Route::middleware('auth')->group(
 
         Route::prefix('rekap')->group(function () {
             Route::get('/', [RekapController::class, 'index'])->name('rekap.index');
-            // Route::post('/', [RekapController::class, 'store'])->name('transaksi.store');
+            Route::get('/exportPdf', [RekapController::class, 'exportPdf'])->name('rekap.exportPdf');
         });
 
         // Route::get('transaksi/', [TransaksiController::class, "index"]);

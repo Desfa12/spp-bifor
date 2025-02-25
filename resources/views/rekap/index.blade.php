@@ -26,10 +26,10 @@
 <div class="pb-3">
     <form method="GET" action="{{ route('rekap.index') }}">
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <input type="text" name="katakunci" class="form-control" placeholder="Cari nama, NIS, atau NISN" value="{{ request('katakunci') }}">
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <select class="form-control" name="tipe" id="tipe">
                     <option value="">-- Pilih Pembayaran --</option>
                     <option value="SPP" {{ request('tipe') == 'SPP' ? 'selected' : '' }}>SPP</option>
@@ -37,9 +37,15 @@
                     <option value="Lainnya" {{ request('tipe') == 'Lainnya' ? 'selected' : '' }}>Lainnya</option>
                 </select>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
+                <input type="month" class="form-control" name="bulan" id="bulan" value="{{ request('bulan') }}" >
+            </div>
+            <div class="col-md-3">
                 <button type="submit" class="btn btn-primary">Filter</button>
                 <a href="{{ route('rekap.index') }}" class="btn btn-danger">Reset</a>
+                <a href="{{ route('rekap.exportPdf', request()->query()) }}" class="btn btn-success">
+                    <i class="fas fa-file-pdf"></i> Export PDF
+                </a>
             </div>
         </div>
     </form>
@@ -68,7 +74,7 @@
                         <td>{{ $item->siswa?->nama_siswa ?? '-' }}</td>
                         <td>{{ $item->siswa?->nis ?? '-' }}</td>
                         <td>{{ $item->tipe }}</td>
-                        <td>{{ $item->bulan }}</td>
+                        <td>{{ date('Y-m', strtotime($item->bulan)) }}</td>
                         <td>Rp{{ number_format($item->tagihan, 0, ',', '.') }}</td>
                         <td>Rp{{ number_format($item->bayar, 0, ',', '.') }}</td>
                         <td>Rp{{ number_format($item->sisa, 0, ',', '.') }}</td>

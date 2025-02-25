@@ -47,9 +47,12 @@
                         <label for="nisn">Jurusan</label>
                         <select class="form-control" name="jurusan" id="jurusan">
                             <option value="">-- Pilih Jurusan --</option>
-                            <option value="RPL">RPL</option>
-                            <option value="MULTIMEDIA">MULTIMEDIA</option>
-                            <option value="PEMASARAN">PEMASARAN</option>
+                            <option value="RPL">REKAYASA PERANGKAT LUNAK (RPL)</option>
+                            <option value="MULTIMEDIA">MULTIMEDIA (MM)</option>
+                            <option value="TEKNIK JARINGAN KOMPUTER">TEKNIK JARINGAN KOMPUTER (TKJ)</option>
+                            <option value="OTOMATISASI TATA KELOLA PERKANTORAN ">OTOMATISASI TATA KELOLA PERKANTORAN (OTKP)</option>
+                            <option value="PERBANKAN DAN KEUANGAN MIKRO">PERBANKAN DAN KEUANGAN MIKRO (PKM)</option>
+                            <option value="KEPERAWATAN">KEPERAWATAN</option>
                         </select>
                     </div>
 
