@@ -56,7 +56,7 @@
       </form>
 
       <p class="mb-1">
-        <a href="forgot-password.html">Lupa password? Reset di sini.</a>
+        <a href="/password/reset">Lupa password? Reset di sini.</a>
       </p>
       <p class="mb-0">
         <a href="/register" class="text-center">Belum punya akun? Daftar di sini.</a>
