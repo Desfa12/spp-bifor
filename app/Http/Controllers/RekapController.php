@@ -61,5 +61,4 @@ class RekapController extends Controller
         $pdf = PDF::loadView('rekap.rekap_data_pdf', compact('transaksi'));
         return $pdf->download('rekap_data.pdf');
     }
-
 }

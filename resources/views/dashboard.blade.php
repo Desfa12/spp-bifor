@@ -76,7 +76,7 @@
      <div class="row">
     <!-- Form Kiri -->
     <div class="col-md-6">
-        <div class="card card-success">
+        <div class="card card-info">
             <div class="card-header">
                 <h3 class="card-title">Data Status Pendidikan</h3>
             </div>

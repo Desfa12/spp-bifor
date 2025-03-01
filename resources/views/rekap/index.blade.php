@@ -36,11 +36,16 @@
                     <option value="">-- Pilih Pembayaran --</option>
                     <option value="SPP" {{ request('tipe') == 'SPP' ? 'selected' : '' }}>SPP</option>
                     <option value="DSP" {{ request('tipe') == 'DSP' ? 'selected' : '' }}>DSP</option>
+                    <option value="PAS 1 Ganjil" {{ request('tipe') == 'PAS 1 Ganjil' ? 'selected' : '' }}>PAS 1 Ganjil</option>
+                    <option value="PTS 1 Ganjil" {{ request('tipe') == 'PTS 1 Ganjil' ? 'selected' : '' }}>PTS 1 Ganjil</option>
+                    <option value="PAS 2 Genap" {{ request('tipe') == 'PAS 2 Genap' ? 'selected' : '' }}>PAS 2 Genap</option>
+                    <option value="PTS 2 Genap" {{ request('tipe') == 'PTS 2 Genap' ? 'selected' : '' }}>PTS 2 Genap</option>
+                    <option value="Daftar Ulang" {{ request('tipe') == 'Daftar Ulang' ? 'selected' : '' }}>Daftar Ulang</option>
                     <option value="Lainnya" {{ request('tipe') == 'Lainnya' ? 'selected' : '' }}>Lainnya</option>
                 </select>
             </div>
             <div class="col-12 col-md-3 mb-2">
-                <input type="month" class="form-control" name="bulan" id="bulan" value="{{ request('bulan') }}">
+                <input type="date" class="form-control" name="tanggal" id="tanggal" value="{{ request('tanggal') }}">
             </div>
             <div class="col-12 col-md-3 mb-2">
                 <button type="submit" class="btn btn-primary me-2">Filter</button>
@@ -66,7 +71,7 @@
                     <th>NIS</th>
                     <th>Kelas</th>
                     <th>Tipe</th>
-                    <th>Bulan</th>
+                    <th>tanggal</th>
                     <th>Tagihan</th>
                     <th>Bayar</th>
                     <th>Sisa</th>
@@ -82,7 +87,7 @@
                         <td>{{ $item->siswa?->nis ?? '-' }}</td>
                         <td>{{ $item->siswa?->kelas?->tingkat ?? '-' }} {{ $item->siswa?->kelas?->jurusan ?? '-' }} - {{ $item->siswa?->kelas?->angkatan ?? '-' }}</td>
                         <td>{{ $item->tipe }}</td>
-                        <td>{{ date('Y-m', strtotime($item->bulan)) }}</td>
+                        <td>{{ date('d F Y', strtotime($item->bulan . '-01')) }}</td>
                         <td>Rp{{ number_format($item->tagihan, 0, ',', '.') }}</td>
                         <td>Rp{{ number_format($item->bayar, 0, ',', '.') }}</td>
                         <td>Rp{{ number_format($item->sisa, 0, ',', '.') }}</td>

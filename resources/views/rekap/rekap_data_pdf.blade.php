@@ -41,7 +41,7 @@
 <body>
 
     <h3><i class="fas fa-clipboard-list"></i> <b>Data Rekap Pembayaran</b></h3>
-    <p>Tanggal: {{ date('d-m-Y') }}</p>
+    <p>Tanggal: {{ date('d F Y') }}</p>
 
     <table>
         <thead>
@@ -49,10 +49,9 @@
                 <th>No</th>
                 <th>Nama Siswa</th>
                 <th>NISN</th>
-                {{-- <th>NIS</th> --}}
                 <th>Kelas</th>
                 <th>Tipe</th>
-                <th>Bulan</th>
+                <th>Tanggal</th>
                 <th>Tagihan</th>
                 <th>Bayar</th>
                 <th>Sisa</th>
@@ -65,10 +64,9 @@
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $item->siswa?->nama_siswa ?? '-' }}</td>
                     <td>{{ $item->siswa?->nisn ?? '-' }}</td>
-                    {{-- <td>{{ $item->siswa?->nis ?? '-' }}</td> --}}
                     <td>{{ $item->siswa?->kelas?->tingkat ?? '-' }} {{ $item->siswa?->kelas?->jurusan ?? '-' }} - {{ $item->siswa?->kelas?->angkatan ?? '-' }}</td>
                     <td>{{ $item->tipe }}</td>
-                    <td>{{ date('Y-m', strtotime($item->bulan)) }}</td>
+                    <td>{{ date('d F Y', strtotime($item->bulan . '-01')) }}</td>
                     <td>Rp{{ number_format($item->tagihan, 0, ',', '.') }}</td>
                     <td>Rp{{ number_format($item->bayar, 0, ',', '.') }}</td>
                     <td>Rp{{ number_format($item->sisa, 0, ',', '.') }}</td>

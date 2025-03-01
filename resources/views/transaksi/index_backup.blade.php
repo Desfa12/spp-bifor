@@ -74,12 +74,17 @@
                             <option value="">-- Pilih Pembayaran --</option>
                             <option value="SPP">SPP</option>
                             <option value="DSP">DSP</option>
+                            <option value="PTS 1 Ganjil">PTS 1 Ganjil</option>
+                            <option value="PAS 1 Ganjil">PAS 1 Ganjil</option>
+                            <option value="PAS 2 Genap">PAS 2 Genap</option>
+                            <option value="PAS 2 Genap">PAS 2 Genap</option>
+                            <option value="Daftar Ulang">Daftar Ulang</option>
                             <option value="Lainnya">Lainnya</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="bulan">Bulan</label>
-                        <input type="month" class="form-control" name="bulan" id="bulan" required>
+                        <label for="Tanggal">Tanggal</label>
+                        <input type="date" class="form-control" name="bulan" id="bulan" required>
                     </div>
                     <div class="form-group">
                         <label for="tagihan">Jumlah Tagihan</label>
@@ -101,7 +106,7 @@
             </div>
             
             <div class="form-group">
-                <a href="{{ url('transactions') }}" class="btn btn-secondary">Kembali</a>
+                <a href="{{ url('transaksi') }}" class="btn btn-secondary">Kembali</a>
                 <button type="submit" class="btn btn-primary">Simpan</button>
             </div>
         </form>
