@@ -25,16 +25,24 @@ class SettingController extends Controller
     public function update(Request $request)
     {
         $request->validate([
-            'nama_satuan' => 'required|string|max:255',
-            'no_lembaga' => 'nullable|string|max:50',
-            'no_tlp' => 'nullable|string|max:15',
-            'alamat' => 'nullable|string|max:255',
-            'kota' => 'nullable|string|max:100',
+            'nama_satuan'   => 'required|string|max:255',
+            'no_lembaga'    => 'nullable|digits_between:8,10',
+            'no_tlp'        => ['nullable', 'regex:/^(\+62|0)[0-9]{9,12}$/'],
+            'alamat'        => 'nullable|string|max:255',
+            'kota'          => 'nullable|string|max:100',
             'kepala_sekolah' => 'nullable|string|max:255',
-            'nip_kepsek' => 'nullable|string|max:50',
-            'bendahara' => 'nullable|string|max:255',
-            'nip_bendahara' => 'nullable|string|max:50',
-            'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif',
+            'nip_kepsek'    => 'nullable|digits:18',
+            'bendahara'     => 'nullable|string|max:255',
+            'nip_bendahara' => 'nullable|digits:18',
+            'logo'          => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ], [
+            'no_lembaga.digits_between' => 'Nomor Lembaga harus terdiri dari 8 hingga 10 digit angka.',
+            'no_tlp.regex' => 'Format nomor telepon tidak valid. Harus diawali dengan +62 atau 0 dan memiliki panjang 9-12 digit.',
+            'nip_kepsek.digits' => 'NIP Kepala Sekolah harus tepat 18 digit.',
+            'nip_bendahara.digits' => 'NIP Bendahara harus tepat 18 digit.',
+            'logo.image' => 'File yang diunggah harus berupa gambar.',
+            'logo.mimes' => 'Format gambar yang diperbolehkan: jpeg, png, jpg, atau gif.',
+            'logo.max' => 'Ukuran gambar tidak boleh lebih dari 2MB.',
         ]);
 
         $setting = Setting::firstOrCreate([]);
@@ -42,30 +50,20 @@ class SettingController extends Controller
         // Cek apakah ada file logo yang diunggah
         if ($request->hasFile('logo')) {
             // Hapus logo lama jika ada
-            if ($setting->logo && file_exists(public_path('logo/' . $setting->logo))) {
+            if (!empty($setting->logo) && file_exists(public_path('logo/' . $setting->logo))) {
                 unlink(public_path('logo/' . $setting->logo));
             }
 
             // Simpan logo baru di public/logo
             $file = $request->file('logo');
             $filename = time() . '_' . $file->getClientOriginalName();
-            $file->move(public_path('logo'), $filename); // Pindahkan ke public/logo
+            $file->move(public_path('logo'), $filename);
 
             $setting->logo = $filename;
         }
 
         // Update data lainnya
-        $setting->update([
-            'nama_satuan' => $request->nama_satuan,
-            'no_lembaga' => $request->no_lembaga,
-            'no_tlp' => $request->no_tlp,
-            'alamat' => $request->alamat,
-            'kota' => $request->kota,
-            'kepala_sekolah' => $request->kepala_sekolah,
-            'nip_kepsek' => $request->nip_kepsek,
-            'bendahara' => $request->bendahara,
-            'nip_bendahara' => $request->nip_bendahara,
-        ]);
+        $setting->update($request->except(['_token', '_method', 'logo']));
 
         return redirect()->route('settings.edit')->with('success', 'Pengaturan berhasil diperbarui.');
     }
