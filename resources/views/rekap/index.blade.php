@@ -50,7 +50,7 @@
             <div class="col-12 col-md-3 mb-2">
                 <button type="submit" class="btn btn-primary me-2">Filter</button>
                 <a href="{{ route('rekap.index') }}" class="btn btn-danger me-2">Reset</a>
-                <a href="{{ route('rekap.exportPdf', request()->query()) }}" class="btn btn-success">
+                <a href="{{ route('rekap.exportPdf', request()->query()) }}" class="btn btn-danger">
                     <i class="fas fa-file-pdf"></i> Export PDF
                 </a>
             </div>
@@ -87,7 +87,7 @@
                         <td>{{ $item->siswa?->nis ?? '-' }}</td>
                         <td>{{ $item->siswa?->kelas?->tingkat ?? '-' }} {{ $item->siswa?->kelas?->jurusan ?? '-' }} - {{ $item->siswa?->kelas?->angkatan ?? '-' }}</td>
                         <td>{{ $item->tipe }}</td>
-                        <td>{{ date('d F Y', strtotime($item->bulan . '-01')) }}</td>
+                        <td>{{ \Carbon\Carbon::parse($item->bulan)->translatedFormat('d F Y') }}</td>
                         <td>Rp{{ number_format($item->tagihan, 0, ',', '.') }}</td>
                         <td>Rp{{ number_format($item->bayar, 0, ',', '.') }}</td>
                         <td>Rp{{ number_format($item->sisa, 0, ',', '.') }}</td>

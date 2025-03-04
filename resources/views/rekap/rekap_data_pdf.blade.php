@@ -41,7 +41,7 @@
 <body>
 
     <h3><i class="fas fa-clipboard-list"></i> <b>Data Rekap Pembayaran</b></h3>
-    <p>Tanggal: {{ date('d F Y') }}</p>
+    {{-- <p>Tanggal: {{ date('d F Y') }}</p> --}}
 
     <table>
         <thead>
