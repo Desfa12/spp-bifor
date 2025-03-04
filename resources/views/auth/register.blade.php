@@ -51,6 +51,15 @@
           </div>
         </div>
         <div class="input-group mb-3">
+          <input type="text" class="form-control" name="unique_code" placeholder="Kode Unik">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-key"></span>
+            </div>
+          </div>
+          <small class="text-muted">Kode unik ini digunakan untuk reset password jika Anda lupa.</small>        
+        </div>
+        <div class="input-group mb-3">
           <input type="password" class="form-control" name="password" placeholder="Password">
           <div class="input-group-append">
             <div class="input-group-text">
