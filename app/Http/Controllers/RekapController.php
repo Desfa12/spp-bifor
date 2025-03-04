@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Transaksi;
 use Illuminate\Http\Request;
 use PDF;
+use Carbon\Carbon;
 
 class RekapController extends Controller
 {
@@ -26,9 +27,8 @@ class RekapController extends Controller
             $query->where('tipe', $request->tipe);
         }
 
-        // Filter berdasarkan bulan (format: YYYY-MM)
-        if ($request->filled('bulan')) {
-            $query->where('bulan', $request->bulan);
+        if ($request->filled('tanggal')) {
+            $query->whereDate('bulan', $request->tanggal);
         }
 
         $transaksi = $query->orderBy('created_at', 'desc')->paginate(10);
