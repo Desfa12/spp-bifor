@@ -107,37 +107,35 @@
                         </div>
                     </div>
                     <div class="row">
-    <div class="col-md-6">
-        <div class="mb-3">
-            <label for="bendahara">Nama Bendahara Sekolah</label>
-            <input type="text" class="form-control @error('bendahara') is-invalid @enderror" 
-                name="bendahara" value="{{ old('bendahara', $setting->bendahara) }}">
-            @error('bendahara')
-                <div class="invalid-feedback">{{ $message }}</div>
-            @enderror
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="mb-3">
-            <label for="nip_bendahara">Nomor NIP Bendahara</label>
-            <input type="text" class="form-control @error('nip_bendahara') is-invalid @enderror" 
-                name="nip_bendahara" value="{{ old('nip_bendahara', $setting->nip_bendahara) }}">
-            @error('nip_bendahara')
-                <div class="invalid-feedback">{{ $message }}</div>
-            @enderror
-        </div>
-    </div>
-</div>
-
-
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="bendahara">Nama Bendahara Sekolah</label>
+                                <input type="text" class="form-control @error('bendahara') is-invalid @enderror" 
+                                    name="bendahara" value="{{ old('bendahara', $setting->bendahara) }}">
+                                @error('bendahara')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="nip_bendahara">Nomor NIP Bendahara</label>
+                                <input type="text" class="form-control @error('nip_bendahara') is-invalid @enderror" 
+                                    name="nip_bendahara" value="{{ old('nip_bendahara', $setting->nip_bendahara) }}">
+                                @error('nip_bendahara')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
                     <button type="submit" class="btn btn-primary">Update</button>
                 </div>
 
                 <!-- Kolom Kanan -->
                 <div class="col-md-6">
                     <div class="mb-3">
-                        <label for="logo">Upload Logo Sekolah</label>
-                        <input type="file" class="form-control @error('logo') is-invalid @enderror" name="logo" id="logo">
+                        <label for="logo">Upload Logo Sekolah (Max: 2MB)</label>
+                        <input type="file" class="form-control @error('logo') is-invalid @enderror" name="logo">
                         @error('logo')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -145,11 +143,23 @@
 
                     <div class="mt-3 text-center">
                         @if ($setting->logo)
-                            <img id="preview" src="{{ asset('logo/' . $setting->logo) }}" alt="Logo Sekolah" 
+                            <img id="preview-logo" src="{{ asset('logo/' . $setting->logo) }}" alt="Logo Sekolah" 
                                 style="max-width: 150px; height: auto; border: 1px solid #ddd; padding: 5px;">
-                        @else
-                            <img id="preview" src="#" alt="Preview Logo" 
-                                style="max-width: 150px; height: auto; display: none; border: 1px solid #ddd; padding: 5px;">
+                        @endif
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="ttd_bendahara">Upload Tanda Tangan Bendahara  (Max: 2MB)</label>
+                        <input type="file" class="form-control @error('ttd_bendahara') is-invalid @enderror" name="ttd_bendahara">
+                        @error('ttd_bendahara')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    
+                    <div class="mt-3 text-center">
+                        @if ($setting->ttd_bendahara)
+                            <img id="preview-ttd" src="{{ asset('ttd/' . $setting->ttd_bendahara) }}" alt="Tanda Tangan Bendahara" 
+                                style="max-width: 150px; height: auto; border: 1px solid #ddd; padding: 5px;">
                         @endif
                     </div>
                 </div>

@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Feb 25, 2025 at 03:39 PM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Host: localhost
+-- Generation Time: Mar 05, 2025 at 02:47 PM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -49,6 +49,14 @@ CREATE TABLE `kelas` (
   `jurusan` varchar(255) NOT NULL,
   `angkatan` varchar(100) NOT NULL,
   `aktif` int(11) NOT NULL,
+  `spp` decimal(10,0) DEFAULT NULL,
+  `dsp` decimal(10,0) DEFAULT NULL,
+  `pts1` decimal(10,0) DEFAULT NULL,
+  `pas1` decimal(10,0) DEFAULT NULL,
+  `pts2` decimal(10,0) DEFAULT NULL,
+  `pas2` decimal(10,0) DEFAULT NULL,
+  `daftar_ulang` decimal(10,0) DEFAULT NULL,
+  `lainnya` decimal(10,0) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -57,26 +65,27 @@ CREATE TABLE `kelas` (
 -- Dumping data for table `kelas`
 --
 
-INSERT INTO `kelas` (`id`, `tingkat`, `jurusan`, `angkatan`, `aktif`, `created_at`, `updated_at`) VALUES
-(5, 'XI', 'REKAYASA PERANGKAT LUNAK (RPL)', '2024/2025', 1, '2025-02-19 07:07:50', '2025-02-25 14:32:01'),
-(7, 'XI', 'MULTIMEDIA (MM)', '2024/2025', 1, NULL, '2025-02-25 14:32:56'),
-(10, 'X', 'MULTIMEDIA (MM)', '2024/2025', 1, NULL, '2025-02-25 14:33:33'),
-(11, 'X', 'TEKNIK JARINGAN KOMPUTER (TKJ)', '2024/2025', 1, NULL, '2025-02-25 14:33:41'),
-(12, 'XI', 'TEKNIK JARINGAN KOMPUTER (TKJ)', '2024/2025', 1, NULL, '2025-02-25 14:33:50'),
-(13, 'XII', 'REKAYASA PERANGKAT LUNAK (RPL)', '2024/2025', 1, NULL, '2025-02-25 14:32:15'),
-(14, 'X', 'OTOMATISASI TATA KELOLA PERKANTORAN (OTKP)', '2024/2025', 1, NULL, '2025-02-25 14:34:01'),
-(15, 'XII', 'TEKNIK JARINGAN KOMPUTER (TKJ)', '2024/2025', 1, NULL, '2025-02-25 14:34:12'),
-(16, 'XII', 'MULTIMEDIA (MM)', '2024/2025', 1, NULL, '2025-02-25 14:37:21'),
-(17, 'XI', 'OTOMATISASI TATA KELOLA PERKANTORAN (OTKP)', '2024/2025', 1, NULL, '2025-02-25 14:37:50'),
-(18, 'XII', 'OTOMATISASI TATA KELOLA PERKANTORAN', '2024/2025', 0, NULL, '2025-02-25 14:28:32'),
-(19, 'XII', 'PEMASARAN', '2022', 0, NULL, NULL),
-(20, 'X', 'AKUNTANSI', '2024', 0, NULL, NULL),
-(21, 'XI', 'AKUNTANSI', '2023', 0, NULL, NULL),
-(22, 'XII', 'AKUNTANSI', '2022', 0, NULL, NULL),
-(23, 'X', 'TKJ', '2024', 0, NULL, NULL),
-(24, 'XI', 'TKJ', '2023', 0, NULL, NULL),
-(25, 'XII', 'TKJ', '2022', 0, NULL, NULL),
-(26, 'X', 'REKAYASA PERANGKAT LUNAK (RPL)', '2024/2025', 1, '2025-02-22 20:56:07', '2025-02-25 14:31:51');
+INSERT INTO `kelas` (`id`, `tingkat`, `jurusan`, `angkatan`, `aktif`, `spp`, `dsp`, `pts1`, `pas1`, `pts2`, `pas2`, `daftar_ulang`, `lainnya`, `created_at`, `updated_at`) VALUES
+(5, 'XI', 'REKAYASA PERANGKAT LUNAK (RPL)', '2024/2025', 1, 0, 0, 0, 0, 0, 0, 0, 0, '2025-02-19 07:07:50', '2025-02-25 14:32:01'),
+(7, 'XI', 'MULTIMEDIA (MM)', '2024/2025', 1, 0, 0, 0, 0, 0, 0, 0, 0, NULL, '2025-02-25 14:32:56'),
+(10, 'X', 'MULTIMEDIA (MM)', '2024/2025', 1, 0, 0, 0, 0, 0, 0, 0, 0, NULL, '2025-02-25 14:33:33'),
+(11, 'X', 'TEKNIK JARINGAN KOMPUTER (TKJ)', '2024/2025', 1, 0, 0, 0, 0, 0, 0, 0, 0, NULL, '2025-02-25 14:33:41'),
+(12, 'XI', 'TEKNIK JARINGAN KOMPUTER (TKJ)', '2024/2025', 1, 0, 0, 0, 0, 0, 0, 0, 0, NULL, '2025-02-25 14:33:50'),
+(13, 'XII', 'REKAYASA PERANGKAT LUNAK (RPL)', '2024/2025', 1, 0, 0, 0, 0, 0, 0, 0, 0, NULL, '2025-02-25 14:32:15'),
+(14, 'X', 'OTOMATISASI TATA KELOLA PERKANTORAN (OTKP)', '2024/2025', 1, 0, 0, 0, 0, 0, 0, 0, 0, NULL, '2025-02-25 14:34:01'),
+(15, 'XII', 'TEKNIK JARINGAN KOMPUTER (TKJ)', '2024/2025', 1, 0, 0, 0, 0, 0, 0, 0, 0, NULL, '2025-02-25 14:34:12'),
+(16, 'XII', 'MULTIMEDIA (MM)', '2024/2025', 1, 0, 0, 0, 0, 0, 0, 0, 0, NULL, '2025-02-25 14:37:21'),
+(17, 'XI', 'OTOMATISASI TATA KELOLA PERKANTORAN (OTKP)', '2024/2025', 1, 0, 0, 0, 0, 0, 0, 0, 0, NULL, '2025-02-25 14:37:50'),
+(18, 'XII', 'OTOMATISASI TATA KELOLA PERKANTORAN', '2024/2025', 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, '2025-02-25 14:28:32'),
+(19, 'XII', 'PEMASARAN', '2022', 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL),
+(20, 'X', 'AKUNTANSI', '2024', 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL),
+(21, 'XI', 'AKUNTANSI', '2023', 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL),
+(22, 'XII', 'AKUNTANSI', '2022', 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL),
+(23, 'X', 'TKJ', '2024', 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL),
+(24, 'XI', 'TKJ', '2023', 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL),
+(25, 'XII', 'TKJ', '2022', 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL),
+(26, 'X', 'REKAYASA PERANGKAT LUNAK (RPL)', '2024/2025', 1, 0, 0, 0, 0, 0, 0, 0, 0, '2025-02-22 20:56:07', '2025-02-25 14:31:51'),
+(28, 'X', 'REKAYASA PERANGKAT LUNAK (RPL)', '2025/2026', 1, 300000, 250000, 100000, 100000, 100000, 100000, 50000, 2000000, '2025-03-05 12:19:24', '2025-03-05 12:23:01');
 
 -- --------------------------------------------------------
 
@@ -132,6 +141,13 @@ CREATE TABLE `password_reset_tokens` (
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `password_reset_tokens`
+--
+
+INSERT INTO `password_reset_tokens` (`email`, `token`, `created_at`) VALUES
+('viandry8002@gmail.com', '$2y$12$HRbNXoLdgvI6iuq463uk4eLR3ZvCDYabapzhhf6YmA/U5yqbGKxje', '2025-02-26 03:46:48');
+
 -- --------------------------------------------------------
 
 --
@@ -161,14 +177,15 @@ CREATE TABLE `settings` (
   `id` int(11) NOT NULL,
   `nama_satuan` varchar(255) DEFAULT NULL,
   `no_lembaga` varchar(255) DEFAULT NULL,
-  `no_tlp` int(11) DEFAULT NULL,
+  `no_tlp` varchar(50) DEFAULT NULL,
   `alamat` text DEFAULT NULL,
   `kota` varchar(255) DEFAULT NULL,
   `kepala_sekolah` varchar(255) DEFAULT NULL,
-  `nip_kepsek` int(11) DEFAULT NULL,
+  `nip_kepsek` varchar(18) DEFAULT NULL,
   `bendahara` varchar(255) DEFAULT NULL,
-  `nip_bendahara` int(11) DEFAULT NULL,
+  `nip_bendahara` varchar(18) DEFAULT NULL,
   `logo` varchar(255) DEFAULT NULL,
+  `ttd_bendahara` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -177,8 +194,8 @@ CREATE TABLE `settings` (
 -- Dumping data for table `settings`
 --
 
-INSERT INTO `settings` (`id`, `nama_satuan`, `no_lembaga`, `no_tlp`, `alamat`, `kota`, `kepala_sekolah`, `nip_kepsek`, `bendahara`, `nip_bendahara`, `logo`, `created_at`, `updated_at`) VALUES
-(1, 'YAYASAN PENDIDIKAN NURUL ILMA 123', '123123', 3123333, 'ddd', 'fff', 'aaa', 2232323, 'ssss', 23212323, '1740318704_yysn.png', '2025-02-19 08:33:29', '2025-02-23 06:51:44');
+INSERT INTO `settings` (`id`, `nama_satuan`, `no_lembaga`, `no_tlp`, `alamat`, `kota`, `kepala_sekolah`, `nip_kepsek`, `bendahara`, `nip_bendahara`, `logo`, `ttd_bendahara`, `created_at`, `updated_at`) VALUES
+(1, 'YAYASAN PENDIDIKAN NURUL ILMA 123', '167816861', '087834013036', 'ddd', 'fff', 'aaa', '938372837389083832', 'ssss', '738372635245678987', '1741169444_dandels.jpg', '1741169638_ttd_rosi.jpeg', '2025-02-19 08:33:29', '2025-03-05 10:13:58');
 
 -- --------------------------------------------------------
 
@@ -233,7 +250,7 @@ CREATE TABLE `transaksi` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `id_siswa` int(11) NOT NULL,
   `tipe` varchar(255) NOT NULL,
-  `bulan` varchar(255) DEFAULT NULL,
+  `bulan` date DEFAULT NULL,
   `tagihan` int(11) DEFAULT NULL,
   `bayar` int(11) NOT NULL,
   `sisa` int(11) DEFAULT NULL,
@@ -247,13 +264,11 @@ CREATE TABLE `transaksi` (
 --
 
 INSERT INTO `transaksi` (`id`, `id_siswa`, `tipe`, `bulan`, `tagihan`, `bayar`, `sisa`, `keterangan`, `created_at`, `updated_at`) VALUES
-(1, 1, 'pembayaran spp', '', 10000, 7000, 3000, NULL, '2025-02-23 13:49:11', '2025-02-23 13:49:11'),
-(2, 1, 'SPP', '', 123, 21, 102, 'asdasdasd', '2025-02-23 08:00:08', '2025-02-23 08:00:08'),
-(3, 1, 'SPP', '', 123, 21, 102, 'asdasdasd', '2025-02-23 08:00:28', '2025-02-23 08:00:28'),
-(4, 2, 'SPP', '2025-02', 2000, 1000, 1000, 'asdasdasdas', '2025-02-23 08:13:04', '2025-02-23 08:13:04'),
-(5, 4, 'DSP', '2025-02', 231231, 222, 231009, 'asdasdasd', '2025-02-23 08:19:28', '2025-02-23 08:19:28'),
-(6, 1, 'DSP', '2025-03', 100000, 50000, 50000, 'sisa', '2025-02-24 00:32:06', '2025-02-24 00:32:06'),
-(7, 19, 'SPP', '2025-02', 250000, 40000, 210000, 'masih sisa', '2025-02-24 00:32:45', '2025-02-24 00:32:45');
+(8, 1, 'SPP', '2025-03-04', 200000, 100000, 100000, 'asd', '2025-03-04 10:08:44', '2025-03-04 10:08:44'),
+(9, 1, 'DSP', '2025-03-04', 300000, 50000, 250000, NULL, '2025-03-04 10:45:39', '2025-03-04 10:45:39'),
+(10, 1, 'SPP', '2025-03-05', 250000, 50000, 200000, NULL, '2025-03-04 10:47:29', '2025-03-04 10:47:29'),
+(11, 1, 'SPP', '2025-03-07', 350000, 25000, 325000, NULL, '2025-03-04 10:52:58', '2025-03-04 10:52:58'),
+(12, 5, 'DSP', '2025-03-04', 500000, 500000, 0, NULL, '2025-03-04 11:06:18', '2025-03-04 11:06:18');
 
 -- --------------------------------------------------------
 
@@ -266,6 +281,7 @@ CREATE TABLE `users` (
   `name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
+  `unique_code` varchar(50) NOT NULL,
   `password` varchar(255) NOT NULL,
   `remember_token` varchar(100) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -276,10 +292,13 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'desfa', 'de@gmail.com', NULL, '$2y$12$zw0A.YuYF1T9q7UfzVZt5OcSWiesnOfA8v9BfxC2TF..PiuD9Ll/2', NULL, '2025-02-06 04:07:38', '2025-02-06 04:07:38'),
-(2, 'Qotrun', 'qotrun@gmail.com', NULL, '$2y$12$ljH07CViLAIS/niUFh/05e5i1WVH6VJFJ.a7BIoTR5npMr96gyceS', NULL, '2025-02-07 06:38:11', '2025-02-07 06:38:11'),
-(3, 'dafa', 'dafa@gmail.com', NULL, '$2y$12$9NBNkAukCR7trTb8px.6tOapq3KZ2Wzt84pvIJVafLdHQH4ScGJry', NULL, '2025-02-17 06:19:27', '2025-02-17 06:19:27');
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `unique_code`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'desfa', 'de@gmail.com', NULL, '', '$2y$12$zw0A.YuYF1T9q7UfzVZt5OcSWiesnOfA8v9BfxC2TF..PiuD9Ll/2', NULL, '2025-02-06 04:07:38', '2025-02-06 04:07:38'),
+(2, 'Qotrun', 'qotrun@gmail.com', NULL, '', '$2y$12$ljH07CViLAIS/niUFh/05e5i1WVH6VJFJ.a7BIoTR5npMr96gyceS', NULL, '2025-02-07 06:38:11', '2025-02-07 06:38:11'),
+(3, 'dafa', 'dafa@gmail.com', NULL, '', '$2y$12$9NBNkAukCR7trTb8px.6tOapq3KZ2Wzt84pvIJVafLdHQH4ScGJry', NULL, '2025-02-17 06:19:27', '2025-02-17 06:19:27'),
+(4, 'viandry', 'viandry8002@gmail.com', NULL, '', '$2y$12$wn.XxjvYBCD5P0gdy6imB.dYWXU7oZU0VpdDOJLB2bfu5CGJ44vMO', NULL, '2025-02-26 03:09:30', '2025-02-26 03:09:30'),
+(5, 'vian', 'vian@gmail.com', NULL, 'asd123', '$2y$12$.lu/ISXa9OJi5MuZMbPIYOUd/8qhu1GoiCB5C6zsEZxsIa0Zm8rpe', NULL, '2025-03-04 07:44:03', '2025-03-04 09:50:44'),
+(6, 'dede', 'dede@gmail.com', NULL, 'dede123', '$2y$12$Ggde2QgrfHMVXDlHg6.GQOpSzp0tecZCGZvx47iuuxINFfei0o9xa', NULL, '2025-03-04 09:53:01', '2025-03-04 09:53:01');
 
 --
 -- Indexes for dumped tables
@@ -365,7 +384,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `kelas`
 --
 ALTER TABLE `kelas`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -395,13 +414,13 @@ ALTER TABLE `siswa`
 -- AUTO_INCREMENT for table `transaksi`
 --
 ALTER TABLE `transaksi`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
