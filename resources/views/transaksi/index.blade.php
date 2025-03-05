@@ -160,10 +160,13 @@
             
             <div class="form-group">
                 <a href="{{ url('transaksi') }}" class="btn btn-secondary">Kembali</a>
-                <button type="submit" class="btn btn-primary">Simpan</button>
-                <a href="{{ route('rekap.exportPdf', request()->query()) }}" class="btn btn-success">
-                    <i class="fas fa-file-pdf"></i> Cetak Kwitansi </a>
-
+                <button type="submit" name="cetak" value="true"  class="btn btn-primary">Simpan & Cetak Kwitansi</button>
+                {{-- <a href="{{ route('transaksi.export', $transaksi->id ?? 0) }}" class="btn btn-success">
+                    <i class="fas fa-file-excel"></i> Cetak Kwitansi
+                </a> --}}
+                
+                {{-- <a href="{{ route('rekap.exportPdf', request()->query()) }}" class="btn btn-success">
+                    <i class="fas fa-file-pdf"></i> Cetak Kwitansi </a> --}}
             </div>
         </form>
     </div>

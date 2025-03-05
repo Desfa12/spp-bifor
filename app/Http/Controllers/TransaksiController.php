@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Datasiswa;
 use App\Models\Transaksi;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\KwitansiExport;
 
 class TransaksiController extends Controller
 {
@@ -55,7 +57,7 @@ class TransaksiController extends Controller
         ]);
 
         // Simpan ke database
-        Transaksi::create([
+        $transaksi = Transaksi::create([
             'id_siswa' => $request->id_siswa,
             'tipe' => $request->tipe,
             'bulan' => $request->bulan,
@@ -65,6 +67,21 @@ class TransaksiController extends Controller
             'keterangan' => $request->keterangan,
         ]);
 
+        if ($request->has('cetak')) {
+            return redirect()->route('transaksi.export', $transaksi->id);
+        }
+
         return redirect()->route('transaksi.index')->with('success', 'Transaksi berhasil ditambahkan!');
+        // return redirect()->with('success', 'Transaksi berhasil ditambahkan!');
+        // return response()->json([
+        //     'success' => true,
+        //     'message' => 'Transaksi berhasil ditambahkan!',
+        //     'data' => $transaksi
+        // ]);
+    }
+
+    public function exportExcel($id)
+    {
+        return Excel::download(new KwitansiExport($id), 'kwitansi.xlsx');
     }
 }

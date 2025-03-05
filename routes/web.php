@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\Auth\ForgotPasswordController;
-use App\Http\Controllers\Auth\ResetPasswordController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\DashboardController;
@@ -11,8 +10,8 @@ use App\Http\Controllers\DatasiswaController;
 use App\Http\Controllers\RekapController;
 use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\LaporanController;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\WelcomeController;
+// use App\Http\Controllers\AuthController;
+// use App\Http\Controllers\WelcomeController;
 
 // Route utama
 Route::get('/', function () {
@@ -23,11 +22,6 @@ Route::get('/', function () {
 // Auth::routes();
 Auth::routes(['reset' => true]);
 Route::middleware('guest')->group(function () {
-    // Route::get('password/reset', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
-    // Route::post('password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
-    // Route::get('password/reset/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
-    // Route::post('password/reset', [ResetPasswordController::class, 'reset'])->name('password.update');
-
     Route::get('/forgot-password', [ForgotPasswordController::class, 'showForgotPasswordForm'])->name('password.forgot');
     Route::post('/forgot-password', [ForgotPasswordController::class, 'validateUniqueCode'])->name('password.validate');
     Route::get('/reset-password', [ForgotPasswordController::class, 'showResetPasswordForm'])->name('password.reset.form');
@@ -66,6 +60,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/', [TransaksiController::class, 'index'])->name('transaksi.index');
         Route::post('/', [TransaksiController::class, 'store'])->name('transaksi.store');
     });
+    Route::get('/transaksi/export/{id}', [TransaksiController::class, 'exportExcel'])->name('transaksi.export');
 
     Route::prefix('rekap')->group(function () {
         Route::get('/', [RekapController::class, 'index'])->name('rekap.index');
