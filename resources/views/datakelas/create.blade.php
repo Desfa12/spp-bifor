@@ -72,20 +72,7 @@
                     </div>
                 </div>
 
-                <!-- Kolom Kanan -->
-                <div class="col-md-6">
-                    @php
-                        $fields = ['spp', 'dsp', 'pts1', 'pas1', 'pts2', 'pas2', 'daftar_ulang','lainnya'];
-                    @endphp
-
-                    @foreach ($fields as $field)
-                        <div class="form-group">
-                            <label for="{{ $field }}">{{ strtoupper(str_replace('_', ' ', $field)) }}</label>
-                            <input type="text" class="form-control format-rupiah" id="{{ $field }}_formatted" value="{{ old($field) ? 'Rp '.number_format(old($field), 0, ',', '.') : '' }}" oninput="formatInput('{{ $field }}')">
-                            <input type="hidden" name="{{ $field }}" id="{{ $field }}" value="{{ old($field) }}">
-                        </div>
-                    @endforeach
-                </div>
+               
             </div>
 
             <div class="form-group">

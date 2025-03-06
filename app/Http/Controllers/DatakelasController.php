@@ -46,14 +46,6 @@ class DatakelasController extends Controller
             'jurusan' => 'required|string',
             'angkatan' => 'required|string',
             'aktif' => 'required|string',
-            'spp' => 'nullable|numeric',
-            'dsp' => 'nullable|numeric',
-            'pts1' => 'nullable|numeric',
-            'pas1' => 'nullable|numeric',
-            'pts2' => 'nullable|numeric',
-            'pas2' => 'nullable|numeric',
-            'daftar_ulang' => 'nullable|numeric',
-            'lainnya' => 'nullable|numeric',
         ]);
 
         Kelas::create($request->all());
@@ -76,14 +68,6 @@ class DatakelasController extends Controller
             'jurusan' => 'required|string',
             'angkatan' => 'required|string',
             'aktif' => 'required|string',
-            'spp' => 'nullable|numeric',
-            'dsp' => 'nullable|numeric',
-            'pts1' => 'nullable|numeric',
-            'pas1' => 'nullable|numeric',
-            'pts2' => 'nullable|numeric',
-            'pas2' => 'nullable|numeric',
-            'daftar_ulang' => 'nullable|numeric',
-            'lainnya' => 'nullable|numeric',
         ]);
 
         $datakelas->update($request->all());

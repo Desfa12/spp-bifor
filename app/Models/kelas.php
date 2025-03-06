@@ -10,7 +10,7 @@ class Kelas extends Model
     use HasFactory;
 
     protected $table = 'kelas';
-    protected $fillable = ['tingkat', 'jurusan', 'angkatan', 'aktif', 'spp', 'dsp', 'pts1', 'pas1', 'pts2', 'pas2', 'daftar_ulang', 'lainnya'];
+    protected $fillable = ['tingkat', 'jurusan', 'angkatan', 'aktif'];
 
     public function siswa()
     {
