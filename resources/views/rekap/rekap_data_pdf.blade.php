@@ -55,7 +55,7 @@
                 <th>Tagihan</th>
                 <th>Bayar</th>
                 <th>Sisa</th>
-                <th>Keterangan</th>
+                {{-- <th>Keterangan</th> --}}
             </tr>
         </thead>
         <tbody>
@@ -66,13 +66,17 @@
                     <td>{{ $item->siswa?->nisn ?? '-' }}</td>
                     <td>{{ $item->siswa?->kelas?->tingkat ?? '-' }} {{ $item->siswa?->kelas?->jurusan ?? '-' }} - {{ $item->siswa?->kelas?->angkatan ?? '-' }}</td>
                     <td>{{ $item->tipe }}</td>
-                    <td>{{ date('d F Y', strtotime($item->bulan . '-01')) }}</td>
+                    <td>{{ \Carbon\Carbon::parse($item->bulan)->translatedFormat('d F Y') }}</td>
                     <td>Rp{{ number_format($item->tagihan, 0, ',', '.') }}</td>
                     <td>Rp{{ number_format($item->bayar, 0, ',', '.') }}</td>
                     <td>Rp{{ number_format($item->sisa, 0, ',', '.') }}</td>
-                    <td>{{ $item->keterangan ?? '-' }}</td>
+                    {{-- <td>{{ $item->keterangan ?? '-' }}</td> --}}
                 </tr>
             @endforeach
+            <tr>
+                <td colspan="8">Total Sisa : </td>
+                <td>Rp{{ number_format($totalSisa, 0, ',', '.') }}</td>
+            </tr>
         </tbody>
     </table>
 

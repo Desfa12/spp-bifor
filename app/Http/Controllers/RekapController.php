@@ -58,7 +58,11 @@ class RekapController extends Controller
 
         $transaksi = $query->orderBy('created_at', 'desc')->get();
 
-        $pdf = PDF::loadView('rekap.rekap_data_pdf', compact('transaksi'));
+        // Menjumlahkan total sisa dari semua transaksi yang difilter
+        $totalSisa = $transaksi->sum('sisa');
+
+        $pdf = PDF::loadView('rekap.rekap_data_pdf', compact('transaksi', 'totalSisa'));
         return $pdf->download('rekap_data.pdf');
     }
+
 }
