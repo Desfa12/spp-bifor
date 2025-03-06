@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Datasiswa;
+use App\Models\Setting;
 use App\Models\Transaksi;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\KwitansiExport;
+use PDF;
 
 class TransaksiController extends Controller
 {
@@ -72,16 +74,33 @@ class TransaksiController extends Controller
         }
 
         return redirect()->route('transaksi.index')->with('success', 'Transaksi berhasil ditambahkan!');
-        // return redirect()->with('success', 'Transaksi berhasil ditambahkan!');
-        // return response()->json([
-        //     'success' => true,
-        //     'message' => 'Transaksi berhasil ditambahkan!',
-        //     'data' => $transaksi
-        // ]);
     }
 
     public function exportExcel($id)
     {
         return Excel::download(new KwitansiExport($id), 'kwitansi.xlsx');
     }
+
+    // public function exportPdf($id)
+    // {
+
+
+    //     $pdf = PDF::loadView('rekap.rekap_data_pdf', compact('transaksi', 'totalSisa'));
+    //     return $pdf->stream('rekap_data.pdf');
+    // }
+    public function exportPdf($id)
+    {
+        // Ambil transaksi berdasarkan ID dengan relasi siswa dan kelas
+        $transaksi = Transaksi::with('siswa.kelas')->findOrFail($id);
+        $setting = Setting::firstOrCreate([]);
+    
+        // Generate PDF dalam mode landscape
+        $pdf = PDF::loadView('transaksi.kwitansi_pdf', compact('transaksi', 'setting'))
+                  ->setPaper('a4', 'landscape'); // Ubah ke landscape
+    
+        // Menampilkan PDF di browser sebelum diunduh
+        return $pdf->stream('transaksi.kwitansi_pdf.pdf');
+    }
+    
+
 }

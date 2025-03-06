@@ -60,7 +60,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/', [TransaksiController::class, 'index'])->name('transaksi.index');
         Route::post('/', [TransaksiController::class, 'store'])->name('transaksi.store');
     });
-    Route::get('/transaksi/export/{id}', [TransaksiController::class, 'exportExcel'])->name('transaksi.export');
+    // Route::get('/transaksi/export/{id}', [TransaksiController::class, 'exportExcel'])->name('transaksi.export');
+    Route::get('/transaksi/export-pdf/{id}', [TransaksiController::class, 'exportPdf'])->name('transaksi.export');
 
     Route::prefix('rekap')->group(function () {
         Route::get('/', [RekapController::class, 'index'])->name('rekap.index');
