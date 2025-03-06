@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Setting;
 use App\Models\Transaksi;
 use Illuminate\Http\Request;
 use PDF;
@@ -57,12 +58,14 @@ class RekapController extends Controller
         }
 
         $transaksi = $query->orderBy('created_at', 'desc')->get();
-
+       
         // Menjumlahkan total sisa dari semua transaksi yang difilter
         $totalSisa = $transaksi->sum('sisa');
+        $setting = Setting::firstOrCreate([]);
 
-        $pdf = PDF::loadView('rekap.rekap_data_pdf', compact('transaksi', 'totalSisa'));
-        return $pdf->download('rekap_data.pdf');
+        $pdf = PDF::loadView('rekap.rekap_data_pdf', compact('transaksi', 'totalSisa','setting'));
+        // return $pdf->download('rekap_data.pdf');
+        return $pdf->stream('rekap.rekap_data_pdf');
     }
 
 }

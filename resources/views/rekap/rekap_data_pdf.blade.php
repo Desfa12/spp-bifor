@@ -35,13 +35,36 @@
             margin-top: 20px;
             text-align: right;
             font-style: italic;
+
+            /* text-align: center; */
+            margin-top: 40px;
+        }
+        /* .signature {
+            text-align: center;
+            margin-top: 40px;
+        } */
+        .footer img {
+            width: 150px; /* Sesuaikan ukuran tanda tangan */
+            height: auto;
+        }
+        .footer p {
+            margin-top: 10px;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
 
-    <h3><i class="fas fa-clipboard-list"></i> <b>Data Rekap Pembayaran</b></h3>
+    <h3><i class="fas fa-clipboard-list"></i> <b>Data Rekap Pembayaran</b></h3><br>
     {{-- <p>Tanggal: {{ date('d F Y') }}</p> --}}
+    
+    @php
+        use Carbon\Carbon;
+        Carbon::setLocale('id');
+        $tanggalCetak = Carbon::now('Asia/Jakarta')->translatedFormat('l, d F Y H:i');
+    @endphp
+
+    <p>Dicetak pada: {{ $tanggalCetak }} WIB</p>
 
     <table>
         <thead>
@@ -55,7 +78,6 @@
                 <th>Tagihan</th>
                 <th>Bayar</th>
                 <th>Sisa</th>
-                {{-- <th>Keterangan</th> --}}
             </tr>
         </thead>
         <tbody>
@@ -70,25 +92,26 @@
                     <td>Rp{{ number_format($item->tagihan, 0, ',', '.') }}</td>
                     <td>Rp{{ number_format($item->bayar, 0, ',', '.') }}</td>
                     <td>Rp{{ number_format($item->sisa, 0, ',', '.') }}</td>
-                    {{-- <td>{{ $item->keterangan ?? '-' }}</td> --}}
                 </tr>
             @endforeach
             <tr>
-                <td colspan="8">Total Sisa : </td>
-                <td>Rp{{ number_format($totalSisa, 0, ',', '.') }}</td>
+                <td colspan="8"><b>Total Sisa :</b></td>
+                <td><b>Rp{{ number_format($totalSisa, 0, ',', '.') }}</b></td>
             </tr>
         </tbody>
     </table>
 
-    @php
-        use Carbon\Carbon;
-        Carbon::setLocale('id');
-        $tanggalCetak = Carbon::now('Asia/Jakarta')->translatedFormat('l, d F Y H:i');
-    @endphp
-
     <div class="footer">
-        <p>Dicetak pada: {{ $tanggalCetak }} WIB</p>
+        {{-- <p>Dicetak pada: {{ $tanggalCetak }} WIB</p> --}}
+        {{-- <div class="signature"> --}}
+            <p>Tanda tangan</p>
+            @if (!empty($setting->ttd_bendahara))
+                <img src="{{ public_path('ttd/' . $setting->ttd_bendahara) }}" alt="Tanda Tangan Bendahara">
+            @endif
+            <p>{{ $setting->bendahara ?? 'Bendahara' }}</p>
+        {{-- </div> --}}
     </div>
+
 
 </body>
 </html>
