@@ -112,7 +112,7 @@
                 <tr>
                     <td><b>Kelas</b></td>
                     <td>:</td>
-                    <td>{{ $transaksi->siswa->kelas->nama_kelas }}</td>
+                    <td>{{ $transaksi->siswa->kelas->tingkat ?? '-' }} {{ $transaksi->siswa->kelas->jurusan ?? '-' }}</td>
                 </tr>
                 <tr>
                     <td><b>Jumlah Bayar</b></td>

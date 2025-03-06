@@ -92,6 +92,7 @@ class TransaksiController extends Controller
     {
         // Ambil transaksi berdasarkan ID dengan relasi siswa dan kelas
         $transaksi = Transaksi::with('siswa.kelas')->findOrFail($id);
+        // return $transaksi;
         $setting = Setting::firstOrCreate([]);
     
         // Generate PDF dalam mode landscape

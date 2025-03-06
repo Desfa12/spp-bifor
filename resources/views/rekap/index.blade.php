@@ -76,6 +76,7 @@
                     <th>Bayar</th>
                     <th>Sisa</th>
                     <th>Keterangan</th>
+                    <th>Kwitansi</th>
                 </tr>
             </thead>
             <tbody>
@@ -92,6 +93,9 @@
                         <td>Rp{{ number_format($item->bayar, 0, ',', '.') }}</td>
                         <td>Rp{{ number_format($item->sisa, 0, ',', '.') }}</td>
                         <td>{{ $item->keterangan ?? '-' }}</td>
+                        <td>
+                            <a href="{{ route('transaksi.export', $item->id) }}" class="btn btn-warning btn-sm ">Lihat</a>
+                        </td>
                     </tr>
                 @endforeach
             </tbody>
