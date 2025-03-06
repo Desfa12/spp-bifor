@@ -63,15 +63,7 @@
                         <th>No</th>
                         <th>Tingkat</th>
                         <th>Jurusan</th>
-                        <th>Angkatan</th>
-                        <th>SPP</th>
-                        <th>DSP</th>
-                        <th>PTS 1</th>
-                        <th>PAS 1</th>
-                        <th>PTS 2</th>
-                        <th>PAS 2</th>
-                        <th>Daftar Ulang</th>
-                        <th>Lainnya</th>
+                        <th>Angkatan</th>                   
                         <th>Status</th>
                         <th>Aksi</th>
                     </tr>
@@ -83,14 +75,6 @@
                             <td>{{ $item->tingkat }}</td>
                             <td>{{ $item->jurusan }}</td>
                             <td>{{ $item->angkatan }}</td>
-                            <td>Rp {{ number_format($item->spp, 0, ',', '.') }}</td>
-                            <td>Rp {{ number_format($item->dsp, 0, ',', '.') }}</td>
-                            <td>Rp {{ number_format($item->pts1, 0, ',', '.') }}</td>
-                            <td>Rp {{ number_format($item->pas1, 0, ',', '.') }}</td>
-                            <td>Rp {{ number_format($item->pts2, 0, ',', '.') }}</td>
-                            <td>Rp {{ number_format($item->pas2, 0, ',', '.') }}</td>
-                            <td>Rp {{ number_format($item->daftar_ulang, 0, ',', '.') }}</td>
-                            <td>Rp {{ number_format($item->lainnya, 0, ',', '.') }}</td>
                             <td>
                                 <span class="badge {{ $item->aktif == 1 ? 'bg-success' : 'bg-danger' }}">
                                     {{ $item->aktif == 1 ? 'Aktif' : 'Inaktif' }}
