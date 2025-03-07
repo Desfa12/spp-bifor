@@ -5,7 +5,7 @@
         </div>
         <div class="info">
          @auth
-          <a href="#" class="d-block">Hello {{ Auth::user()->name }}!</a>
+          <a class="d-block">Hello {{ Auth::user()->name }}!</a>
            @else
           <a href="#" class="d-block">Belum Login</a>
 

@@ -66,5 +66,8 @@ Route::middleware('auth')->group(function () {
     Route::prefix('rekap')->group(function () {
         Route::get('/', [RekapController::class, 'index'])->name('rekap.index');
         Route::get('/exportPdf', [RekapController::class, 'exportPdf'])->name('rekap.exportPdf');
+
+        Route::post('/datasiswa/import', [DatasiswaController::class, 'import'])->name('datasiswa.import');
+        Route::get('/datasiswa/export', [DatasiswaController::class, 'export'])->name('datasiswa.export');
     });
 });

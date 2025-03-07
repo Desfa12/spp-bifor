@@ -83,6 +83,8 @@
             <div class="form-group">
                 <a href="{{ url('datasiswa') }}" class="btn btn-secondary">Kembali</a>
                 <button type="submit" class="btn btn-primary">Simpan</button>
+
+                
             </div>
         </form>
     </div>

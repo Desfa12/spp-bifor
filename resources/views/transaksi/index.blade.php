@@ -92,7 +92,7 @@
 
     <!-- FORM PEMBAYARAN (Disembunyikan Awalnya) -->
     <div id="form-pembayaran" style="display: none;">
-        <form action="{{ url('transaksi') }}" method="post">
+        <form action="{{ url('transaksi') }}" method="post" onsubmit="return validateForm()">
             @csrf
             <div class="form-group">
                 <input type="hidden" class="form-control" name="id_siswa" id="id_siswa">
@@ -161,12 +161,6 @@
             <div class="form-group">
                 <a href="{{ url('transaksi') }}" class="btn btn-secondary">Kembali</a>
                 <button type="submit" name="cetak" value="true"  class="btn btn-primary">Simpan & Cetak Kwitansi</button>
-                {{-- <a href="{{ route('transaksi.export', $transaksi->id ?? 0) }}" class="btn btn-success">
-                    <i class="fas fa-file-excel"></i> Cetak Kwitansi
-                </a> --}}
-                
-                {{-- <a href="{{ route('rekap.exportPdf', request()->query()) }}" class="btn btn-success">
-                    <i class="fas fa-file-pdf"></i> Cetak Kwitansi </a> --}}
             </div>
         </form>
     </div>
@@ -243,5 +237,40 @@
         formatOnInput(tagihanInput);
         formatOnInput(bayarInput);
     });
+    //=============================== validasi
+      document.addEventListener("DOMContentLoaded", function() {
+        document.querySelector("form[action='{{ url('transaksi') }}']").addEventListener("submit", function(event) {
+            let tipe = document.getElementById("tipe").value;
+            let bulan = document.getElementById("bulan").value;
+            let tagihan = parseNumber(document.getElementById("tagihan").value);
+            let bayar = parseNumber(document.getElementById("bayar").value);
+            let sisa = parseNumber(document.getElementById("sisa").value);
+            let errorMessage = "";
+
+            if (!tipe) errorMessage += "Tipe Pembayaran harus dipilih!\n";
+            if (!bulan) errorMessage += "Tanggal harus diisi!\n";
+            if (tagihan <= 0) errorMessage += "Jumlah tagihan harus lebih dari 0!\n";
+            if (bayar < 0) errorMessage += "Jumlah pembayaran tidak valid!\n";
+            if (sisa < 0) errorMessage += "Sisa tidak boleh negatif!\n";
+
+            if (errorMessage) {
+                alert(errorMessage);
+                event.preventDefault();
+            }
+        });
+    });
+      function validateForm() {
+        const tipe = document.getElementById("tipe").value;
+        const bulan = document.getElementById("bulan").value;
+        const tagihan = document.getElementById("tagihan").value;
+        const bayar = document.getElementById("bayar").value;
+        const sisa = document.getElementById("sisa").value;
+        
+        if (!tipe || !bulan || !tagihan || !bayar || !sisa) {
+            alert("Harap isi semua bidang sebelum menyimpan!");
+            return false;
+        }
+        return true;
+    }
 </script>
 @endsection

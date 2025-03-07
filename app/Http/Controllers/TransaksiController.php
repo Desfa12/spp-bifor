@@ -43,10 +43,10 @@ class TransaksiController extends Controller
             // 'id_siswa' => 'required|exists:datasiswa,id', // Pastikan id_siswa ada di tabel datasiswa
             'id_siswa' => 'required|integer',
             'tipe' => 'required|string',
-            'bulan' => 'required|string',
-            'tagihan' => 'required|min:0',
-            'bayar' => 'required|min:0',
-            'sisa' => 'required|min:0',
+            'bulan' => 'required|date',
+            'tagihan' => 'required|numeric|min:1',
+            'bayar' => 'required|numeric|min:0',
+            'sisa' => 'required|numeric|min:0',
             'keterangan' => 'nullable|string',
         ]);
 
@@ -81,27 +81,18 @@ class TransaksiController extends Controller
         return Excel::download(new KwitansiExport($id), 'kwitansi.xlsx');
     }
 
-    // public function exportPdf($id)
-    // {
-
-
-    //     $pdf = PDF::loadView('rekap.rekap_data_pdf', compact('transaksi', 'totalSisa'));
-    //     return $pdf->stream('rekap_data.pdf');
-    // }
     public function exportPdf($id)
     {
         // Ambil transaksi berdasarkan ID dengan relasi siswa dan kelas
         $transaksi = Transaksi::with('siswa.kelas')->findOrFail($id);
         // return $transaksi;
         $setting = Setting::firstOrCreate([]);
-    
+
         // Generate PDF dalam mode landscape
         $pdf = PDF::loadView('transaksi.kwitansi_pdf', compact('transaksi', 'setting'))
-                  ->setPaper('a4', 'landscape'); // Ubah ke landscape
-    
+            ->setPaper('a4', 'landscape'); // Ubah ke landscape
+
         // Menampilkan PDF di browser sebelum diunduh
         return $pdf->stream('transaksi.kwitansi_pdf.pdf');
     }
-    
-
 }
