@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\SiswaExport;
+use App\Imports\SiswaImport;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Models\Kelas;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
@@ -13,9 +16,10 @@ class DatakelasController extends Controller
         $katakunci = $request->input('katakunci');
         $status = $request->input('status'); // Ambil filter status
 
-        $query = Kelas::query();
+        // Menggunakan withCount untuk menghitung jumlah siswa dalam setiap kelas
+        $query = Kelas::with('siswa')->withCount('siswa');
 
-        if ($katakunci) {
+        if (!empty($katakunci)) {
             $query->where(function ($q) use ($katakunci) {
                 $q->where('tingkat', 'like', "%$katakunci%")
                     ->orWhere('jurusan', 'like', "%$katakunci%")
@@ -23,13 +27,19 @@ class DatakelasController extends Controller
             });
         }
 
-        if ($status !== null) {
+        if ($status !== null && $status !== '') {
             $query->where('aktif', $status);
         }
 
         $datakelas = $query->orderBy('created_at', 'desc')->paginate(10);
 
         return view('datakelas.index', compact('datakelas', 'katakunci', 'status'));
+    }
+
+    public function show($id)
+    {
+        $datakelas = Kelas::with('siswa')->findOrFail($id);
+        return view('datakelas.show', compact('datakelas'));
     }
 
     public function create()
@@ -75,9 +85,20 @@ class DatakelasController extends Controller
         return redirect()->route('datakelas.index')->with('success', 'Data berhasil diperbarui');
     }
 
-    public function destroy($id)
+    public function export($id)
     {
-        Kelas::findOrFail($id)->delete();
-        return redirect()->route('datakelas.index')->with('success', 'Data kelas berhasil dihapus!');
+        $kelas = Kelas::findOrFail($id);
+        return Excel::download(new SiswaExport($id), 'data_siswa_' . $kelas->tingkat . '_' . $kelas->jurusan . '.xlsx');
+    }
+
+    public function import(Request $request, $id)
+    {
+        $request->validate([
+            'file' => 'required|mimes:xlsx,csv',
+        ]);
+
+        Excel::import(new SiswaImport($id), $request->file('file'));
+
+        return redirect()->back()->with('success', 'Data siswa berhasil diimpor ke kelas yang dipilih!');
     }
 }

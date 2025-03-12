@@ -1,6 +1,7 @@
 @extends('layouts.master')
 
-@section('title', 'Data Kelas')
+@section('title')
+@endsection
 
 @section('page-title')
     <h3 class="card-title"><i class="fas fa-users"></i><b> Data Kelas</b></h3>
@@ -63,6 +64,7 @@
                         <th>No</th>
                         <th>Tingkat</th>
                         <th>Jurusan</th>
+                        <th>Jumlah Siswa</th>
                         <th>Angkatan</th>                   
                         <th>Status</th>
                         <th>Aksi</th>
@@ -74,6 +76,7 @@
                             <td>{{ $datakelas->firstItem() + $index }}</td>
                             <td>{{ $item->tingkat }}</td>
                             <td>{{ $item->jurusan }}</td>
+                            <td>{{ $item->siswa_count }} siswa</td>
                             <td>{{ $item->angkatan }}</td>
                             <td>
                                 <span class="badge {{ $item->aktif == 1 ? 'bg-success' : 'bg-danger' }}">
@@ -81,11 +84,13 @@
                                 </span>
                             </td>
                             <td>
+                                <a href="{{ route('datakelas.show', $item->id) }}" class="btn btn-info btn-sm">Detail</a>
                                 <a href="{{ route('datakelas.edit', $item->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                                <form action="{{ route('datakelas.destroy', $item->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus?')">
+
+                                <form id="delete-form-{{ $item->id }}" action="{{ route('datakelas.destroy', $item->id) }}" method="POST" class="d-inline">
                                     @csrf 
                                     @method('DELETE')
-                                    <input type="submit" class="btn btn-danger btn-sm" value="Hapus">
+                                    <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete({{ $item->id }}, '{{ $item->siswa_count }}')">Hapus</button>
                                 </form>
                             </td>
                         </tr>
@@ -94,5 +99,19 @@
             </table>
             {{ $datakelas->withQueryString()->links() }}
         </div>
-    </div>                    
+    </div>    
+
+    <!-- JavaScript untuk Konfirmasi Hapus -->
+    <script>
+        function confirmDelete(id, siswaCount) {
+            let message = `Apakah Anda yakin ingin menghapus kelas ini?\n`;
+            if (siswaCount > 0) {
+                message += `⚠️ Seluruh ${siswaCount} siswa dalam kelas ini akan ikut terhapus!`;
+            }
+
+            if (confirm(message)) {
+                document.getElementById(`delete-form-${id}`).submit();
+            }
+        }
+    </script>              
 @endsection

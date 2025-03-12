@@ -40,12 +40,19 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('datakelas')->group(function () {
         Route::get('/', [DatakelasController::class, 'index'])->name('datakelas.index');
+        Route::get('/{id}', [DatakelasController::class, 'show'])->name('datakelas.show');
         Route::get('/create', [DatakelasController::class, 'create'])->name('datakelas.create');
         Route::post('/', [DatakelasController::class, 'store'])->name('datakelas.store');
         Route::get('/{datakelas_id}/edit', [DatakelasController::class, 'edit'])->name('datakelas.edit');
         Route::put('/{datakelas}', [DatakelasController::class, 'update'])->name('datakelas.update');
         Route::delete('/{datakelas_id}', [DatakelasController::class, 'destroy'])->name('datakelas.destroy');
+
+        Route::get('/export/{id}', [DatakelasController::class, 'export'])->name('datakelas.export');
+        Route::post('/import/{id}', [DatakelasController::class, 'import'])->name('datakelas.import');
     });
+
+    Route::get('/export', [DatakelasController::class, 'export'])->name('siswa.export');
+    Route::post('/import', [DatakelasController::class, 'import'])->name('siswa.import');
 
     Route::prefix('datasiswa')->group(function () {
         Route::get('/', [DatasiswaController::class, 'index'])->name('datasiswa.index');
