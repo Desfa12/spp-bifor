@@ -18,16 +18,22 @@ class SiswaImport implements ToModel, WithHeadingRow
 
     public function model(array $row)
     {
-        return new Datasiswa([
-            'nis' => $row['nis'],
-            'nisn' => $row['nisn'],
-            'nama_siswa' => $row['nama_siswa'],
-            'jenis_kelamin' => $row['jenis_kelamin'],
-            'tgl_lahir' => is_numeric($row['tanggal_lahir'])
-                ? Date::excelToDateTimeObject($row['tanggal_lahir'])->format('Y-m-d')
-                : $row['tanggal_lahir'],
-            'no_telp' => $row['no_telepon'],
-            'id_kelas' => $this->kelas_id, // Menambahkan siswa ke kelas yang dipilih
-        ]);
+        // Konversi tanggal lahir jika berbentuk angka (serial number Excel)
+        $tgl_lahir = is_numeric($row['tanggal_lahir'])
+            ? Date::excelToDateTimeObject($row['tanggal_lahir'])->format('Y-m-d')
+            : $row['tanggal_lahir'];
+
+        // Perbarui jika NIS sudah ada, jika tidak, buat baru
+        return Datasiswa::updateOrCreate(
+            ['nis' => $row['nis']], // Kondisi pencarian
+            [
+                'nisn'          => $row['nisn'],
+                'nama_siswa'    => $row['nama_siswa'],
+                'jenis_kelamin' => $row['jenis_kelamin'],
+                'tgl_lahir'     => $tgl_lahir,
+                'no_telp'       => $row['no_telepon'],
+                'id_kelas'      => $this->kelas_id, // Menyesuaikan kelas
+            ]
+        );
     }
 }
