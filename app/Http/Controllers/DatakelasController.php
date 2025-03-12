@@ -85,6 +85,20 @@ class DatakelasController extends Controller
         return redirect()->route('datakelas.index')->with('success', 'Data berhasil diperbarui');
     }
 
+    public function destroy($id)
+    {
+        $kelas = Kelas::findOrFail($id);
+
+        // Hapus semua siswa yang terkait dengan kelas ini
+        $kelas->siswa()->delete();
+
+        // Hapus kelas
+        $kelas->delete();
+
+        return redirect()->route('datakelas.index')->with('success', 'Data kelas dan seluruh siswa di dalamnya berhasil dihapus!');
+    }
+
+
     public function export($id)
     {
         $kelas = Kelas::findOrFail($id);

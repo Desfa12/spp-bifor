@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Mar 05, 2025 at 02:47 PM
+-- Generation Time: Mar 12, 2025 at 07:34 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -49,14 +49,6 @@ CREATE TABLE `kelas` (
   `jurusan` varchar(255) NOT NULL,
   `angkatan` varchar(100) NOT NULL,
   `aktif` int(11) NOT NULL,
-  `spp` decimal(10,0) DEFAULT NULL,
-  `dsp` decimal(10,0) DEFAULT NULL,
-  `pts1` decimal(10,0) DEFAULT NULL,
-  `pas1` decimal(10,0) DEFAULT NULL,
-  `pts2` decimal(10,0) DEFAULT NULL,
-  `pas2` decimal(10,0) DEFAULT NULL,
-  `daftar_ulang` decimal(10,0) DEFAULT NULL,
-  `lainnya` decimal(10,0) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -65,27 +57,25 @@ CREATE TABLE `kelas` (
 -- Dumping data for table `kelas`
 --
 
-INSERT INTO `kelas` (`id`, `tingkat`, `jurusan`, `angkatan`, `aktif`, `spp`, `dsp`, `pts1`, `pas1`, `pts2`, `pas2`, `daftar_ulang`, `lainnya`, `created_at`, `updated_at`) VALUES
-(5, 'XI', 'REKAYASA PERANGKAT LUNAK (RPL)', '2024/2025', 1, 0, 0, 0, 0, 0, 0, 0, 0, '2025-02-19 07:07:50', '2025-02-25 14:32:01'),
-(7, 'XI', 'MULTIMEDIA (MM)', '2024/2025', 1, 0, 0, 0, 0, 0, 0, 0, 0, NULL, '2025-02-25 14:32:56'),
-(10, 'X', 'MULTIMEDIA (MM)', '2024/2025', 1, 0, 0, 0, 0, 0, 0, 0, 0, NULL, '2025-02-25 14:33:33'),
-(11, 'X', 'TEKNIK JARINGAN KOMPUTER (TKJ)', '2024/2025', 1, 0, 0, 0, 0, 0, 0, 0, 0, NULL, '2025-02-25 14:33:41'),
-(12, 'XI', 'TEKNIK JARINGAN KOMPUTER (TKJ)', '2024/2025', 1, 0, 0, 0, 0, 0, 0, 0, 0, NULL, '2025-02-25 14:33:50'),
-(13, 'XII', 'REKAYASA PERANGKAT LUNAK (RPL)', '2024/2025', 1, 0, 0, 0, 0, 0, 0, 0, 0, NULL, '2025-02-25 14:32:15'),
-(14, 'X', 'OTOMATISASI TATA KELOLA PERKANTORAN (OTKP)', '2024/2025', 1, 0, 0, 0, 0, 0, 0, 0, 0, NULL, '2025-02-25 14:34:01'),
-(15, 'XII', 'TEKNIK JARINGAN KOMPUTER (TKJ)', '2024/2025', 1, 0, 0, 0, 0, 0, 0, 0, 0, NULL, '2025-02-25 14:34:12'),
-(16, 'XII', 'MULTIMEDIA (MM)', '2024/2025', 1, 0, 0, 0, 0, 0, 0, 0, 0, NULL, '2025-02-25 14:37:21'),
-(17, 'XI', 'OTOMATISASI TATA KELOLA PERKANTORAN (OTKP)', '2024/2025', 1, 0, 0, 0, 0, 0, 0, 0, 0, NULL, '2025-02-25 14:37:50'),
-(18, 'XII', 'OTOMATISASI TATA KELOLA PERKANTORAN', '2024/2025', 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, '2025-02-25 14:28:32'),
-(19, 'XII', 'PEMASARAN', '2022', 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL),
-(20, 'X', 'AKUNTANSI', '2024', 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL),
-(21, 'XI', 'AKUNTANSI', '2023', 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL),
-(22, 'XII', 'AKUNTANSI', '2022', 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL),
-(23, 'X', 'TKJ', '2024', 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL),
-(24, 'XI', 'TKJ', '2023', 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL),
-(25, 'XII', 'TKJ', '2022', 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL),
-(26, 'X', 'REKAYASA PERANGKAT LUNAK (RPL)', '2024/2025', 1, 0, 0, 0, 0, 0, 0, 0, 0, '2025-02-22 20:56:07', '2025-02-25 14:31:51'),
-(28, 'X', 'REKAYASA PERANGKAT LUNAK (RPL)', '2025/2026', 1, 300000, 250000, 100000, 100000, 100000, 100000, 50000, 2000000, '2025-03-05 12:19:24', '2025-03-05 12:23:01');
+INSERT INTO `kelas` (`id`, `tingkat`, `jurusan`, `angkatan`, `aktif`, `created_at`, `updated_at`) VALUES
+(5, 'XI', 'REKAYASA PERANGKAT LUNAK (RPL)', '2024/2025', 1, '2025-02-19 07:07:50', '2025-02-25 14:32:01'),
+(7, 'XI', 'MULTIMEDIA (MM)', '2024/2025', 1, NULL, '2025-02-25 14:32:56'),
+(10, 'X', 'MULTIMEDIA (MM)', '2024/2025', 1, NULL, '2025-02-25 14:33:33'),
+(11, 'X', 'TEKNIK JARINGAN KOMPUTER (TKJ)', '2024/2025', 1, NULL, '2025-02-25 14:33:41'),
+(12, 'XI', 'TEKNIK JARINGAN KOMPUTER (TKJ)', '2024/2025', 1, NULL, '2025-02-25 14:33:50'),
+(13, 'XII', 'REKAYASA PERANGKAT LUNAK (RPL)', '2024/2025', 1, NULL, '2025-02-25 14:32:15'),
+(14, 'X', 'OTOMATISASI TATA KELOLA PERKANTORAN (OTKP)', '2024/2025', 1, NULL, '2025-02-25 14:34:01'),
+(15, 'XII', 'TEKNIK JARINGAN KOMPUTER (TKJ)', '2024/2025', 1, NULL, '2025-02-25 14:34:12'),
+(16, 'XII', 'MULTIMEDIA (MM)', '2024/2025', 1, NULL, '2025-02-25 14:37:21'),
+(17, 'XI', 'OTOMATISASI TATA KELOLA PERKANTORAN (OTKP)', '2024/2025', 1, NULL, '2025-02-25 14:37:50'),
+(18, 'XII', 'OTOMATISASI TATA KELOLA PERKANTORAN', '2024/2025', 0, NULL, '2025-02-25 14:28:32'),
+(19, 'XII', 'PEMASARAN', '2022', 0, NULL, NULL),
+(20, 'X', 'AKUNTANSI', '2024', 0, NULL, NULL),
+(21, 'XI', 'AKUNTANSI', '2023', 0, NULL, NULL),
+(22, 'XII', 'AKUNTANSI', '2022', 0, NULL, NULL),
+(23, 'X', 'TKJ', '2024', 0, NULL, NULL),
+(24, 'XI', 'TKJ', '2023', 0, NULL, NULL),
+(25, 'XII', 'TKJ', '2022', 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -249,6 +239,7 @@ INSERT INTO `siswa` (`id`, `nis`, `nisn`, `nama_siswa`, `id_kelas`, `jenis_kelam
 CREATE TABLE `transaksi` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `id_siswa` int(11) NOT NULL,
+  `sekolah` varchar(50) NOT NULL,
   `tipe` varchar(255) NOT NULL,
   `bulan` date DEFAULT NULL,
   `tagihan` int(11) DEFAULT NULL,
@@ -263,12 +254,12 @@ CREATE TABLE `transaksi` (
 -- Dumping data for table `transaksi`
 --
 
-INSERT INTO `transaksi` (`id`, `id_siswa`, `tipe`, `bulan`, `tagihan`, `bayar`, `sisa`, `keterangan`, `created_at`, `updated_at`) VALUES
-(8, 1, 'SPP', '2025-03-04', 200000, 100000, 100000, 'asd', '2025-03-04 10:08:44', '2025-03-04 10:08:44'),
-(9, 1, 'DSP', '2025-03-04', 300000, 50000, 250000, NULL, '2025-03-04 10:45:39', '2025-03-04 10:45:39'),
-(10, 1, 'SPP', '2025-03-05', 250000, 50000, 200000, NULL, '2025-03-04 10:47:29', '2025-03-04 10:47:29'),
-(11, 1, 'SPP', '2025-03-07', 350000, 25000, 325000, NULL, '2025-03-04 10:52:58', '2025-03-04 10:52:58'),
-(12, 5, 'DSP', '2025-03-04', 500000, 500000, 0, NULL, '2025-03-04 11:06:18', '2025-03-04 11:06:18');
+INSERT INTO `transaksi` (`id`, `id_siswa`, `sekolah`, `tipe`, `bulan`, `tagihan`, `bayar`, `sisa`, `keterangan`, `created_at`, `updated_at`) VALUES
+(8, 1, '', 'SPP', '2025-03-04', 200000, 100000, 100000, 'asd', '2025-03-04 10:08:44', '2025-03-04 10:08:44'),
+(9, 1, '', 'DSP', '2025-03-04', 300000, 50000, 250000, NULL, '2025-03-04 10:45:39', '2025-03-04 10:45:39'),
+(10, 1, '', 'SPP', '2025-03-05', 250000, 50000, 200000, NULL, '2025-03-04 10:47:29', '2025-03-04 10:47:29'),
+(11, 1, '', 'SPP', '2025-03-07', 350000, 25000, 325000, NULL, '2025-03-04 10:52:58', '2025-03-04 10:52:58'),
+(12, 5, '', 'DSP', '2025-03-04', 500000, 500000, 0, NULL, '2025-03-04 11:06:18', '2025-03-04 11:06:18');
 
 -- --------------------------------------------------------
 
@@ -408,7 +399,7 @@ ALTER TABLE `settings`
 -- AUTO_INCREMENT for table `siswa`
 --
 ALTER TABLE `siswa`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `transaksi`
