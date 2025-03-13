@@ -84,7 +84,8 @@
 
             <!-- Header -->
             <div class="header">
-                {{ $setting->nama_satuan }}
+                {{ $setting->nama_satuan }} <br>
+                {{ $transaksi->sekolah }}
             </div>
             <p class="text-center"> {{ $setting->no_lembaga }}, Kota  {{ $setting->kota }}  |  {{ $setting->alamat }} |  {{ $setting->no_tlp }}</p>
 
@@ -135,13 +136,13 @@
                             - Simpan bukti pembayaran ini sebagai arsip.<br>
                             - Pembayaran yang sudah dilakukan tidak dapat dikembalikan.
                         </td>
-                        <td class="text-center no-border" style="width: 25%;">
-                            <b>Pembayar</b><br><br><br>
+                        {{-- <td class="text-center no-border" style="width: 25%;">
+                            <b>Pembayar</b><br><br><br><br><br>
                             <u>{{ $transaksi->siswa->nama_siswa }}</u>
-                        </td>
+                        </td> --}}
                         <td class="text-center no-border" style="width: 25%;">
-                            <b>Bagian Keuangan</b><br><br><br>
-                            <u>{{ $setting->bendahara }}</u>
+                            <b>Bagian Keuangan</b><br><br><br><br><br>
+                            {{-- <u>{{ $setting->bendahara }}</u> --}}
                         </td>
                     </tr>
                 </table>
