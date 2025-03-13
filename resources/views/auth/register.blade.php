@@ -18,7 +18,7 @@
 <div class="register-box">
   <div class="card card-outline card-primary">
     <div class="card-header text-center">
-      <a href="../../index2.html" class="h3"><b>Web SPP </b>Yayasan Pendidikan Nurul Ilma</a>
+      <a href="../../index2.html" class="h3"><b> SPP </b>Yayasan Pendidikan Nurul Ilma</a>
     </div>
     <div class="card-body">
       <p class="login-box-msg">Register</p>

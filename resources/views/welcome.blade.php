@@ -39,7 +39,7 @@
         </div>
         <div class="relative z-10 flex flex-col items-center justify-center h-full text-center">
             <h1 class="text-4xl md:text-5xl font-bold">Sistem Pembayaran Sekolah</h1>
-            <p class="text-xl md:text-2xl mt-4">{{ $setting->nama_satuan }}</p>
+            <p class="text-xl md:text-2xl mt-4">{{{ $setting->nama_satuan }}}</p>
         </div>
     </div>
 </body>

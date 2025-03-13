@@ -20,13 +20,27 @@
 
 <!-- Tombol Export & Import -->
 <div class="pb-3">
-    <a href="{{ route('datakelas.export', $datakelas->id) }}" class="btn btn-success">Export Excel</a>
+    <a href="{{ route('datakelas.export', $datakelas->id) }}" class="btn btn-success mb-2">Export Excel</a>
 
     <form action="{{ route('datakelas.import', $datakelas->id) }}" method="POST" enctype="multipart/form-data" class="d-inline">
         @csrf
-        <input type="file" name="file" accept=".xlsx, .csv" required class="form-control d-inline w-auto">
-        <button type="submit" class="btn btn-primary">Import Excel</button>
+        <div class="row">
+            <div class="col-8 col-md-8 mb-2">
+                <div class="input-group">
+                    <input type="file" name="file" accept=".xlsx, .csv" required class="form-control">
+                </div>
+            </div>
+            <div class="col-12 col-md-4 mb-2">
+                <button type="submit" class="btn btn-primary">Import Excel</button>
+            </div>
+        </div>
     </form>
+</div>
+
+<!-- Tombol Kembali -->
+    <div class="mt">
+        <a href="{{ route('datakelas.index') }}" class="btn btn-secondary">Kembali</a>
+    </div>
 </div>
 
 <!-- Tabel Data Siswa -->
