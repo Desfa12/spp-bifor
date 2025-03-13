@@ -102,14 +102,11 @@
     </table>
 
     <div class="footer">
-            <p>Tanda tangan</p>
-            @if (!empty($setting->ttd_bendahara))
-                {{-- <img src="{{ public_path('ttd/' . $setting->ttd_bendahara) }}" alt="Tanda Tangan Bendahara"> --}}
+            <p>Bagian Keuangan</p>
+            {{-- @if (!empty($setting->ttd_bendahara))
                 <img src="{{ storage_path('app/public/ttd/' . $setting->ttd_bendahara) }}" alt="Tanda Tangan Bendahara">
-                {{-- <img src="{{ asset('ttd/' . $setting->ttd_bendahara) }}" alt="Tanda Tangan Bendahara">
-                <img src="{{ url('ttd/' . $setting->ttd_bendahara) }}" alt="Tanda Tangan Bendahara"> --}}
             @endif
-            <p>{{ $setting->bendahara ?? 'Bendahara' }}</p>
+            <p>{{ $setting->bendahara ?? 'Bendahara' }}</p> --}}
     </div>
 
 

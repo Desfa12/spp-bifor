@@ -148,7 +148,7 @@
                         @endif
                     </div>
 
-                    <div class="mb-3">
+                    {{-- <div class="mb-3">
                         <label for="ttd_bendahara">Upload Tanda Tangan Bendahara  (Max: 2MB)</label>
                         <input type="file" class="form-control @error('ttd_bendahara') is-invalid @enderror" name="ttd_bendahara">
                         @error('ttd_bendahara')
@@ -161,7 +161,7 @@
                             <img id="preview-ttd" src="{{ asset('ttd/' . $setting->ttd_bendahara) }}" alt="Tanda Tangan Bendahara" 
                                 style="max-width: 150px; height: auto; border: 1px solid #ddd; padding: 5px;">
                         @endif
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </form>

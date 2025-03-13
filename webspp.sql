@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Mar 12, 2025 at 07:34 AM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Host: 127.0.0.1
+-- Generation Time: Mar 13, 2025 at 04:32 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -175,7 +175,6 @@ CREATE TABLE `settings` (
   `bendahara` varchar(255) DEFAULT NULL,
   `nip_bendahara` varchar(18) DEFAULT NULL,
   `logo` varchar(255) DEFAULT NULL,
-  `ttd_bendahara` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -184,8 +183,8 @@ CREATE TABLE `settings` (
 -- Dumping data for table `settings`
 --
 
-INSERT INTO `settings` (`id`, `nama_satuan`, `no_lembaga`, `no_tlp`, `alamat`, `kota`, `kepala_sekolah`, `nip_kepsek`, `bendahara`, `nip_bendahara`, `logo`, `ttd_bendahara`, `created_at`, `updated_at`) VALUES
-(1, 'YAYASAN PENDIDIKAN NURUL ILMA 123', '167816861', '087834013036', 'ddd', 'fff', 'aaa', '938372837389083832', 'ssss', '738372635245678987', '1741169444_dandels.jpg', '1741169638_ttd_rosi.jpeg', '2025-02-19 08:33:29', '2025-03-05 10:13:58');
+INSERT INTO `settings` (`id`, `nama_satuan`, `no_lembaga`, `no_tlp`, `alamat`, `kota`, `kepala_sekolah`, `nip_kepsek`, `bendahara`, `nip_bendahara`, `logo`, `created_at`, `updated_at`) VALUES
+(1, 'YAYASAN PENDIDIKAN NURUL ILMA 123', '167816861', '087834013036', 'ddd', 'fff', 'aaa', '938372837389083832', 'ssss', '738372635245678987', '1741169444_dandels.jpg', '2025-02-19 08:33:29', '2025-03-05 10:13:58');
 
 -- --------------------------------------------------------
 
@@ -228,7 +227,8 @@ INSERT INTO `siswa` (`id`, `nis`, `nisn`, `nama_siswa`, `id_kelas`, `jenis_kelam
 (16, '1013', '2013', 'Mira Septiani', 5, 'P', '2007-09-19', '081234567902', NULL, NULL),
 (17, '1014', '2014', 'Novi Yulianti', 5, 'P', '2006-02-28', '081234567903', NULL, NULL),
 (18, '1015', '2015', 'Oki Setiawan', 5, 'L', '2005-07-01', '081234567904', NULL, NULL),
-(19, '17171717171717717171', '12345645', 'rath', 5, 'P', '2025-02-23', '13213131231', '2025-02-22 20:39:20', '2025-02-22 20:48:25');
+(19, '17171717171717717171', '12345645', 'rath', 5, 'P', '2025-02-23', '13213131231', '2025-02-22 20:39:20', '2025-02-22 20:48:25'),
+(24, '3232', '123123', 'dafad', 7, 'L', '2025-08-10', '9189723981', '2025-03-13 14:43:22', '2025-03-13 14:43:22');
 
 -- --------------------------------------------------------
 
@@ -259,7 +259,7 @@ INSERT INTO `transaksi` (`id`, `id_siswa`, `sekolah`, `tipe`, `bulan`, `tagihan`
 (9, 1, '', 'DSP', '2025-03-04', 300000, 50000, 250000, NULL, '2025-03-04 10:45:39', '2025-03-04 10:45:39'),
 (10, 1, '', 'SPP', '2025-03-05', 250000, 50000, 200000, NULL, '2025-03-04 10:47:29', '2025-03-04 10:47:29'),
 (11, 1, '', 'SPP', '2025-03-07', 350000, 25000, 325000, NULL, '2025-03-04 10:52:58', '2025-03-04 10:52:58'),
-(12, 5, '', 'DSP', '2025-03-04', 500000, 500000, 0, NULL, '2025-03-04 11:06:18', '2025-03-04 11:06:18');
+(13, 1, 'SMK Bina Informatika', 'SPP', '2025-03-13', 300000, 100000, 200000, 'asd', '2025-03-13 15:27:21', '2025-03-13 15:27:21');
 
 -- --------------------------------------------------------
 
@@ -399,13 +399,13 @@ ALTER TABLE `settings`
 -- AUTO_INCREMENT for table `siswa`
 --
 ALTER TABLE `siswa`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `transaksi`
 --
 ALTER TABLE `transaksi`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `users`

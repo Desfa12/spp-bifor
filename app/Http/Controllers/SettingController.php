@@ -27,7 +27,6 @@ class SettingController extends Controller
             'bendahara'     => 'nullable|string|max:255',
             'nip_bendahara' => 'nullable|digits:18',
             'logo'          => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'ttd_bendahara' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         $setting = Setting::firstOrCreate([]);
@@ -42,17 +41,7 @@ class SettingController extends Controller
             $setting->logo = $filename;
         }
 
-        if ($request->hasFile('ttd_bendahara')) {
-            if (!empty($setting->ttd_bendahara) && file_exists(public_path('ttd/' . $setting->ttd_bendahara))) {
-                unlink(public_path('ttd/' . $setting->ttd_bendahara));
-            }
-            $file = $request->file('ttd_bendahara');
-            $filename = time() . '_ttd_' . $file->getClientOriginalName();
-            $file->move(public_path('ttd'), $filename);
-            $setting->ttd_bendahara = $filename;
-        }
-
-        $setting->update($request->except(['_token', '_method', 'logo', 'ttd_bendahara']));
+        $setting->update($request->except(['_token', '_method', 'logo']));
 
         return redirect()->route('settings.edit')->with('success', 'Pengaturan berhasil diperbarui.');
     }

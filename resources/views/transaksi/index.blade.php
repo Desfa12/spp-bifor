@@ -122,6 +122,14 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
+                        <label for="sekolah">Sekolah</label>
+                        <select class="form-control" name="sekolah" id="sekolah" required>
+                            <option value="">-- Pilih Sekolah --</option>
+                            <option value="SMK Bina Informatika">SMK Bina Informatika</option>
+                            <option value="SMK Bina Husada">SMK Bina Husada</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <label for="tipe">Tipe Pembayaran</label>
                         <select class="form-control" name="tipe" id="tipe" required>
                             <option value="">-- Pilih Pembayaran --</option>

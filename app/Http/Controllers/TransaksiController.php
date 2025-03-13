@@ -39,9 +39,23 @@ class TransaksiController extends Controller
 
     public function store(Request $request)
     {
+        $request->merge([
+            'tagihan' => preg_replace('/\D/', '', $request->tagihan),
+            'bayar' => preg_replace('/\D/', '', $request->bayar),
+            'sisa' => preg_replace('/\D/', '', $request->sisa),
+        ]);
+    
+        // Konversi ke tipe data numerik
+        $request->merge([
+            'tagihan' => (int) $request->tagihan,
+            'bayar' => (int) $request->bayar,
+            'sisa' => (int) $request->sisa,
+        ]);
+    
+        // Validasi input
         $request->validate([
-            // 'id_siswa' => 'required|exists:datasiswa,id', // Pastikan id_siswa ada di tabel datasiswa
             'id_siswa' => 'required|integer',
+            'sekolah' => 'required|string',
             'tipe' => 'required|string',
             'bulan' => 'required|date',
             'tagihan' => 'required|numeric|min:1',
@@ -50,17 +64,10 @@ class TransaksiController extends Controller
             'keterangan' => 'nullable|string',
         ]);
 
-        // Hitung sisa pembayaran
-        // $sisa = $request->tagihan - $request->bayar;
-        $request->merge([
-            'tagihan' => preg_replace('/\D/', '', $request->tagihan),
-            'bayar' => preg_replace('/\D/', '', $request->bayar),
-            'sisa' => preg_replace('/\D/', '', $request->sisa),
-        ]);
-
         // Simpan ke database
         $transaksi = Transaksi::create([
             'id_siswa' => $request->id_siswa,
+            'sekolah' => $request->sekolah,
             'tipe' => $request->tipe,
             'bulan' => $request->bulan,
             'tagihan' => $request->tagihan,
