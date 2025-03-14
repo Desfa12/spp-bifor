@@ -96,8 +96,8 @@ class DatasiswaController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'nis' => 'required|string|unique:datasiswas,nis,' . $id,
-            'nisn' => 'required|string|unique:datasiswas,nisn,' . $id,
+            'nis' => 'required|string',
+            'nisn' => 'required|string',
             'nama_siswa' => 'required|string',
             'id_kelas' => 'required|exists:kelas,id',
             'jenis_kelamin' => 'required|string|in:L,P',

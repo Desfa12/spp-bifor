@@ -19,7 +19,7 @@
   <!-- /.login-logo -->
   <div class="card card-outline card-primary">
     <div class="card-header text-center">
-      <a href="#" class="h3"><b> Spp </b>Yayasan Pendidikan Nurul Ilma</a>
+      <a href="#" class="h3"><b> Sistem Pembayaran Sekolah</b>Yayasan Pendidikan Nurul Ilma</a>
     </div>
     <div class="card-body">
         <p class="login-box-msg">Login</p>
