@@ -26,8 +26,8 @@
         }
         .header {
             text-align: center;
-            background: #007bff;
-            color: white;
+            background: #d0d7dd;
+            color: black;
             padding: 12px;
             border-radius: 5px;
             font-size: 18px;
@@ -82,22 +82,31 @@
 
         <div class="container">
 
-            <!-- Header -->
-            <div class="header">
-                {{ $setting->nama_satuan }} <br>
-                {{ $transaksi->sekolah }}
-            </div>
-            <p class="text-center"> {{ $setting->no_lembaga }}, Kota  {{ $setting->kota }}  |  {{ $setting->alamat }} |  {{ $setting->no_tlp }}</p>
+        <!-- Header -->
+         <div class="header">
+            <table>
+                <tr>
+                    <td style="width: 10%">
+                        <img src="{{ public_path($transaksi->sekolah == 'SMK Kesehatan Bina Husada' ? 'images/logoh.png' : 'images/logob.png') }}" alt="Logo Sekolah" style="height: 80px;">
+                    </td>
+                    <td>
+                        <div style="margin-left: -100px;text-align:center">
+                            {{ $setting->nama_satuan }} <br>
+                            {{ $transaksi->sekolah }}
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <p class="text-center"> 
+            {{ $setting->no_lembaga }}, Kota {{ $setting->kota }}  |  
+            {{ $setting->alamat }} |  
+            {{ $setting->no_tlp }}
+        </p>
 
             <!-- Informasi Transaksi -->
             <table>
-                {{-- <tr>
-                    <td><b>No</b></td>
-                    <td>:</td>
-                    <td>001</td>
-                    <td colspan="3"></td>
-                    <td rowspan="2" class="text-center highlight"><b>Bukti Pembayaran</b></td>
-                </tr> --}}
                 <tr>
                     <td><b>Tanggal</b></td>
                     <td>:</td>
@@ -136,10 +145,7 @@
                             - Simpan bukti pembayaran ini sebagai arsip.<br>
                             - Pembayaran yang sudah dilakukan tidak dapat dikembalikan.
                         </td>
-                        {{-- <td class="text-center no-border" style="width: 25%;">
-                            <b>Pembayar</b><br><br><br><br><br>
-                            <u>{{ $transaksi->siswa->nama_siswa }}</u>
-                        </td> --}}
+                        
                         <td class="text-center no-border" style="width: 25%;">
                             <b>Bagian Keuangan</b><br><br><br><br><br>
                             {{-- <u>{{ $setting->bendahara }}</u> --}}

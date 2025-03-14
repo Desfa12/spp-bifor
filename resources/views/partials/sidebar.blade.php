@@ -78,29 +78,5 @@
               </p>
             </a>
           </li>
-          {{-- <li class="nav-item">
-            <a href="/rekap" class="nav-link">
-              <i class="fas fa-clipboard-list"></i>
-              <p>
-                Rekap
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="/laporan" class="nav-link">
-              <i class="fas fa-book"></i>
-              <p>
-                Laporan
-              </p>
-            </a>
-          </li> --}}
-          {{-- <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="fas fa-save"></i>
-              <p>
-                Simpan
-              </p>
-            </a>
-          </li> --}}
             
     </div>

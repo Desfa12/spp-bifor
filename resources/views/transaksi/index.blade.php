@@ -126,7 +126,7 @@
                         <select class="form-control" name="sekolah" id="sekolah" required>
                             <option value="">-- Pilih Sekolah --</option>
                             <option value="SMK Bina Informatika">SMK Bina Informatika</option>
-                            <option value="SMK Bina Husada">SMK Bina Husada</option>
+                            <option value="SMK Kesehatan Bina Husada">SMK Kesehatan Bina Husada</option>
                         </select>
                     </div>
                     <div class="form-group">
