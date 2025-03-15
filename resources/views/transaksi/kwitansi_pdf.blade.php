@@ -87,7 +87,7 @@
             <table>
                 <tr>
                     <td style="width: 10%">
-                        <img src="{{ public_path($transaksi->sekolah == 'SMK Kesehatan Bina Husada' ? 'images/logoh.png' : 'images/logob.png') }}" alt="Logo Sekolah" style="height: 80px;">
+                        <img src="{{ public_path($transaksi->sekolah == 'SMK Kesehatan Bina Husada' ? 'images/logobihus.png' : 'images/logobifor.png') }}" alt="Logo Sekolah" style="height: 80px;">
                     </td>
                     <td>
                         <div style="margin-left: -100px;text-align:center">
