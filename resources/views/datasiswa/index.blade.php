@@ -54,17 +54,6 @@
     <a href="{{ url('datasiswa/create') }}" class="btn btn-primary">+ Tambah Data</a>
 </div>
 
-{{-- <div class="mb-3">
-    <form action="{{ route('datasiswa.import') }}" method="POST" enctype="multipart/form-data" class="d-inline">
-        @csrf
-        <input type="file" name="file" class="form-control d-inline" style="width: auto; display: inline-block;" required>
-        <button type="submit" class="btn btn-success">Import Excel</button>
-    </form>
-
-    <a href="{{ route('datasiswa.export') }}" class="btn btn-primary">Export Excel</a>
-</div> --}}
-
-
 <!-- TABEL DATA -->
 <div class="card p-3 shadow-sm">
     <div class="table-responsive">

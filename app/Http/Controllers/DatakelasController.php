@@ -44,7 +44,8 @@ class DatakelasController extends Controller
 
     public function create()
     {
-        return view('datakelas.create');
+        // return view('datakelas.create');
+        return "tes123";
     }
 
     public function store(Request $request)

@@ -26,8 +26,8 @@
         }
         .header {
             text-align: center;
-            background: #d0d7dd;
-            color: black;
+            background: #353e64;
+            color: rgb(255, 255, 255);
             padding: 12px;
             border-radius: 5px;
             font-size: 18px;
@@ -39,7 +39,7 @@
             margin-top: 15px;
         }
         th, td {
-            border: 1px solid #dee2e6;
+            border: 1px solid #353e64;
             padding: 12px;
             text-align: left;
         }
@@ -66,7 +66,7 @@
             text-align: center;
         }
         .highlight {
-            background: #ffc107;
+            background: #353e64;
             font-weight: bold;
         }
         .approved {
@@ -75,6 +75,12 @@
             padding: 10px;
             border-radius: 5px;
             font-weight: bold;
+        }
+        .text-center b{
+            color: #ffffff
+        }
+        .text-centerr{
+            color: black
         }
     </style>
 </head>
@@ -87,7 +93,7 @@
             <table>
                 <tr>
                     <td style="width: 10%">
-                        <img src="{{ public_path($transaksi->sekolah == 'SMK Kesehatan Bina Husada' ? 'images/logobihus.png' : 'images/logobifor.png') }}" alt="Logo Sekolah" style="height: 80px;">
+                        <img src="{{ public_path($transaksi->sekolah == 'SMK Kesehatan Bina Husada' ? 'images/logohusada.png' : 'images/logobifor.png') }}" alt="Logo Sekolah" style="height: 80px;">
                     </td>
                     <td>
                         <div style="margin-left: -100px;text-align:center">
@@ -146,9 +152,8 @@
                             - Pembayaran yang sudah dilakukan tidak dapat dikembalikan.
                         </td>
                         
-                        <td class="text-center no-border" style="width: 25%;">
+                        <td class="text-centerr no-border" style="width: 25%;">
                             <b>Bagian Keuangan</b><br><br><br><br><br>
-                            {{-- <u>{{ $setting->bendahara }}</u> --}}
                         </td>
                     </tr>
                 </table>

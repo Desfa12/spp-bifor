@@ -42,7 +42,7 @@
         <a href="{{ route('datakelas.index') }}" class="btn btn-secondary">Kembali</a>
     </div>
 </div>
-
+    
 <!-- Tabel Data Siswa -->
 <div class="card p-3 shadow-sm">
     <div class="table-responsive">

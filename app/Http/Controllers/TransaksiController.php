@@ -12,11 +12,10 @@ use PDF;
 
 class TransaksiController extends Controller
 {
-    // Menampilkan semua data siswa
     public function index(Request $request)
     {
         $katakunci = $request->input('katakunci');
-        $jenisKelamin = $request->input('jenis_kelamin'); // Ambil filter jenis kelamin dari request
+        $jenisKelamin = $request->input('jenis_kelamin');
 
         $query = Datasiswa::with('kelas');
 
@@ -44,27 +43,24 @@ class TransaksiController extends Controller
             'bayar' => preg_replace('/\D/', '', $request->bayar),
             'sisa' => preg_replace('/\D/', '', $request->sisa),
         ]);
-    
-        // Konversi ke tipe data numerik
+
         $request->merge([
             'tagihan' => (int) $request->tagihan,
             'bayar' => (int) $request->bayar,
             'sisa' => (int) $request->sisa,
         ]);
-    
-        // Validasi input
+
         $request->validate([
             'id_siswa' => 'required|integer',
-            'sekolah' => 'required|string',
-            'tipe' => 'required|string',
+            'sekolah' => 'required|string|max:255',
+            'tipe' => 'required|string|max:100',
             'bulan' => 'required|date',
             'tagihan' => 'required|numeric|min:1',
             'bayar' => 'required|numeric|min:0',
             'sisa' => 'required|numeric|min:0',
-            'keterangan' => 'nullable|string',
+            'keterangan' => 'required|string|min:3',
         ]);
 
-        // Simpan ke database
         $transaksi = Transaksi::create([
             'id_siswa' => $request->id_siswa,
             'sekolah' => $request->sekolah,
@@ -90,16 +86,12 @@ class TransaksiController extends Controller
 
     public function exportPdf($id)
     {
-        // Ambil transaksi berdasarkan ID dengan relasi siswa dan kelas
         $transaksi = Transaksi::with('siswa.kelas')->findOrFail($id);
-        // return $transaksi;
         $setting = Setting::firstOrCreate([]);
 
-        // Generate PDF dalam mode landscape
         $pdf = PDF::loadView('transaksi.kwitansi_pdf', compact('transaksi', 'setting'))
-            ->setPaper('a4', 'landscape'); // Ubah ke landscape
+            ->setPaper('a4', 'landscape');
 
-        // Menampilkan PDF di browser sebelum diunduh
         return $pdf->stream('transaksi.kwitansi_pdf.pdf');
     }
 }
