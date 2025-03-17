@@ -52,7 +52,7 @@
 
     <!-- TOMBOL TAMBAH DATA -->
     <div class="pb-3">
-        <a href="{{ route('datakelas.create') }}" class="btn btn-primary">+ Tambah Data</a>
+        <a href="{{ url('datakelas/create') }}" class="btn btn-primary">+ Tambah Data</a>
     </div>
 
     <!-- TABEL DATA -->

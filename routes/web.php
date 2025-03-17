@@ -10,8 +10,6 @@ use App\Http\Controllers\DatasiswaController;
 use App\Http\Controllers\RekapController;
 use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\LaporanController;
-// use App\Http\Controllers\AuthController;
-// use App\Http\Controllers\WelcomeController;
 
 // Route utama
 Route::get('/', function () {
@@ -40,8 +38,8 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('datakelas')->group(function () {
         Route::get('/', [DatakelasController::class, 'index'])->name('datakelas.index');
-        Route::get('/{id}', [DatakelasController::class, 'show'])->name('datakelas.show');
         Route::get('/create', [DatakelasController::class, 'create'])->name('datakelas.create');
+        Route::get('/{id}', [DatakelasController::class, 'show'])->name('datakelas.show');
         Route::post('/', [DatakelasController::class, 'store'])->name('datakelas.store');
         Route::get('/{datakelas_id}/edit', [DatakelasController::class, 'edit'])->name('datakelas.edit');
         Route::put('/{datakelas}', [DatakelasController::class, 'update'])->name('datakelas.update');
