@@ -47,10 +47,10 @@
               <span class="fas fa-lock"></span>
             </div>
           </div>
-          @error('password')
-            <span class="text-danger">{{ $message }}</span>
-          @enderror
         </div>
+        @error('password')
+          <span class="text-danger">{{ $message }}</span>
+        @enderror
 
         <div class="input-group mb-3">
           <input type="password" class="form-control" name="password_confirmation" placeholder="Konfirmasi Password Baru" required>
