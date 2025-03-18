@@ -70,8 +70,8 @@ class DatasiswaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nis' => 'required|string|unique:datasiswas,nis',
-            'nisn' => 'required|string|unique:datasiswas,nisn',
+            'nis' => 'required|string',
+            'nisn' => 'required|string',
             'nama_siswa' => 'required|string',
             'id_kelas' => 'required|exists:kelas,id',
             'jenis_kelamin' => 'required|string|in:L,P',
@@ -79,6 +79,18 @@ class DatasiswaController extends Controller
             'no_telp' => 'nullable|string',
         ]);
 
+        // Cek apakah NIS atau NISN sudah ada di database
+        $cekNIS = Datasiswa::where('nis', $request->nis)->exists();
+        $cekNISN = Datasiswa::where('nisn', $request->nisn)->exists();
+
+        if ($cekNIS || $cekNISN) {
+            return redirect()->back()->withErrors([
+                'nis' => $cekNIS ? 'NIS sudah terdaftar!' : null,
+                'nisn' => $cekNISN ? 'NISN sudah terdaftar!' : null,
+            ])->withInput(); // Menyimpan input yang sudah diisi
+        }
+
+        // Jika tidak ada duplikasi, simpan data
         Datasiswa::create($request->all());
 
         return redirect()->route('datasiswa.index')->with('success', 'Data siswa berhasil ditambahkan!');
@@ -106,10 +118,24 @@ class DatasiswaController extends Controller
         ]);
 
         $datasiswa = Datasiswa::findOrFail($id);
+
+        // Cek apakah NIS atau NISN sudah ada di database tetapi bukan milik siswa yang sedang diedit
+        $cekNIS = Datasiswa::where('nis', $request->nis)->where('id', '!=', $id)->exists();
+        $cekNISN = Datasiswa::where('nisn', $request->nisn)->where('id', '!=', $id)->exists();
+
+        if ($cekNIS || $cekNISN) {
+            return redirect()->back()->withErrors([
+                'nis' => $cekNIS ? 'NIS sudah terdaftar oleh siswa lain!' : null,
+                'nisn' => $cekNISN ? 'NISN sudah terdaftar oleh siswa lain!' : null,
+            ])->withInput(); // Menyimpan input yang sudah diisi
+        }
+
+        // Jika tidak ada duplikasi, update data
         $datasiswa->update($request->all());
 
         return redirect()->route('datasiswa.index')->with('success', 'Data siswa berhasil diperbarui!');
     }
+
 
     // Hapus data siswa
     public function destroy($id)

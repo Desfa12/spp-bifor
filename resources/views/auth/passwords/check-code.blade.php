@@ -14,7 +14,7 @@
 <div class="login-box">
   <div class="card card-outline card-primary">
     <div class="card-header text-center">
-      <a href="#" class="h3"><b>Web SPP </b>Yayasan Pendidikan Nurul Ilma</a>
+      <a href="#" class="h3"><b>Sistem Pembayaran Sekolah </b>Yayasan Pendidikan Nurul Ilma</a>
     </div>
     <div class="card-body">
       <p class="login-box-msg">Masukkan Kode Unik Anda untuk mereset password</p>
