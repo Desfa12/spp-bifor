@@ -26,12 +26,12 @@
         }
         .header {
             text-align: center;
-            background: #353e64;
             color: rgb(255, 255, 255);
             padding: 12px;
             border-radius: 5px;
             font-size: 18px;
             font-weight: bold;
+            background-color: {{ $transaksi->sekolah == 'SMK Kesehatan Bina Husada' ? '#006400' : '#02447d' }};
         }
         table {
             width: 100%;
@@ -39,7 +39,7 @@
             margin-top: 15px;
         }
         th, td {
-            border: 1px solid #353e64;
+            border: 1px solid  {{ $transaksi->sekolah == 'SMK Kesehatan Bina Husada' ? '#006400' : '#02447d' }};
             padding: 12px;
             text-align: left;
         }
@@ -66,7 +66,7 @@
             text-align: center;
         }
         .highlight {
-            background: #353e64;
+            background:  {{ $transaksi->sekolah == 'SMK Kesehatan Bina Husada' ? '#006400' : '#02447d' }};
             font-weight: bold;
         }
         .approved {
@@ -85,11 +85,10 @@
     </style>
 </head>
 <body>
-
-        <div class="container">
-
+    
+    <div class="container">
         <!-- Header -->
-         <div class="header">
+        <div class="header">
             <table>
                 <tr>
                     <td style="width: 10%">
@@ -110,56 +109,53 @@
             {{ $setting->alamat }} |  
             {{ $setting->no_tlp }}
         </p>
+       
+        <!-- Informasi Transaksi -->
+        <table>
+            <tr>
+                <td><b>Tanggal</b></td>
+                <td>:</td>
+                <td>{{ date('d-m-Y', strtotime($transaksi->created_at)) }}</td>
+                <td class="text-center highlight"><b>Bukti Pembayaran</b></td>
+            </tr>
+            <tr>
+                <td><b>Nama</b></td>
+                <td>:</td>
+                <td>{{ $transaksi->siswa->nama_siswa }}</td>
+                <td rowspan="3"><b>Untuk Pembayaran:</b> {{ $transaksi->tipe ?? '-' }}</td>
+            </tr>
+            <tr>
+                <td><b>Kelas</b></td>
+                <td>:</td>
+                <td>{{ $transaksi->siswa->kelas->tingkat ?? '-' }} {{ $transaksi->siswa->kelas->jurusan ?? '-' }}</td>
+            </tr>
+            <tr>
+                <td><b>Jumlah Bayar</b></td>
+                <td>:</td>
+                <td><b>Rp {{ number_format($transaksi->bayar, 0, ',', '.') }}</b></td>
+            </tr>
+        </table>
 
-            <!-- Informasi Transaksi -->
-            <table>
-                <tr>
-                    <td><b>Tanggal</b></td>
-                    <td>:</td>
-                    <td>{{ date('d-m-Y', strtotime($transaksi->created_at)) }}</td>
-                    <td class="text-center highlight"><b>Bukti Pembayaran</b></td>
-                </tr>
-                <tr>
-                    <td><b>Nama</b></td>
-                    <td>:</td>
-                    <td>{{ $transaksi->siswa->nama_siswa }}</td>
-                    <td rowspan="3"><b>Untuk Pembayaran:</b> {{ $transaksi->tipe ?? '-' }}</td>
-                </tr>
-                <tr>
-                    <td><b>Kelas</b></td>
-                    <td>:</td>
-                    <td>{{ $transaksi->siswa->kelas->tingkat ?? '-' }} {{ $transaksi->siswa->kelas->jurusan ?? '-' }}</td>
-                </tr>
-                <tr>
-                    <td><b>Jumlah Bayar</b></td>
-                    <td>:</td>
-                    <td><b>Rp {{ number_format($transaksi->bayar, 0, ',', '.') }}</b></td>
-                </tr>
-            </table>
-
-            <!-- Bukti Pembayaran -->
-            <div class="approved" style="margin-top: 20px;">
-                Bukti Pembayaran: Pembayaran ini sah dan telah diterima.
-            </div>
-
-            <!-- Footer -->
-            <div class="footer">
-                <table>
-                    <tr>
-                        <td class="no-border" style="width: 50%;">
-                            <b>Ketentuan:</b><br>
-                            - Simpan bukti pembayaran ini sebagai arsip.<br>
-                            - Pembayaran yang sudah dilakukan tidak dapat dikembalikan.
-                        </td>
-                        
-                        <td class="text-centerr no-border" style="width: 25%;">
-                            <b>Bagian Keuangan</b><br><br><br><br><br>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-
+        <!-- Bukti Pembayaran -->
+        <div class="approved" style="margin-top: 20px;">
+            Bukti Pembayaran: Pembayaran ini sah dan telah diterima.
         </div>
 
+        <!-- Footer -->
+        <div class="footer">
+            <table>
+                <tr>
+                    <td class="no-border" style="width: 50%;">
+                        <b>Ketentuan:</b><br>
+                        - Simpan bukti pembayaran ini sebagai arsip.<br>
+                        - Pembayaran yang sudah dilakukan tidak dapat dikembalikan.
+                    </td>
+                    <td class="text-centerr no-border" style="width: 25%;">
+                        <b>Bagian Keuangan</b><br><br><br><br><br>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
 </body>
 </html>

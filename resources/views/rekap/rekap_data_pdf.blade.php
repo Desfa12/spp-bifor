@@ -103,10 +103,7 @@
 
     <div class="footer">
             <p>Bagian Keuangan</p>
-            {{-- @if (!empty($setting->ttd_bendahara))
-                <img src="{{ storage_path('app/public/ttd/' . $setting->ttd_bendahara) }}" alt="Tanda Tangan Bendahara">
-            @endif
-            <p>{{ $setting->bendahara ?? 'Bendahara' }}</p> --}}
+           
     </div>
 
 

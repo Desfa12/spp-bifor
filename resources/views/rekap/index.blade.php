@@ -25,8 +25,6 @@
 
 <div class="pb-3">
     <form method="GET" action="{{ route('rekap.index') }}">
-       <div class="pb-3">
-    <form method="GET" action="{{ route('rekap.index') }}">
         <div class="row align-items-end">
             <div class="col-12 col-md-3 mb-2">
                 <input type="text" name="katakunci" class="form-control" placeholder="Cari nama, NIS, atau NISN" value="{{ request('katakunci') }}">
@@ -57,8 +55,6 @@
         </div>
     </form>
 </div>
-    </form>
-</div>
 
 <div class="card p-3 shadow-sm">
     <div class="table-responsive">
@@ -84,11 +80,23 @@
                 @foreach ($transaksi as $item)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
-                        <td>{{ $item->siswa?->nama_siswa ?? '-' }}</td>
+                        <td>
+                            @if($item->siswa)
+                                {{ $item->siswa->nama_siswa }}
+                            @else
+                                <span style="color: red; font-weight: bold;">Siswa tidak ditemukan</span>
+                            @endif
+                        </td>
                         <td>{{ $item->siswa?->nisn ?? '-' }}</td>
                         <td>{{ $item->siswa?->nis ?? '-' }}</td>
                         <td>{{ $item->sekolah ?? '-' }}</td>
-                        <td>{{ $item->siswa?->kelas?->tingkat ?? '-' }} {{ $item->siswa?->kelas?->jurusan ?? '-' }} - {{ $item->siswa?->kelas?->angkatan ?? '-' }}</td>
+                        <td>
+                            @if($item->siswa)
+                                {{ $item->siswa->kelas?->tingkat ?? '-' }} {{ $item->siswa->kelas?->jurusan ?? '-' }} - {{ $item->siswa->kelas?->angkatan ?? '-' }}
+                            @else
+                                <span style="color: red; font-weight: bold;">-</span>
+                            @endif
+                        </td>
                         <td>{{ $item->tipe }}</td>
                         <td>{{ \Carbon\Carbon::parse($item->bulan)->translatedFormat('d F Y') }}</td>
                         <td>Rp{{ number_format($item->tagihan, 0, ',', '.') }}</td>
@@ -96,7 +104,11 @@
                         <td>Rp{{ number_format($item->sisa, 0, ',', '.') }}</td>
                         <td>{{ $item->keterangan ?? '-' }}</td>
                         <td>
-                            <a href="{{ route('transaksi.export', $item->id) }}" class="btn btn-warning btn-sm ">Lihat</a>
+                            @if($item->siswa)
+                                <a href="{{ route('transaksi.export', $item->id) }}" class="btn btn-warning btn-sm">Lihat</a>
+                            @else
+                                <span style="color: red; font-weight: bold;">Tidak dapat melihat kwitansi</span>
+                            @endif
                         </td>
                     </tr>
                 @endforeach

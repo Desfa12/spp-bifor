@@ -57,6 +57,9 @@ class RekapController extends Controller
             $query->where('bulan', $request->bulan);
         }
 
+        // Tambahkan filter agar hanya transaksi dengan siswa yang masih ada
+        $query->whereHas('siswa');
+
         $transaksi = $query->orderBy('created_at', 'desc')->get();
 
         // Menjumlahkan total sisa dari semua transaksi yang difilter
@@ -64,7 +67,7 @@ class RekapController extends Controller
         $setting = Setting::firstOrCreate([]);
 
         $pdf = PDF::loadView('rekap.rekap_data_pdf', compact('transaksi', 'totalSisa', 'setting'));
-        // return $pdf->download('rekap_data.pdf');
-        return $pdf->stream('rekap.rekap_data_pdf');
+
+        return $pdf->stream('rekap_data.pdf');
     }
 }

@@ -71,7 +71,7 @@ class DatasiswaController extends Controller
     {
         $request->validate([
             'nis' => 'required|string',
-            'nisn' => 'required|string',
+            'nisn' => 'required|string|digits:10',
             'nama_siswa' => 'required|string',
             'id_kelas' => 'required|exists:kelas,id',
             'jenis_kelamin' => 'required|string|in:L,P',
@@ -87,11 +87,10 @@ class DatasiswaController extends Controller
             return redirect()->back()->withErrors([
                 'nis' => $cekNIS ? 'NIS sudah terdaftar!' : null,
                 'nisn' => $cekNISN ? 'NISN sudah terdaftar!' : null,
-            ])->withInput(); // Menyimpan input yang sudah diisi
+            ])->withInput();
         }
 
-        // Jika tidak ada duplikasi, simpan data
-        Datasiswa::create($request->all());
+        Datasiswa::create($request->only(['nis', 'nisn', 'nama_siswa', 'id_kelas', 'jenis_kelamin', 'tgl_lahir', 'no_telp']));
 
         return redirect()->route('datasiswa.index')->with('success', 'Data siswa berhasil ditambahkan!');
     }
@@ -109,7 +108,7 @@ class DatasiswaController extends Controller
     {
         $request->validate([
             'nis' => 'required|string',
-            'nisn' => 'required|string',
+            'nisn' => 'required|string|digits:10',
             'nama_siswa' => 'required|string',
             'id_kelas' => 'required|exists:kelas,id',
             'jenis_kelamin' => 'required|string|in:L,P',
@@ -127,15 +126,13 @@ class DatasiswaController extends Controller
             return redirect()->back()->withErrors([
                 'nis' => $cekNIS ? 'NIS sudah terdaftar oleh siswa lain!' : null,
                 'nisn' => $cekNISN ? 'NISN sudah terdaftar oleh siswa lain!' : null,
-            ])->withInput(); // Menyimpan input yang sudah diisi
+            ])->withInput();
         }
 
-        // Jika tidak ada duplikasi, update data
-        $datasiswa->update($request->all());
+        $datasiswa->update($request->only(['nis', 'nisn', 'nama_siswa', 'id_kelas', 'jenis_kelamin', 'tgl_lahir', 'no_telp']));
 
         return redirect()->route('datasiswa.index')->with('success', 'Data siswa berhasil diperbarui!');
     }
-
 
     // Hapus data siswa
     public function destroy($id)
