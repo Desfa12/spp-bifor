@@ -115,7 +115,7 @@
             <tr>
                 <td><b>Tanggal</b></td>
                 <td>:</td>
-                <td>{{ date('d-m-Y', strtotime($transaksi->bulan)) }}</td>
+                 <td>{{ \Carbon\Carbon::parse($transaksi->bulan)->translatedFormat('d F Y') }}</td>
                 <td class="text-center highlight"><b>Bukti Pembayaran</b></td>
             </tr>
             <tr>
