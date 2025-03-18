@@ -115,7 +115,7 @@
             <tr>
                 <td><b>Tanggal</b></td>
                 <td>:</td>
-                <td>{{ date('d-m-Y', strtotime($transaksi->created_at)) }}</td>
+                <td>{{ date('d-m-Y', strtotime($transaksi->bulan)) }}</td>
                 <td class="text-center highlight"><b>Bukti Pembayaran</b></td>
             </tr>
             <tr>

@@ -84,7 +84,7 @@
                             @if($item->siswa)
                                 {{ $item->siswa->nama_siswa }}
                             @else
-                                <span style="color: red; font-weight: bold;">Siswa tidak ditemukan</span>
+                                <span style="color: font-weight: bold;">Siswa tidak ditemukan</span>
                             @endif
                         </td>
                         <td>{{ $item->siswa?->nisn ?? '-' }}</td>
@@ -107,7 +107,7 @@
                             @if($item->siswa)
                                 <a href="{{ route('transaksi.export', $item->id) }}" class="btn btn-warning btn-sm">Lihat</a>
                             @else
-                                <span style="color: red; font-weight: bold;">Tidak dapat melihat kwitansi</span>
+                                <span style="color: font-weight: bold;">Tidak dapat melihat kwitansi</span>
                             @endif
                         </td>
                     </tr>
